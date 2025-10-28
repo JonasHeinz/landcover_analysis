@@ -1,0 +1,30 @@
+Eindeutige Qualitaet-Werte (5):
+['PV74', 'PEP', 'PN', 'AV93', 'weitere']
+
+Eindeutige Art-Werte (26):
+['Schilfguertel',
+'Trottoir',
+'Gewaesser_fliessendes',
+'Strasse_Weg',
+'Acker_Wiese_Weide',
+'uebrige_humusierte',
+'geschlossener_Wald',
+'Gewaesser_stehendes',
+'Geroell_Sand',
+'Bahn',
+'Verkehrsinsel',
+'Fels',
+'Flugplatz',
+'Wytweide_offen',
+'uebrige_bestockte',
+'Abbau_Deponie',
+'uebrige_Intensivkultur'
+,Wytweide_dicht',
+'Gebaeude',
+'uebrige_vegetationslose',
+'Wasserbecken',
+'Gletscher_Firn',
+'uebrige_befestigte',
+'Gartenanlage',
+'Hoch_Flachmoor',
+'Reben']
