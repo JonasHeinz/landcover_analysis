@@ -16,11 +16,25 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # Einstellungen
 # -------------------------------------
 url = "https://geodienste.ch/info/services.json"
-download_dir = "av_downloads"
-gpkg_dir = "av_gpkg"
 
-os.makedirs(download_dir, exist_ok=True)
-os.makedirs(gpkg_dir, exist_ok=True)
+
+wd = os.getcwd()
+path = os.path.join(wd, '..', '..', '..','..')
+path = os.path.normpath(path)  # normalize path separators
+
+download_dir = "data/preprocessing/av/av_downloads"
+gpkg_dir = "data/preprocessing/av/av_gpkg"
+
+
+download_path = os.path.join(path,download_dir)
+gpkg_path =  os.path.join(path,gpkg_dir)
+
+print(download_path)
+print(gpkg_path)
+
+
+os.makedirs(download_path, exist_ok=True)
+# os.makedirs(gpkg_path, exist_ok=True)
 
 # -------------------------------------
 # JSON abrufen
@@ -49,7 +63,7 @@ print(f"Gefundene AV-Datasets: {len(freie_datasets)}")
 # -------------------------------------
 for dataset_url in freie_datasets:
     kanton = dataset_url.split("/")[-2]
-    zip_path = os.path.join(download_dir, f"{kanton}.zip")
+    zip_path = os.path.join(download_path, f"{kanton}.zip")
 
     print(f"Lade herunter: {kanton} ...")
     try:
@@ -63,7 +77,7 @@ for dataset_url in freie_datasets:
         continue
 
     # Entpacken
-    extract_path = os.path.join(download_dir, kanton)
+    extract_path = os.path.join(download_path, kanton)
     os.makedirs(extract_path, exist_ok=True)
     try:
         with zipfile.ZipFile(io.BytesIO(r.content)) as z:
@@ -78,7 +92,7 @@ for dataset_url in freie_datasets:
     #     for file in os.listdir(extract_path):
     #         if file.lower().endswith((".itf", ".xtf")):
     #             input_file = os.path.join(extract_path, file)
-    #             output_file = os.path.join(gpkg_dir, f"{kanton}.gpkg")
+    #             output_file = os.path.join(gpkg_path, f"{kanton}.gpkg")
 
     #             print(f"{kanton}: Konvertiere nach GeoPackage ...")
     #             subprocess.run(
