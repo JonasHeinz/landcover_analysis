@@ -1,0 +1,27 @@
+c	AVS-Code	BB-Unterart				
+Gebäude	0	–				
+befestigt	1	Strasse_Weg			Strasse_Weg	
+	2	Trottoir			Trottoir	
+	3	Verkehrsinsel			Verkehrsinsel	
+	4	Bahn			Bahn	
+	5	Flugplatz			Flugplatz	
+	6	Wasserbecken			Wasserbecken	
+	7	uebrige_befestigte			uebrige_befestigte	
+humusiert	8	Acker_Wiese_Weide			Acker_Wiese_Weide	
+	9	Reben			Reben	
+	10	uebrige_Intensivkultur			uebrige_Intensivkultur	
+	11	Gartenanlage			Gartenanlage	
+	12	Hoch_Flachmoor			Hoch_Flachmoor	
+	13	uebrige_humusierte			uebrige_humusierte	
+Gewässer	14	stehendes			stehendes	
+	15	fliessendes			fliessendes	
+	16	Schilfguertel			Schilfguertel	bestockt
+bestockt	17	geschlossener_Wald			geschlossener_Wald	
+	18	Wytweide_dicht			Wytweide_dicht	
+	19	Wytweide_offen			Wytweide_offen	
+	20	uebrige_bestockte			uebrige_bestockte	
+vegetationslos	21	Fels			Fels	
+	22	Gletscher_Firn			Gletscher_Firn	
+	23	Geroell_Sand			Geroell_Sand	
+	24	Abbau_Deponie			Abbau_Deponie	
+	25	uebrige_vegetationslose			uebrige_vegetationslose	
