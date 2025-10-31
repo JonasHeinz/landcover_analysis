@@ -7,7 +7,7 @@ mbsf = gpd.read_file(
     "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/Vorprozessierung/04_Vollstaendigkeit/mbsf.gpkg"
 )
 lcsf = gpd.read_file(
-    "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/Daten/BB_ergaenzung.gpkg"
+    "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/05_Daten/BB_CH_Gesamt.gpkg"
 )
 print("Layer eingelesen erfolgreich.")
 
