@@ -214,3 +214,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project Data
+/data/*
+
+# Exclude Testdata from Project Data
+!/data/analysis/arealstatistik/ag-b-00.03-37-area-all-gpkg_zug.gpkg
+!/data/analysis/corine/2012/U2018_CLC2012_V2020_20u1_zug.gpkg
+!/data/analysis/corine/2012/U2018_CLC2012_V2020_20u1_zug.tif
+!/data/analysis/corine/2018/U2018_CLC2018_V2020_20u1_zug.gpkg
+!/data/analysis/corine/2018/U2018_CLC2018_V2020_20u1_zug.tif
