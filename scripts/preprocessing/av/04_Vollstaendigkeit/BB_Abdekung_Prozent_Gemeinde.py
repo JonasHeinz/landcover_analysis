@@ -1,62 +1,77 @@
 import geopandas as gpd
+import os
+
+# -------------------------------
+# Schritt 0: Pfad definieren
+# -------------------------------
+
+wd = os.getcwd()
+path = os.path.join(wd, '..', '..', '..','..')
+path = os.path.normpath(path)  # normalize path separators
+
+gem_CH_datei = "data/swissBOUNDARIES3D_1_5_LV95_LN02.gpkg"
+BB_CH_datei = "data/preprocessing/av/BB_CH_Gesamt.gpkg"
+
+gem_CH_dir = os.path.join(path,gem_CH_datei)
+BB_CH_dir = os.path.join(path,BB_CH_datei)
+
+print("Pfade Definiert")
 
 # -------------------------------
 # Schritt 1: Layer einlesen (GeoPackage)
 # -------------------------------
-mbsf = gpd.read_file(
-    "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/Vorprozessierung/04_Vollstaendigkeit/mbsf.gpkg"
-)
-lcsf = gpd.read_file(
-    "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/05_Daten/BB_CH_Gesamt.gpkg"
-)
+Gem_CH = gpd.read_file(gem_CH_datei, layer = "tlm_hoheitsgebiet")
+
+BB_CH = gpd.read_file(BB_CH_dir)
 print("Layer eingelesen erfolgreich.")
 
 # -------------------------------
-# Schritt 2: Eindeutige ID für mbsf erzeugen
+# Schritt 2: Eindeutige ID für Gem_CH erzeugen
 # -------------------------------
-if "fid" not in mbsf.columns:
-    mbsf = mbsf.reset_index().rename(columns={'index': 'fid'})
-print("FID für mbsf erfolgreich erstellt.")
+if "fid" not in Gem_CH.columns:
+    Gem_CH = Gem_CH.reset_index().rename(columns={'index': 'fid'})
+print("FID für Gem_CH erfolgreich erstellt.")
 
 # -------------------------------
-# Schritt 3: Fläche jedes mbsf-Polygons berechnen
+# Schritt 3: Fläche jedes Gem_CH-Polygons berechnen
 # -------------------------------
-mbsf["area_total"] = mbsf.geometry.area
-print("Flächen der mbsf-Polygone berechnet erfolgreich.")
+Gem_CH["area_total"] = Gem_CH.geometry.area
+print("Flächen der Gem_CH-Polygone berechnet erfolgreich.")
+
+print("Gemeindeflächen Berechnet")
+
+# -------------------------------
+# Schritt 5: BB Flächen vereinigen für Overlay
+# -------------------------------
+
+BB_CH_Union = BB_CH.union_all()
 
 # -------------------------------
 # Schritt 4: Overlay zur Berechnung der Schnittflächen
 # -------------------------------
-intersection = gpd.overlay(mbsf, lcsf, how="intersection")
-print("Schnittflächen mit Overlay berechnet erfolgreich.")
+
+# geometrie aus gdf ziehen
+BB_gdf = gpd.GeoDataFrame(geometry=[BB_CH_Union], crs=Gem_CH.crs)
+
+# ausfführung Overlay
+differenz_Union = gpd.overlay(Gem_CH, BB_gdf, how="difference")
 
 # -------------------------------
-# Schritt 5: Fläche der Schnittgeometrien berechnen
+# Schritt 5: Abdeckung in Prozent berechnen
 # -------------------------------
-intersection["inter_area"] = intersection.geometry.area
-print("Flächen der Schnittgeometrien berechnet erfolgreich.")
+
+differenz_Union["area_diff"] = differenz_Union.geometry.area
+differenz_Union["prozent_diff"] = (differenz_Union["area_diff"] / differenz_Union["area_total"]) * 100
+
 
 # -------------------------------
-# Schritt 6: Summiere Schnittflächen pro mbsf-FID
+# Schritt 7: erstellen von Mulipolygons für fehlende Abdeckung (fehlende Flächen > 99% Abdeckung)
 # -------------------------------
-inter_sum = intersection.groupby("fid")["inter_area"].sum().reset_index()
-print("Schnittflächen pro FID summiert erfolgreich.")
-
-# -------------------------------
-# Schritt 7: Prozentwert berechnen und in mbsf übernehmen
-# -------------------------------
-mbsf = mbsf.merge(inter_sum, on="fid", how="left")
-mbsf["inter_area"] = mbsf["inter_area"].fillna(0)
-mbsf["cover_percent"] = (mbsf["inter_area"] / mbsf["area_total"]) * 100
-print("Prozentwert berechnet und übernommen erfolgreich.")
+fehlende_Flaeche = differenz_Union[differenz_Union["prozent_diff"] > 99]
 
 # -------------------------------
 # Schritt 8: Neues GeoPackage speichern
 # -------------------------------
-mbsf.to_file(
-    "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/Vorprozessierung/04_Vollstaendigkeit/mbsf_abgedeckt.gpkg",
-    driver="GPKG"
-)
-print("Neues GeoPackage gespeichert erfolgreich.")
 
-print("Script erfolgreich abgeschlossen! Feld 'cover_percent' enthält die Abdeckung in Prozent.")
+fehlende_Flaeche.to_file(
+    "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/05_Daten/fehlende_Flaeche.gpkg", layer = "fehlende_Fla", driver="GPKG")

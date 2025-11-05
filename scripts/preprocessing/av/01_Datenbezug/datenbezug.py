@@ -27,10 +27,10 @@ gpkg_dir = "data/preprocessing/av/av_gpkg"
 
 
 download_path = os.path.join(path,download_dir)
-gpkg_path =  os.path.join(path,gpkg_dir)
+# gpkg_path =  os.path.join(path,gpkg_dir)
 
 print(download_path)
-print(gpkg_path)
+# print(gpkg_path)
 
 
 os.makedirs(download_path, exist_ok=True)
