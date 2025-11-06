@@ -1,4 +1,5 @@
 import geopandas as gpd
+from shapely.validation import explain_validity, make_valid
 import os
 
 # -------------------------------
@@ -37,6 +38,21 @@ print("FID für Gem_CH erfolgreich erstellt.")
 Gem_CH["area_total"] = Gem_CH.geometry.area
 print("Flächen der Gem_CH-Polygone berechnet erfolgreich.")
 print("Gemeindeflächen Berechnet")
+
+# 2. Überprüfen, ob alle Geometrien gültig sind
+BB_CH["is_valid"] = BB_CH.geometry.is_valid
+print(BB_CH["is_valid"].value_counts())
+
+# 3. Anzeigen der ungültigen Geometrien
+invalid = BB_CH[~BB_CH["is_valid"]]
+print(invalid.shape)
+print(invalid.apply(lambda row: explain_validity(row.geometry), axis=1))
+
+# 4. Reparieren der Geometrien (Shapely 2.x)
+BB_CH["geometry"] = BB_CH["geometry"].apply(make_valid)
+print("Geometrien repariert.")
+# 5. Erneut prüfen
+print(BB_CH.geometry.is_valid.value_counts())
 
 # -------------------------------
 # Schritt 5: BB Flächen vereinigen für Overlay
