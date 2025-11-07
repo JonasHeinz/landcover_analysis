@@ -80,16 +80,19 @@ print("Overlay zur Berechnung der Schnittflächen erfolgreich.")
 differenz_Union["area_diff"] = differenz_Union.geometry.area
 differenz_Union["prozent_diff"] = (differenz_Union["area_diff"] / differenz_Union["area_total"]) * 100
 print("Abdeckung in Prozent berechnet erfolgreich.")
+differenz_Union_dir = os.path.join(path, r"data\preprocessing\av\04_Vollstaendigkeit\differenz_Union.gpkg")
+differenz_Union.to_file(differenz_Union_dir, layer = "fehlende_Fla", driver="GPKG")
 
 # -------------------------------
 # Schritt 7: erstellen von Mulipolygons für fehlende Abdeckung (fehlende Flächen > 99% Abdeckung)
 # -------------------------------
-fehlende_Flaeche = differenz_Union[differenz_Union["prozent_diff"] > 99]
-print("Fehlende Flächen mit mehr als 99% Abdeckung extrahiert erfolgreich.")
+fehlende_Flaeche = differenz_Union[differenz_Union["prozent_diff"] > 1]
+print("Fehlende Flächen mit mehr als 1% Abdeckung extrahiert erfolgreich.")
 # -------------------------------
 # Schritt 8: Neues GeoPackage speichern
 # -------------------------------
 
-fehlende_Flaeche.to_file(
-    "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/05_Daten/fehlende_Flaeche.gpkg", layer = "fehlende_Fla", driver="GPKG")
+fehlende_Flaeche_dir = os.path.join(path, r"data\preprocessing\av\04_Vollstaendigkeit\fehlende_Flaeche.gpkg")
+
+fehlende_Flaeche.to_file(fehlende_Flaeche_dir, layer = "fehlende_Fla", driver="GPKG")
 print("Neues GeoPackage mit fehlenden Flächen gespeichert erfolgreich.")
