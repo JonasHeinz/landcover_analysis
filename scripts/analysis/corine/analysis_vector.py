@@ -1,6 +1,7 @@
 import os
 os.environ['PROJ_LIB'] = r"C:\Users\LeonardoS\miniconda3\envs\corine\Library\share\proj"
 
+import pandas as pd
 import geopandas as gpd
 from scripts import DATA_DIR
 from scripts.helpers import raster_helper
@@ -19,6 +20,44 @@ points["grid"] = points.geometry.apply(lambda p: raster_helper.calculate_vectorb
 
 # Überschreiben des ursprünglichen Geometriefeld der Arealstatistik durch die neuen Boxen
 points["geometry"] = points["grid"]
-points = points.drop(columns="grid")  
+squares = points.drop(columns="grid")  
 
-# points.to_file(DATA_DIR / "analysis/corine/2012/test.gpkg")
+reduced_squares = squares[["RELI", "geometry"]]
+
+# Erstellen von Verschnitten zwischen den Quadraten der Arealstatistik und den Polygonen von CORINE 
+intersections = gpd.overlay(reduced_squares, polygons, how="intersection")
+
+# Berechnen der Fläche der Verschnitte
+intersections["polygon_area"] = intersections.geometry.area
+
+# Berechnen der Fläche der Quadrate der Arealstatistik
+intersections["square_area"] = intersections.groupby("RELI")["polygon_area"].transform("sum")
+
+# Berechnen der prozentualen Flächenanteile der Veschnitte pro Fläche der Quadrate der Arealstatistik
+intersections["percent_per_square"] = intersections["polygon_area"] / intersections["square_area"] * 100
+
+# Gruppieren nach den Quadraten der Arealstatistik mit einer bestimmten CORINE Kategorie und danach Aufsummieren der prozentualen Flächenanteilen der Veschnitte pro Fläche
+intersections_of_category = intersections.groupby(["RELI", "Code_12"])["percent_per_square"].sum().reset_index()
+
+# Gruppieren nach den Quadraten der Arealstatistik und Erstellen einer Liste, die für jedes Quadrat die CORINE Kategorien mit ihren aufsummierten prozentualen Flächenanteilen enthält
+intersections_of_category_from_square = intersections_of_category.groupby("RELI")[["Code_12", "percent_per_square"]].apply(lambda df: {row["Code_12"]: row["percent_per_square"] for _, row in df.iterrows()}).rename("corine_categories").reset_index()
+
+# Zusammenführen des Arealstatistikdatensatzes mit den neu berechneten Werten 
+squares_with_categories = squares.merge(intersections_of_category_from_square, on="RELI", how="left")
+
+# Feststellen der maximal vorkommenden CORINE Kategorie pro Quadrat der Arealstatistik 
+squares_with_categories["Code_12_max"] = squares_with_categories["corine_categories"].apply(lambda di: max(di, key=di.get))
+
+# Laden der Zuordnungstabellen von CORINE zu IPCC und von Arealstatistik zu IPCC
+ipcc_corine_mapping_dict = pd.read_csv(DATA_DIR / "analysis/corine/mapping_ipcc_corine.csv", sep=";" ).set_index("CORINE_ID")["IPCC_ID"].to_dict()
+ipcc_arealstatistik_mapping_dict = pd.read_csv(DATA_DIR / "analysis/arealstatistik/mapping_ipcc_arealstatistik.csv", sep=";" ).set_index("AS_ID")["IPCC_ID"].to_dict()
+
+# Speichern der CORINE Kategorie und der Arealstatistik Kategorie als IPCC Kategorie
+squares_with_categories["IPCC_CORINE_Id"] = squares_with_categories["Code_12_max"].astype(int).map(ipcc_corine_mapping_dict)
+squares_with_categories["IPCC_AS_Id"] = squares_with_categories["AS18_72"].astype(int).map(ipcc_arealstatistik_mapping_dict)
+
+# Prüfen der Gleichheit der IPCC Kategorien
+squares_with_categories["IPCC_Match"] = squares_with_categories["IPCC_CORINE_Id"] == squares_with_categories["IPCC_AS_Id"]
+
+# Speichern der Daten als Geopackage
+squares_with_categories.to_file(DATA_DIR / "analysis/corine/2012/test2.gpkg")
