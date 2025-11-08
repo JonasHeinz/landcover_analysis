@@ -1,0 +1,73 @@
+﻿IPCC_ID;IPCC_NAME;AS_ID;AS_NAME
+5;Settlements;1;Industrie- und Gewerbegebäude
+5;Settlements;2;Umschwung von Industrie- und Gewerbegebäuden
+5;Settlements;3;Ein- und Zweifamilienhäuser
+5;Settlements;4;Umschwung von Ein- und Zweifamilienhäusern
+5;Settlements;5;Reihen- und Terrassenhäuser
+5;Settlements;6;Umschwung von Reihen- und Terrassenhäusern
+5;Settlements;7;Mehrfamilienhäuser
+5;Settlements;8;Umschwung von Mehrfamilienhäusern
+5;Settlements;9;Öffentliche Gebäude
+5;Settlements;10;Umschwung von öffentlichen Gebäuden
+5;Settlements;11;Landwirtschaftliche Gebäude
+5;Settlements;12;Umschwung von landwirtschaftlichen Gebäuden
+5;Settlements;13;Nicht spezifizierte Gebäude
+5;Settlements;14;Umschwung von nicht spezifizierten Gebäuden
+5;Settlements;15;Autobahnen
+5;Settlements;16;Autobahngrün
+5;Settlements;17;Strassen, Wege
+5;Settlements;18;Strassengrün
+5;Settlements;19;Parkplatzareal
+5;Settlements;20;Befestigtes Bahnareal
+5;Settlements;21;Bahngrün
+5;Settlements;22;Flugplätze
+5;Settlements;23;Graspisten, Flugplatzgrün
+5;Settlements;24;Energieversorgungsanlagen
+5;Settlements;25;Abwasserreinigungsanlagen
+5;Settlements;26;Übrige Ver- und Entsorgungsanlagen
+5;Settlements;27;Deponien
+5;Settlements;28;Abbau
+5;Settlements;29;Baustellen
+5;Settlements;30;Bau- und Siedlungsbrachen
+5;Settlements;31;Öffentliche Parkanlagen
+5;Settlements;32;Sportanlagen
+5;Settlements;33;Golfplätze
+5;Settlements;34;Campingplätze
+5;Settlements;35;Schrebergärten
+5;Settlements;36;Friedhöfe
+2;Cropland;37;Obstanlagen
+2;Cropland;38;Feldobst
+2;Cropland;39;Rebbauflächen
+2;Cropland;40;Gartenbauflächen
+2;Cropland;41;Ackerland
+3;Grassland;42;Naturwiesen
+3;Grassland;43;Heimweiden
+3;Grassland;44;Verbuschte Wiesen und Heimweiden
+3;Grassland;45;Alpwiesen
+3;Grassland;46;Günstige Alp- und Juraweiden
+3;Grassland;47;Verbuschte Alp- und Juraweiden
+3;Grassland;48;Versteinte Alp- und Juraweiden
+3;Grassland;49;Schafalpen
+1;Forest land;50;Normalwald
+1;Forest land;51;Schmaler Wald
+1;Forest land;52;Aufforstungen
+1;Forest land;53;Holzschläge
+1;Forest land;54;Waldschäden
+1;Forest land;55;Aufgelöster Wald (auf Landwirtschaftsflächen)
+1;Forest land;56;Aufgelöster Wald (auf unproduktiven Flächen)
+1;Forest land;57;Gebüschwald
+1;Forest land;58;Feldgehölze, Hecken
+1;Forest land;59;Baumgruppen (auf Landwirtschaftsflächen)
+1;Forest land;60;Baumgruppen (auf unproduktiven Flächen)
+4;Wetlands;61;Stehende Gewässer
+4;Wetlands;62;Wasserläufe
+4;Wetlands;63;Hochwasserverbauungen
+3;Grassland;64;Gebüsch, Strauchvegetation
+3;Grassland;65;Unproduktive Gras- und Krautvegetation
+6;Other Land;66;Lawinen- und Steinschlagverbauungen
+4;Wetlands;67;Feuchtgebiete
+6;Other Land;68;Alpine Sportinfrastruktur
+6;Other Land;69;Fels
+6;Other Land;70;Geröll, Sand
+6;Other Land;71;Landschaftseingriffe
+6;Other Land;72;Gletscher, Firn
