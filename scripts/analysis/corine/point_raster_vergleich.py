@@ -12,7 +12,7 @@ areal_gpkg = (
 )  # Arealstatistik Punkte
 corine_raster = (
     DATA_DIR / "analysis/corine/2018/U2018_CLC2018_V2020_20u1_zug.tif"
-)  # Corine Raster
+)  # CORINE Raster
 ipcc_mapping_file_corine = (
     DATA_DIR / "analysis/corine/mapping_ipcc_corine.csv"
 )  # Zuordnungstabelle Corine mit IPCC
@@ -25,7 +25,7 @@ output_gpkg = (
 )  # Output Geopackage Punkte
 
 
-# Hilfsfunktionen
+# Hilfsfunktionen zum Auslesen der Arealstatistik labels aus Mapping Tabelle
 def read_areal_labels(mapping_path):
     """Liest Arealstatistik-Labels aus CSV mit Spalten 'AS_ID, AS_NAME'."""
     labels = {}
@@ -44,6 +44,7 @@ def read_areal_labels(mapping_path):
     return labels
 
 
+# Hilfsfunktionen zum Auslesen der CORINE labels aus Mapping Tabelle
 def read_corine_labels(mapping_path):
     """Liest Corine-Labels aus CSV mit Spalten 'RASTER_ID, CORINE_NAME'."""
     labels = {}
@@ -68,7 +69,7 @@ def read_corine_labels(mapping_path):
 corine_labels = read_corine_labels(ipcc_mapping_file_corine)
 areal_labels = read_areal_labels(ipcc_mapping_file_as)
 
-# Arealstatistik laden
+# Arealstatistik Geopackage laden
 gdf = gpd.read_file(areal_gpkg)
 print(f"{len(gdf):,} Arealstatistik Punkte aus GeoPackage geladen.")
 
@@ -79,9 +80,10 @@ if "AS18_72" not in gdf.columns:
 gdf = gdf.rename(columns={"AS18_72": "areal_value"})
 gdf["areal_label"] = gdf["areal_value"].map(areal_labels).fillna("Unknown")
 
-# CORINE-Werte sampeln
+# CORINE-Werte auf Arealstatistikpunkte sampeln
 with rasterio.open(corine_raster) as src:
     coords = [(geom.x, geom.y) for geom in gdf.geometry]
+    # Liest den CORINE-Rasterwert für jeden Arealstatistikpunkt aus
     corine_vals = [val[0] if val is not None else np.nan for val in src.sample(coords)]
 
 gdf["corine_value"] = corine_vals
@@ -91,7 +93,7 @@ gdf["corine_label"] = gdf["corine_value"].apply(
 print("CORINE-Werte erfolgreich gesampelt und gelabelt.")
 
 
-# Mapping-Tabelle laden (IPCC – CORINE)
+# Mapping-Tabelle laden (IPCC - CORINE)
 map_df_corine = pd.read_csv(ipcc_mapping_file_corine, sep=";", encoding="utf-8-sig")
 required_cols_c = {"IPCC_ID", "IPCC_NAME", "RASTER_ID", "CORINE_NAME"}
 if not required_cols_c.issubset(map_df_corine.columns):
@@ -106,7 +108,7 @@ gdf["ipcc_corine_label"] = (
 gdf["ipcc_corine_value"] = gdf["corine_value"].map(corine_to_ipcc_id).astype("Int64")
 
 
-# Mapping-Tabelle laden (IPCC – Arealstatistik)
+# Mapping-Tabelle laden (IPCC - Arealstatistik)
 map_df_areal = pd.read_csv(ipcc_mapping_file_as, sep=";", encoding="utf-8-sig")
 required_cols_a = {"IPCC_ID", "IPCC_NAME", "AS_ID", "AS_NAME"}
 if not required_cols_a.issubset(map_df_areal.columns):
@@ -118,7 +120,7 @@ areal_to_ipcc_id = dict(zip(map_df_areal["AS_ID"], map_df_areal["IPCC_ID"]))
 gdf["ipcc_areal_label"] = gdf["areal_value"].map(areal_to_ipcc_name).fillna("Unknown")
 gdf["ipcc_areal_value"] = gdf["areal_value"].map(areal_to_ipcc_id).astype("Int64")
 
-# Vergleich (Unterschiede)
+# Vergleich zwischen IPCC - Arealstatistik & IPCC - CORINE (0 = gleich, 1 = unterschiedlich)
 gdf["diff_ipcc"] = (
     gdf["ipcc_areal_value"].fillna(-1) != gdf["ipcc_corine_value"].fillna(-1)
 ).astype(int)
@@ -127,7 +129,7 @@ gdf["diff_ipcc"] = (
 gdf["x"] = gdf.geometry.x
 gdf["y"] = gdf.geometry.y
 
-# Spaltenreihenfolge
+# Spaltenreihenfolge anpassen
 desired_order = [
     "areal_value",
     "areal_label",
