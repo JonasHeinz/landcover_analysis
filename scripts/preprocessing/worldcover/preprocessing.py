@@ -131,5 +131,5 @@ def process_worldcover(year):
 # Beispielaufruf:
 # define data paths for worlcover files
 
-# process_worldcover(2020)
+process_worldcover(2020)
 process_worldcover(2021)
