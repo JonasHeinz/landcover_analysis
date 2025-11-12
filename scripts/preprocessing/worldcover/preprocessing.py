@@ -32,7 +32,7 @@ def process_worldcover(year):
     gpkg_path = DATA_DIR / "base" / "swissBOUNDARIES3D" / "swissBOUNDARIES3D_1_5_LV95_LN02.gpkg"
     
     # --- Grenze laden und puffern ---
-    border_gdf = gpd.read_file(gpkg_path)
+    border_gdf = gpd.read_file(gpkg_path, layer="tlm_landesgebiet")
     buffered_border_gdf = border_gdf.copy()
     buffered_border_gdf["geometry"] = buffered_border_gdf.buffer(1000)  # 1 km Buffer
 
