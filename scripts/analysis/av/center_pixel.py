@@ -4,54 +4,64 @@ import geopandas as gpd
 from scripts import DATA_DIR
 from scripts.helpers import raster_helper
 
-# Polygone des CORINE Datensatzes
-polygons = gpd.read_file(DATA_DIR / "analysis/av/BB_Zug.gpkg")
+# Polygone des AV Datensatzes
+import geopandas as gpd
 
-# Punktraster der Arealstatistik
-points = gpd.read_file(DATA_DIR / "analysis/arealstatistik/ag-b-00.03-37-area-all-gpkg_zug.gpkg")
+point = gpd.read_file(DATA_DIR/"analysis/arealstatistik/Arealstatistik_Zug.gpkg")
+polygon = gpd.read_file(DATA_DIR/"analysis/av/BB_Zug.gpkg")
 
-# Länge resp. Breite der Boxen um die Punnkte der Arealstatistik
-cell_size = 100  
+import os
+cwd = os.getcwd()
+print(cwd)
 
-# Erstellen von Boxen um jeden Punkt der Arealstatistik
-points["grid"] = points.geometry.apply(lambda p: raster_helper.calculate_vectorbox(p, cell_size))
+# ensure CRS is metric (LV95 / EPSG:2056 or similar)
+print("point.crs:", point.crs)
 
-# Überschreiben des ursprünglichen Geometriefeld der Arealstatistik durch die neuen Boxen
-points["geometry"] = points["grid"]
-squares = points.drop(columns="grid")  
+# if point geometries are polygons use centroids, otherwise geometry if already points
+points = point.geometry.centroid
 
-reduced_squares = squares[["RELI", "geometry"]]
+boxsize = 100  # meters
 
-# Geometrien der Boxen in ihre Mittelpunkt-Punkte umwandeln
-raster_points = reduced_squares.geometry.centroid
+# create GeoSeries of boxes
+boxes = points.apply(lambda p: raster_helper.calculate_vectorbox(p, boxsize))
 
-# Räumliche Verknüpfung der Punkte mit den Polygonen von AV
-squares_with_categories = gpd.sjoin(
-    gpd.GeoDataFrame(geometry=raster_points, crs=reduced_squares.crs),
-    polygons[['Art', 'geometry']],
+# Make GeoDataFrame with same attributes + new geometry
+point_Raster = gpd.GeoDataFrame(point.drop(columns="geometry"), geometry=boxes, crs=point.crs)
+
+# First ensure same CRS
+if point_Raster.crs != polygon.crs:
+    polygon = polygon.to_crs(point_Raster.crs)
+
+# Get centroids of the raster boxes for point-in-polygon operation
+raster_points = point_Raster.geometry.centroid
+
+# Perform spatial join
+joined = gpd.sjoin(
+    gpd.GeoDataFrame(geometry=raster_points, crs=point_Raster.crs),
+    polygon[['Art', 'geometry']],
     how='left',
     predicate='within'
 )
 
-# Umbennenen der 'Art' Spalte zu 'AV_ID' für Klarheit
-squares['AV_ID'] = squares_with_categories['Art']
+# Add the joined Art values back to point_Raster
+point_Raster['Art_AV'] = joined['Art']
 
-# Laden der Zuordnungstabellen von AV zu IPCC und von Arealstatistik zu IPCC
-ipcc_av_mapping_dict = pd.read_csv(DATA_DIR / "analysis/av/mapping_ipcc_av.csv", sep=";" ).set_index("AV_ID")["IPCC_ID"].to_dict()
-ipcc_arealstatistik_mapping_dict = pd.read_csv(DATA_DIR / "analysis/arealstatistik/mapping_ipcc_arealstatistik.csv", sep=";" ).set_index("AS_ID")["IPCC_ID"].to_dict()
+point_Raster["AV_ID"] = point_Raster["Art_AV"]
+
+import pandas as pd
+ipcc_av_mapping_dict = pd.read_csv(DATA_DIR/"analysis/av/mapping_ipcc_av.csv", sep=";" ).set_index("AV_ID")["IPCC_ID"].to_dict()
+ipcc_arealstatistik_mapping_dict = pd.read_csv(DATA_DIR/"analysis/arealstatistik/mapping_ipcc_arealstatistik.csv", sep=";" ).set_index("AS_ID")["IPCC_ID"].to_dict()
 
 # AV_ID contains string categories (e.g. 'Gewaesser_fliessendes'), so don't cast to int — map directly
-squares_with_categories["IPCC_Av_Id"] = squares_with_categories["AV_ID"].map(ipcc_av_mapping_dict)
+point_Raster["IPCC_AV_Id"] = point_Raster["AV_ID"].map(ipcc_av_mapping_dict)
 
 # AS18_72 may be numeric but possibly stored as string; convert safely and map
-squares_with_categories["IPCC_AS_Id"] = pd.to_numeric(squares_with_categories["AS18_72"], errors="coerce").map(ipcc_arealstatistik_mapping_dict)
+point_Raster["IPCC_AS_Id"] = pd.to_numeric(point_Raster["AS18_72"], errors="coerce").map(ipcc_arealstatistik_mapping_dict)
 
-# Check für unmapped Werte
-print("Unmapped AV_ID rows:", squares_with_categories["IPCC_Av_Id"].isna().sum())
-print("Unmapped AS18_72 rows:", squares_with_categories["IPCC_AS_Id"].isna().sum())
+# quick diagnostics for unmapped values
+print("Unmapped AV_ID rows:", point_Raster["IPCC_AV_Id"].isna().sum())
+print("Unmapped AS18_72 rows:", point_Raster["IPCC_AS_Id"].isna().sum())
 
-# Prüfen der Gleichheit der IPCC Kategorien
-squares_with_categories["IPCC_Match"] = squares_with_categories["IPCC_AV_Id"] == squares_with_categories["IPCC_AS_Id"]
+point_Raster["IPCC_Match"] = point_Raster["IPCC_Av_Id"] == point_Raster["IPCC_AS_Id"]
 
-# Speichern der Daten als Geopackage
-squares_with_categories.to_file(DATA_DIR / "analysis/av/test3.gpkg")
+point_Raster.to_file(DATA_DIR/"analysis/av/AV_As_Center_Pixel.gpkg")

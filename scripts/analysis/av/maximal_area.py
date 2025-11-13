@@ -60,4 +60,4 @@ squares_with_categories["IPCC_AS_Id"] = squares_with_categories["AS18_72"].astyp
 squares_with_categories["IPCC_Match"] = squares_with_categories["IPCC_AV_Id"] == squares_with_categories["IPCC_AS_Id"]
 
 # Speichern der Daten als Geopackage
-squares_with_categories.to_file(DATA_DIR / "analysis/av/test.gpkg")
+squares_with_categories.to_file(DATA_DIR / "analysis/av/AV_As_Maximal_Area.gpkg")
