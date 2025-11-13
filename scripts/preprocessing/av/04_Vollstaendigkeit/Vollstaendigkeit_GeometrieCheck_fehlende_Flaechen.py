@@ -86,8 +86,8 @@ differenz_Union.to_file(differenz_Union_dir, layer = "fehlende_Fla", driver="GPK
 # -------------------------------
 # Schritt 7: erstellen von Mulipolygons für fehlende Abdeckung (fehlende Flächen > 99% Abdeckung)
 # -------------------------------
-fehlende_Flaeche = differenz_Union[differenz_Union["prozent_diff"] > 1]
-print("Fehlende Flächen mit mehr als 1% Abdeckung extrahiert erfolgreich.")
+fehlende_Flaeche = differenz_Union[differenz_Union["prozent_diff"] > 5]
+print("Fehlende Flächen mit mehr als 5% Abdeckung extrahiert erfolgreich.")
 # -------------------------------
 # Schritt 8: Neues GeoPackage speichern
 # -------------------------------
