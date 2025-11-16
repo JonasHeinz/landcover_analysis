@@ -73,21 +73,46 @@ my_colors <- c("#fef0d9", "#fdcc8a", "#fc8d59", "#e34a33", "#b30000")
 
 # Plot
 p <- ggplot(result) +
-  geom_sf(aes(fill = change_percent), color = "black", size = 0.2) +
+  geom_sf(aes(fill = change_percent), color = NA) +
+  geom_sf_text(aes(label = name), size = 3, color = "black") +  # Gemeindenamen hinzufügen
   scale_fill_gradientn(colors = my_colors, name = "Änderung (%)") +
   annotation_scale(
-    location = "bl",           # unten links
-    width_hint = 0.2,          # Anteil der Karte für die Länge
-    unit_category = "metric",  # metrische Einheiten
-    bar_cols = c("black", "white"), # Balkenfarben
-    line_width = 1             # Linienstärke
+    location = "bl",
+    width_hint = 0.2,
+    unit_category = "metric",
+    bar_cols = c("black", "white"),
+    line_width = 1
   ) +
   annotation_north_arrow(
     location = "tr",
     which_north = "true",
-    style = north_arrow_fancy_orienteering()
+    style = north_arrow_fancy_orienteering(),
+    height = unit(2, "cm"),  # Höhe des Pfeils
+    width  = unit(2, "cm")   #
   ) +
-  labs(title = "LULC Veränderungen in % der Gemeindefläche") +
+  labs(
+    title = "Prozentuale Änderungen der Landnutzung pro Gemeinde im Kanton Zug",
+    subtitle = "Die Werte zeigen, wie viel Prozent der Gemeindefläche sich zwischen Arealstatistik und ESA WorldCover sich unterscheiden",
+    caption = "Datenquelle: Arealstatistik 2018 & ESA WorldCover 2020"
+  ) +
   theme_minimal() +
-  theme(axis.text = element_blank(), axis.ticks = element_blank(),   panel.grid = element_blank(), # Achsengitter entfernen)
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(), 
+        panel.grid = element_blank(),
+        axis.title.x = element_blank(), # Achsentitel entfernen
+        axis.title.y = element_blank(), # Achsentitel entfernen
+        axis.text.x = element_blank(), # Achsentext entfernen
+        axis.text.y = element_blank(), # Achsentext entfernen
+        plot.title = element_text(face = "bold", size = 16),
+        plot.subtitle = element_text( size = 11)
+        ) # Achsengitter entfernen
+
+ggsave(
+  filename = "data/visualizations/landnutzung_aenderung_pro_gemeinde_zug.pdf",
+  plot = p,
+  width = 10,
+  height = 8
+)
+
 print(p)
+
