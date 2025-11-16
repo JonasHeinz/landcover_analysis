@@ -67,12 +67,27 @@ st_write(result, "data/analysis/worldcover/maxareageographic_aggregation_zug.gpk
 # -----------------------------
 # Karte plotten mit ggplot2 + ggspatial
 # -----------------------------
+# Beispiel: Klassen erstellen
+# Definierte Farben für den Verlauf von niedrig zu hoch
+my_colors <- c("#fef0d9", "#fdcc8a", "#fc8d59", "#e34a33", "#b30000")
+
+# Plot
 p <- ggplot(result) +
   geom_sf(aes(fill = change_percent), color = "black", size = 0.2) +
-  scale_fill_viridis_c(option = "YlOrRd", name = "Änderung (%)") +
-  annotation_scale(location = "bl", width_hint = 0.7) +   # Maßstab unten links
-  annotation_north_arrow(location = "tr", which_north = "true",
-                         style = north_arrow_fancy_orienteering()) + # Nordpfeil oben rechts
+  scale_fill_gradientn(colors = my_colors, name = "Änderung (%)") +
+  annotation_scale(
+    location = "bl",           # unten links
+    width_hint = 0.2,          # Anteil der Karte für die Länge
+    unit_category = "metric",  # metrische Einheiten
+    bar_cols = c("black", "white"), # Balkenfarben
+    line_width = 1             # Linienstärke
+  ) +
+  annotation_north_arrow(
+    location = "tr",
+    which_north = "true",
+    style = north_arrow_fancy_orienteering()
+  ) +
   labs(title = "LULC Veränderungen in % der Gemeindefläche") +
   theme_minimal() +
-  theme(axis.text = element_blank(), axis.ticks = element_blank())
+  theme(axis.text = element_blank(), axis.ticks = element_blank(),   panel.grid = element_blank(), # Achsengitter entfernen)
+print(p)
