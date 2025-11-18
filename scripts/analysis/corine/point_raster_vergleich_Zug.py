@@ -9,10 +9,10 @@ import os
 
 # Eingabedateien
 areal_gpkg = (
-    DATA_DIR / "analysis/arealstatistik/ag-b-00.03-37-area-all-gpkg.gpkg"
+    DATA_DIR / "analysis/arealstatistik/ag-b-00.03-37-area-all-gpkg_zug.gpkg"
 )  # Arealstatistik Punkte
 corine_raster = (
-    DATA_DIR / "analysis/corine/2018/U2018_CLC2018_V2020_20u1.tif"
+    DATA_DIR / "analysis/corine/2018/U2018_CLC2018_V2020_20u1_zug.tif"
 )  # CORINE Raster
 ipcc_mapping_file_corine = (
     DATA_DIR / "analysis/corine/mapping_ipcc_corine.csv"
@@ -20,14 +20,12 @@ ipcc_mapping_file_corine = (
 ipcc_mapping_file_as = (
     DATA_DIR / "analysis/arealstatistik/mapping_ipcc_arealstatistik.csv"
 )  # Zuordnungstabelle Arealstatistik mit IPCC
-output_csv = (
-    DATA_DIR / "analysis/corine/2018/Resultat_Tabelle.csv"
-)  # Output csv Tabelle
+output_csv = DATA_DIR / "analysis/corine/2018/Tabelle_Zug.csv"  # Output csv Tabelle
 output_gpkg = (
-    DATA_DIR / "analysis/corine/2018/Punkte_Resultat.gpkg"
+    DATA_DIR / "analysis/corine/2018/Punkte_Zug.gpkg"
 )  # Output Geopackage Punkte
 output_grid_gpkg = (
-    DATA_DIR / "analysis/corine/2018/VektorRaster_Resultat.gpkg"
+    DATA_DIR / "analysis/corine/2018/VektorRaster.gpkg"
 )  # Output Vektorraster 100x100 m
 
 
