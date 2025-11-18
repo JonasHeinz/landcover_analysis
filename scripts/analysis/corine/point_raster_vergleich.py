@@ -4,6 +4,7 @@ import rasterio
 import numpy as np
 import pandas as pd
 import xml.etree.ElementTree as ET
+from helpers import calculate_vectorbox
 import os
 
 # Eingabedateien
@@ -23,6 +24,9 @@ output_csv = DATA_DIR / "analysis/corine/2018/Tabelle_Zug.csv"  # Output csv Tab
 output_gpkg = (
     DATA_DIR / "analysis/corine/2018/Punkte_Zug.gpkg"
 )  # Output Geopackage Punkte
+output_grid_gpkg = (
+    DATA_DIR / "analysis/corine/2018/VektorRaster.gpkg"
+)  # Output Vektorraster 100x100 m
 
 
 # Hilfsfunktionen zum Auslesen der Arealstatistik labels aus Mapping Tabelle
@@ -144,13 +148,24 @@ desired_order = [
     "y",
 ]
 
+# 100 x 100 Raster Poygone erzeugen
+cell_size = 100
+
+gdf_grid = gdf.copy()
+gdf_grid["geometry"] = gdf_grid.geometry.apply(
+    lambda p: calculate_vectorbox(p, cell_size)
+)
+
+
 # Export csv Tabelle
 gdf[desired_order].to_csv(output_csv, index=False, encoding="utf-8-sig")
-
 
 # Export Punkte als gpkg
 gdf[desired_order + ["geometry"]].to_file(output_gpkg, driver="GPKG")
 
+# Export Vektorraster als gpkg
+gdf_grid.to_file(output_grid_gpkg, driver="GPKG")
 
 print("Tabelle gespeichert unter:", {output_csv})
 print("Geopackage gespeichert unter:", {output_gpkg})
+print("100x100m Vektor-Raster gespeichert unter:", {output_grid_gpkg})
