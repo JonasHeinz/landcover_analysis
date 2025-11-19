@@ -4,9 +4,9 @@ import geopandas as gpd
 import pandas as pd
 
 # --- Dateipfade anpassen ---
-shp_path = "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/05_Daten/AV/AV/Shapefile_LU/GEO.AVBBXXXX_V2_PY.shp"       # dein Shapefile
-gpkg2_path = "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/05_Daten/BB_CH.gpkg"    # dein GeoPackage
-output_path = "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/05_Daten/BB_CH_LU.gpkg"   # gewünschte Ausgabe
+shp_path = r"C:\Users\st1179523\Documents\GitHub\landcover_analysis\data\preprocessing\av\LUAVBB.shp"       # dein Shapefile
+gpkg2_path = r"C:\Users\st1179523\Documents\GitHub\landcover_analysis\data\preprocessing\av\BB_CH_Gesamt_ohne_LU.gpkg"    # dein GeoPackage
+output_path = r"C:\Users\st1179523\Documents\GitHub\landcover_analysis\data\preprocessing\av\BB_CH_LU.gpkg"   # gewünschte Ausgabe
 
 # --- Daten laden ---
 gdf1 = gpd.read_file(shp_path)
@@ -14,32 +14,32 @@ gdf2 = gpd.read_file(gpkg2_path)
 
 # --- Mapping-Tabellen ---
 art_map = {
-    0: "Gebäude",
-    1: "Strasse, Weg",
+    0: "Gebaeude",
+    1: "Strasse_Weg",
     2: "Trottoir",
     3: "Verkehrsinsel",
     4: "Bahn",
     5: "Flugplatz",
     6: "Wasserbecken",
-    7: "übrige befestigte Fläche",
-    8: "Acker, Wiese, Weide",
+    7: "uebrige_befestigte",
+    8: "Acker_Wiese_Weide",
     9: "Reben",
-    10: "übrige Intensivkultur",
+    10: "uebrige_Intensivkultur",
     11: "Gartenanlage",
-    12: "Hoch-, Flachmoor",
-    13: "übrige humusierte Fläche",
-    14: "stehendes Gewässer",
-    15: "fliessendes Gewässer",
-    16: "Schilfgürtel",
-    17: "geschlossener Wald",
-    18: "dichte Wytweide",
-    19: "offene Wytweide",
-    20: "übrige bestockte Fläche",
+    12: "Hoch_Flachmoor",
+    13: "uebrige_humusierte",
+    14: "Gewaesser_stehendes",
+    15: "Gewaesser_fliessendes",
+    16: "Schilfguertel",
+    17: "geschlossener_Wald",
+    18: "Wytweide_dicht",
+    19: "Wytweide_offen",
+    20: "uebrige_bestockte",
     21: "Fels",
-    22: "Gletscher, Firn",
-    23: "Geröll, Sand",
-    24: "Abbau, Deponie",
-    25: "übrige vegetationslose Fläche"
+    22: "Gletscher_Firn",
+    23: "Geroell_Sand",
+    24: "Abbau_Deponie",
+    25: "uebrige_vegetationslose"
 }
 
 qualitaet_map = {

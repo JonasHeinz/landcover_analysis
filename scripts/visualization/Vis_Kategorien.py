@@ -30,7 +30,7 @@ def plot_av_vs_as(gdf: gpd.GeoDataFrame, As_Kategorie: str, Kategorie: str, Tite
         3: "#BCFF1E",   # Grassland -> gelb/grün
         4: "#1E90FF",   # Wetlands -> blau
         5: "#A9A9A9",   # Settlements -> grau
-        6: "#FF69B4"    # Other Land -> pink
+        6: "#F31383"    # Other Land -> pink
     }
 
     def adjust_brightness(color, factor):
@@ -80,13 +80,20 @@ def plot_av_vs_as(gdf: gpd.GeoDataFrame, As_Kategorie: str, Kategorie: str, Tite
     ax_map.text(scalebar_x + scalebar_length/2, scalebar_y + (ylim[1]-ylim[0])*0.01, f"{scalebar_length} m",
                 ha='center', va='bottom', fontsize=10)
 
-    # Balken-Legende
-    for idx, (cat, pct) in enumerate(accuracy_per_class):
+    # Sortierung der Kategorien nach Häufigkeit in As_Kategorie
+    category_counts = gdf[As_Kategorie].value_counts()
+    ordered_cats = list(category_counts.index)
+
+    # Balkenplot nach geordneter Kategorie
+    accuracy_per_class_ordered = [(cat, next(pct for (c, pct) in accuracy_per_class if c == cat))
+                                  for cat in ordered_cats]
+
+    for idx, (cat, pct) in enumerate(accuracy_per_class_ordered):
         incorrect_pct = 100 - pct
         ax_bar.barh(idx, pct, color=color_low_sat[cat], edgecolor='black')
         ax_bar.barh(idx, incorrect_pct, left=pct, color=color_high_sat[cat], edgecolor='black')
 
-    # Y-Achse: Kategorie + Prozentwert IPCC Kategorien
+    # Kategorie-Namen
     category_names = {
         1: "Forest land",
         2: "Cropland",
@@ -95,8 +102,9 @@ def plot_av_vs_as(gdf: gpd.GeoDataFrame, As_Kategorie: str, Kategorie: str, Tite
         5: "Settlements",
         6: "Other Land"
     }
-    ax_bar.set_yticks(range(len(category_colors)))
-    ax_bar.set_yticklabels([f"{category_names[cat]} {pct:.0f}%" for (cat, pct) in accuracy_per_class])
+
+    ax_bar.set_yticks(range(len(ordered_cats)))
+    ax_bar.set_yticklabels([f"{category_names[cat]} {pct:.0f}%" for (cat, pct) in accuracy_per_class_ordered])
 
     # X-Achse
     ax_bar.set_xlim(0, 100)
