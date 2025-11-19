@@ -2,7 +2,7 @@ import fiona
 from multiprocessing import Pool, cpu_count
 
 # Pfad zu deinem Shapefile mit Forward-Slashes
-shapefile_path = "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/Daten/AV/SHP_BB/lcsf.shp"
+gpkg_path = r"C:\Users\aebim\Documents\02_Ausbildung\Studium\05_Semester\5230_Geoniformatik_Raumanalyse\Projektarbeit\03_GitHub\data\preprocessing\av\BB_CH_LU.gpkg"
 
 # Funktion zum Verarbeiten eines Feature-Blocks
 def process_features(features):
@@ -32,8 +32,8 @@ if __name__ == "__main__":
     qualitaet_values = set()
     art_values = set()
     
-    # Fiona öffnet das Shapefile
-    with fiona.open(shapefile_path, 'r') as shp:
+    # Fiona öffnet das GeoPackage
+    with fiona.open(gpkg_path, 'r') as shp:
         # Pool mit allen verfügbaren CPU-Kernen
         with Pool(cpu_count()) as pool:
             # Chunks erzeugen und parallel verarbeiten
