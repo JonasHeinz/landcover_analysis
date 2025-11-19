@@ -116,3 +116,75 @@ ggsave(
 
 print(p)
 
+
+# ---------------------------------------------------
+# Mini-Karten + Balkendiagramme pro Gemeinde erzeugen
+# ---------------------------------------------------
+# ----------------------------
+# Kartenbasis vorbereiten: nur Kanton Zug
+# ----------------------------
+karte <- gemeinden %>% summarise()  
+
+# Sicherstellen, dass die Prozentwerte existieren
+result <- result %>%
+  mutate(correct_percent = 100 - change_percent)
+
+# Liste zum Sammeln der Panels
+plots_list <- list()
+
+# Durch alle Gemeinden iterieren
+for (g in result$name) {
+  
+  gemeinde_poly <- result %>% filter(name == g)
+  changes_g <- st_intersection(changes, gemeinde_poly)
+  
+  # ----------------------------
+  # 1) Karte von Zug mit Highlight der Gemeinde
+  # ----------------------------
+  map_plot <- ggplot() +
+    geom_sf(data = karte, fill = "grey95", color = "white") +
+    geom_sf(data = gemeinde_poly, fill = "red", alpha = 0.8) +
+    labs(title = g) +
+    theme_void() +
+    theme(
+      plot.title = element_text(size = 12, face = "bold")
+    )
+  
+  # ----------------------------
+  # 2) Balkendiagramm
+  # ----------------------------
+  df_bar <- data.frame(
+    category = c("Richtig", "Falsch"),
+    value = c(gemeinde_poly$correct_percent, gemeinde_poly$change_percent)
+  )
+  
+  bar_plot <- ggplot(df_bar, aes(x = category, y = value, fill = category)) +
+    geom_col() +
+    scale_fill_manual(values = c("Richtig" = "darkgreen", "Falsch" = "red")) +
+    labs(y = "Prozent", x = NULL) +
+    theme_minimal() +
+    theme(
+      legend.position = "none",
+      axis.title.x = element_blank()
+    )
+  
+  # ----------------------------
+  # 3) Panel horizontal
+  # ----------------------------
+  panel <- map_plot + bar_plot + plot_layout(widths = c(2, 1))
+  plots_list[[g]] <- panel
+}
+
+# ----------------------------
+# Alle Panels untereinander
+# ----------------------------
+final_plot <- wrap_plots(plots_list, ncol = 1)
+
+# ----------------------------
+# Speichern
+# ----------------------------
+ggsave("data/visualizations/alle_gemeinden_vertical.pdf",
+       final_plot,
+       width = 10, height = 3 * length(plots_list))
+
+print(final_plot)
