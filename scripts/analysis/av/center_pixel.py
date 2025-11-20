@@ -7,8 +7,8 @@ from scripts.helpers import raster_helper
 # Polygone des AV Datensatzes
 import geopandas as gpd
 
-point = gpd.read_file(DATA_DIR/"analysis/arealstatistik/Arealstatistik_Zug.gpkg")
-polygon = gpd.read_file(DATA_DIR/"analysis/av/BB_Zug.gpkg")
+point = gpd.read_file(DATA_DIR/"analysis/arealstatistik/Arealstatistik_Zeitreihe.gpkg")
+polygon = gpd.read_file(DATA_DIR/"preprocessing/av/BB_CH_Gesamt.gpkg")
 
 import os
 cwd = os.getcwd()
@@ -35,7 +35,6 @@ if point_Raster.crs != polygon.crs:
 # Get centroids of the raster boxes for point-in-polygon operation
 raster_points = point_Raster.geometry.centroid
 
-# Perform spatial join
 joined = gpd.sjoin(
     gpd.GeoDataFrame(geometry=raster_points, crs=point_Raster.crs),
     polygon[['Art', 'geometry']],
@@ -43,8 +42,11 @@ joined = gpd.sjoin(
     predicate='within'
 )
 
-# Add the joined Art values back to point_Raster
-point_Raster['Art_AV'] = joined['Art']
+# Remove multiple matches (one point matched multiple polygons)
+joined = joined[~joined.index.duplicated(keep='first')]
+
+# Assign values back
+point_Raster['Art_AV'] = joined['Art'].values
 
 point_Raster["AV_ID"] = point_Raster["Art_AV"]
 
@@ -62,6 +64,6 @@ point_Raster["IPCC_AS_Id"] = pd.to_numeric(point_Raster["AS18_72"], errors="coer
 print("Unmapped AV_ID rows:", point_Raster["IPCC_AV_Id"].isna().sum())
 print("Unmapped AS18_72 rows:", point_Raster["IPCC_AS_Id"].isna().sum())
 
-point_Raster["IPCC_Match"] = point_Raster["IPCC_Av_Id"] == point_Raster["IPCC_AS_Id"]
+point_Raster["IPCC_Match"] = point_Raster["IPCC_AV_Id"] == point_Raster["IPCC_AS_Id"]
 
 point_Raster.to_file(DATA_DIR/"analysis/av/AV_As_Center_Pixel.gpkg")
