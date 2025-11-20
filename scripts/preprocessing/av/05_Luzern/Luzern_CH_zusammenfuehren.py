@@ -4,13 +4,13 @@ import geopandas as gpd
 import pandas as pd
 
 # --- Dateipfade anpassen ---
-shp_path = "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/05_Daten/AV/AV/Shapefile_LU/GEO.AVBBXXXX_V2_PY.shp"       # dein Shapefile
-gpkg2_path = "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/05_Daten/BB_CH.gpkg"    # dein GeoPackage
-output_path = "C:/Users/aebim/Documents/02_Ausbildung/Studium/05_Semester/5230_Geoniformatik_Raumanalyse/Projektarbeit/05_Daten/BB_CH_LU.gpkg"   # gewünschte Ausgabe
+shp_path = r"C:\Users\aebim\Documents\02_Ausbildung\Studium\05_Semester\5230_Geoniformatik_Raumanalyse\Projektarbeit\03_GitHub\data\preprocessing\av\GEO.AVBBXXXX_V2_PY.shp"       # dein Shapefile
+gpkg_path = r"C:\Users\aebim\Documents\02_Ausbildung\Studium\05_Semester\5230_Geoniformatik_Raumanalyse\Projektarbeit\03_GitHub\data\preprocessing\av\BB_CH_Gesamt_ohne_LU.gpkg"    # dein GeoPackage
+output_path = r"C:\Users\aebim\Documents\02_Ausbildung\Studium\05_Semester\5230_Geoniformatik_Raumanalyse\Projektarbeit\03_GitHub\data\preprocessing\av\BB_CH_LU.gpkg"   # gewünschte Ausgabe
 
 # --- Daten laden ---
 gdf1 = gpd.read_file(shp_path)
-gdf2 = gpd.read_file(gpkg2_path)
+gdf2 = gpd.read_file(gpkg_path)
 
 # --- Mapping-Tabellen ---
 art_map = {
@@ -53,6 +53,7 @@ qualitaet_map = {
 # --- gdf1 anpassen ---
 gdf1["Art"] = gdf1["ART"].map(art_map)
 gdf1["Qualitaet"] = gdf1["QUALITAET"].map(qualitaet_map)
+gdf1["BFSNr"] = gdf1["BFS_NR"]
 gdf1["Kanton"] = "LU"  # Standardwert
 
 # --- Nur relevante Spalten auswählen ---
