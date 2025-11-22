@@ -9,10 +9,10 @@ import matplotlib as mpl
 # Mapping für Label-Namen IPCC Klassen
 label_names = {
     1: "Forestland",
-    2: "Grassland",
-    3: "Cropland",
-    4: "Settelmants",
-    5: "Wetlands",
+    2: "Cropland",
+    3: "Grassland",
+    4: "Wetlands",
+    5: "Settelmants",
     6: "Other Land"
 }
 
