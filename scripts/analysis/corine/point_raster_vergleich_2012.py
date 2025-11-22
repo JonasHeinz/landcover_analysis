@@ -12,7 +12,7 @@ areal_gpkg = (
     DATA_DIR / "analysis/arealstatistik/ag-b-00.03-37-area-all-gpkg.gpkg"
 )  # Arealstatistik Punkte
 corine_raster = (
-    DATA_DIR / "analysis/corine/2018/U2018_CLC2018_V2020_20u1.tif"
+    DATA_DIR / "analysis/corine/2012/U2018_CLC2012_V2020_20u1.tif"
 )  # CORINE Raster
 ipcc_mapping_file_corine = (
     DATA_DIR / "analysis/corine/mapping_ipcc_corine.csv"
@@ -21,14 +21,14 @@ ipcc_mapping_file_as = (
     DATA_DIR / "analysis/arealstatistik/mapping_ipcc_arealstatistik.csv"
 )  # Zuordnungstabelle Arealstatistik mit IPCC
 output_csv = (
-    DATA_DIR / "analysis/corine/2018/Resultat_Tabelle.csv"
+    DATA_DIR / "analysis/corine/2012/Resultat_Tabelle_2012.csv"
 )  # Output csv Tabelle
 output_gpkg = (
-    DATA_DIR / "analysis/corine/2018/Punkte_Resultat.gpkg"
+    DATA_DIR / "analysis/corine/2012/Punkte_Resultat_2012.gpkg"
 )  # Output Geopackage Punkte
 output_grid_gpkg = (
-    DATA_DIR / "analysis/corine/2018/VektorRaster_Resultat.gpkg"
-)  # Output Vektorraster 100x100 m
+    DATA_DIR / "analysis/corine/2012/VektorRaster_Resultat_2012.gpkg"
+)  # Output Geopackage Vektorraster 100x100 m
 
 
 # Hilfsfunktionen zum Auslesen der Arealstatistik labels aus Mapping Tabelle
@@ -79,11 +79,11 @@ areal_labels = read_areal_labels(ipcc_mapping_file_as)
 gdf = gpd.read_file(areal_gpkg)
 print(f"{len(gdf):,} Arealstatistik Punkte aus GeoPackage geladen.")
 
-if "AS18_72" not in gdf.columns:
-    raise KeyError("Spalte 'AS18_72' fehlt im GeoPackage!")
+if "AS09_72" not in gdf.columns:
+    raise KeyError("Spalte 'AS09_72' fehlt im GeoPackage!")
 
-# Umbenennen der Arealspalte AS18_72 zu areal_label
-gdf = gdf.rename(columns={"AS18_72": "areal_value"})
+# Umbenennen der Arealspalte AS09_72 zu areal_value
+gdf = gdf.rename(columns={"AS09_72": "areal_value"})
 gdf["areal_label"] = gdf["areal_value"].map(areal_labels).fillna("Unknown")
 
 # CORINE-Werte auf Arealstatistikpunkte sampeln
@@ -150,6 +150,14 @@ desired_order = [
     "y",
 ]
 
+
+# Export csv Tabelle
+gdf[desired_order].to_csv(output_csv, index=False, encoding="utf-8-sig")
+
+# Export Punkte als gpkg
+cols = [c for c in gdf.columns if c not in desired_order] + desired_order
+gdf[cols].to_file(output_gpkg, driver="GPKG")
+
 # 100 x 100 Raster Poygone erzeugen
 cell_size = 100
 
@@ -158,15 +166,9 @@ gdf_grid["geometry"] = gdf_grid.geometry.apply(
     lambda p: calculate_vectorbox(p, cell_size)
 )
 
-
-# Export csv Tabelle
-gdf[desired_order].to_csv(output_csv, index=False, encoding="utf-8-sig")
-
-# Export Punkte als gpkg
-gdf[desired_order + ["geometry"]].to_file(output_gpkg, driver="GPKG")
-
 # Export Vektorraster als gpkg
 gdf_grid.to_file(output_grid_gpkg, driver="GPKG")
+
 
 print("Tabelle gespeichert unter:", {output_csv})
 print("Geopackage gespeichert unter:", {output_gpkg})
