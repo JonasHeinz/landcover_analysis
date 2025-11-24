@@ -3,17 +3,17 @@ library(sf)
 library(ggplot2)
 library(ggalluvial)
 library(dplyr)
+library(scales)
 
 # GeoPackage einlesen
 gdf <- st_read(DATA_DIR,"/analysis/as_av_corine_wc_merged.gpkg")
 
-# Mapping der numerischen Codes 1-6 auf IPCC-Klassen + No Data
+# Mapping der numerischen Codes 1-6 auf IPCC-Klassen + No Datae
 ipcc_levels <- c("Forest land", "Cropland", "Grassland", "Wetlands",
                  "Settlements", "Other Land", "No Data")
 
 code_to_ipcc <- function(x) ipcc_levels[x]
 
-# Neue Spalten erzeugen und No Data ersetzen
 gdf <- gdf %>%
   mutate(
     AS = code_to_ipcc(IPCC_AS_Id),
@@ -24,18 +24,10 @@ gdf <- gdf %>%
   mutate(across(c(AS, WORLDCOVER, CORINE, AV),
                 ~ ifelse(is.na(.x), "No Data", .x)))
 
-# Häufigkeiten pro Kombination berechnen
-data_long <- aggregate(
-  x = list(Freq = rep(1, nrow(gdf))),
-  by = list(AS = gdf$AS,
-            CORINE = gdf$CORINE,
-            WORLDCOVER = gdf$WORLDCOVER,
-            AV = gdf$AV),
-  FUN = sum
-)
-
-# Faktorlevels festlegen
-data_long <- data_long %>%
+# Häufigkeiten berechnen (relativ)
+data_long <- gdf %>%
+  count(AS, WORLDCOVER, CORINE, AV, name = "Freq") %>%
+  mutate(Freq_rel = Freq / sum(Freq)) %>%
   mutate(across(c(AS, WORLDCOVER, CORINE, AV),
                 ~ factor(.x, levels = ipcc_levels)))
 
@@ -47,39 +39,33 @@ ipcc_colors <- c(
   "Settlements" = "#A9A9A9",
   "Wetlands"    = "#1E90FF",
   "Other Land"  = "#F31383",
-  "No Data"     = "#808080" 
+  "No Data"     = "#808080"
 )
 
-comma_apostrophe <- function(x) {
-  format(x, big.mark = "'", scientific = FALSE)
-}
+# Sichtbarkeits-Schwelle für Alluvien 0.125 %
+threshold <- 0.00125
 
-
-# Sichtbarkeits-Schwelle für Alluvien
-threshold <- 5000  # ab wann sichtbar (100% = komplett sichtbar, sonst unsichtbar)
-
-# Alluvial-Plot
+# Alluvial-Plot erstellen
 ggplot(data_long,
        aes(axis1 = AS,
            axis2 = WORLDCOVER,
            axis3 = CORINE,
            axis4 = AV,
-           y = Freq)) +
+           y = Freq_rel)) +
   
   # Flüsse abhängig von Häufigkeit sichtbar/unsichtbar machen
   geom_alluvium(
     aes(
       fill = AS,
-      alpha = case_when(
-        Freq >= threshold ~ 0.6,
-        TRUE ~ 0
-      )
+      alpha = ifelse(Freq_rel >= threshold, 0.6, 0)
     ),
-    width = 1/12
+    width = 1/12, na.rm = TRUE
   ) +
   scale_alpha_identity() +
   
-  geom_stratum(aes(fill = after_stat(stratum)), width = 1/6, color = "NA") +
+  geom_stratum(aes(fill = after_stat(stratum)),
+               width = 1/6, color = "NA", na.rm = TRUE) +
+  
   scale_fill_manual(values = ipcc_colors, drop = FALSE) +
   
   scale_x_discrete(
@@ -88,12 +74,12 @@ ggplot(data_long,
     expand = c(.20, .1)
   ) +
   
-  scale_y_continuous(labels = comma_apostrophe) +
+  scale_y_continuous(labels = percent_format(accuracy = 0.1)) +
   
   labs(
     fill = "IPCC Kategorien:",
     x = "Datensatz",
-    y = "Häufigkeit",
+    y = "Anteil (%)",
     title = "Vergleich der IPCC-Landbedeckungskategorien in Datensätzen für die Schweiz",
     subtitle = "Abweichungen und Übereinstimmungen der Klassifizierungen zwischen verschiedenen Datensätzen"
   ) +
@@ -101,7 +87,7 @@ ggplot(data_long,
   theme_minimal(base_size = 12) +
   theme(
     plot.title = element_text(hjust = 0.5, face = "bold", size = 16),
-    plot.subtitle = element_text(hjust = 0.5, size = 14),
+    plot.subtitle = element_text(hjust = 0.5, size = 13),
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()
   )

@@ -21,14 +21,14 @@ ipcc_mapping_file_as = (
     DATA_DIR / "analysis/arealstatistik/mapping_ipcc_arealstatistik.csv"
 )  # Zuordnungstabelle Arealstatistik mit IPCC
 output_csv = (
-    DATA_DIR / "analysis/corine/2018/Resultat_Tabelle.csv"
+    DATA_DIR / "analysis/corine/2018/Resultat_Tabelle_2018.csv"
 )  # Output csv Tabelle
 output_gpkg = (
-    DATA_DIR / "analysis/corine/2018/Punkte_Resultat.gpkg"
+    DATA_DIR / "analysis/corine/2018/Punkte_Resultat_2018.gpkg"
 )  # Output Geopackage Punkte
 output_grid_gpkg = (
-    DATA_DIR / "analysis/corine/2018/VektorRaster_Resultat.gpkg"
-)  # Output Vektorraster 100x100 m
+    DATA_DIR / "analysis/corine/2018/VektorRaster_Resultat_2018.gpkg"
+)  # Output Geopackage Vektorraster 100x100 m
 
 
 # Hilfsfunktionen zum Auslesen der Arealstatistik labels aus Mapping Tabelle
@@ -82,9 +82,9 @@ print(f"{len(gdf):,} Arealstatistik Punkte aus GeoPackage geladen.")
 if "AS18_72" not in gdf.columns:
     raise KeyError("Spalte 'AS18_72' fehlt im GeoPackage!")
 
-# Umbenennen der Arealspalte AS18_72 zu areal_label
-gdf = gdf.rename(columns={"AS18_72": "areal_value"})
-gdf["areal_label"] = gdf["areal_value"].map(areal_labels).fillna("Unknown")
+# Umbenennen der Arealspalte AS18_72 zu AS_Id
+gdf = gdf.rename(columns={"AS18_72": "AS_Id"})
+gdf["AS_Label"] = gdf["AS_Id"].map(areal_labels).fillna("Unknown")
 
 # CORINE-Werte auf Arealstatistikpunkte sampeln
 with rasterio.open(corine_raster) as src:
@@ -92,8 +92,8 @@ with rasterio.open(corine_raster) as src:
     # Liest den CORINE-Rasterwert für jeden Arealstatistikpunkt aus
     corine_vals = [val[0] if val is not None else np.nan for val in src.sample(coords)]
 
-gdf["corine_value"] = corine_vals
-gdf["corine_label"] = gdf["corine_value"].apply(
+gdf["CORINE_Id"] = corine_vals
+gdf["CORINE_Label"] = gdf["CORINE_Id"].apply(
     lambda v: corine_labels.get(int(v), "NODATA") if not pd.isna(v) else "NODATA"
 )
 print("CORINE-Werte erfolgreich gesampelt und gelabelt.")
@@ -108,10 +108,8 @@ if not required_cols_c.issubset(map_df_corine.columns):
 corine_to_ipcc_name = dict(zip(map_df_corine["RASTER_ID"], map_df_corine["IPCC_NAME"]))
 corine_to_ipcc_id = dict(zip(map_df_corine["RASTER_ID"], map_df_corine["IPCC_ID"]))
 
-gdf["ipcc_corine_label"] = (
-    gdf["corine_value"].map(corine_to_ipcc_name).fillna("Unknown")
-)
-gdf["ipcc_corine_value"] = gdf["corine_value"].map(corine_to_ipcc_id).astype("Int64")
+gdf["IPCC_CORINE_Label"] = gdf["CORINE_Id"].map(corine_to_ipcc_name).fillna("Unknown")
+gdf["IPCC_CORINE_Id"] = gdf["CORINE_Id"].map(corine_to_ipcc_id).astype("Int64")
 
 
 # Mapping-Tabelle laden (IPCC - Arealstatistik)
@@ -123,12 +121,12 @@ if not required_cols_a.issubset(map_df_areal.columns):
 areal_to_ipcc_name = dict(zip(map_df_areal["AS_ID"], map_df_areal["IPCC_NAME"]))
 areal_to_ipcc_id = dict(zip(map_df_areal["AS_ID"], map_df_areal["IPCC_ID"]))
 
-gdf["ipcc_areal_label"] = gdf["areal_value"].map(areal_to_ipcc_name).fillna("Unknown")
-gdf["ipcc_areal_value"] = gdf["areal_value"].map(areal_to_ipcc_id).astype("Int64")
+gdf["IPCC_AS_Label"] = gdf["AS_Id"].map(areal_to_ipcc_name).fillna("Unknown")
+gdf["IPCC_AS_Id"] = gdf["AS_Id"].map(areal_to_ipcc_id).astype("Int64")
 
 # Vergleich zwischen IPCC - Arealstatistik & IPCC - CORINE (0 = gleich, 1 = unterschiedlich)
 gdf["diff_ipcc"] = (
-    gdf["ipcc_areal_value"].fillna(-1) != gdf["ipcc_corine_value"].fillna(-1)
+    gdf["IPCC_AS_Id"].fillna(-1) != gdf["IPCC_CORINE_Id"].fillna(-1)
 ).astype(int)
 
 # x,y-Koordinaten hinzufügen
@@ -137,18 +135,25 @@ gdf["y"] = gdf.geometry.y
 
 # Spaltenreihenfolge anpassen
 desired_order = [
-    "areal_value",
-    "areal_label",
-    "corine_value",
-    "corine_label",
-    "ipcc_areal_value",
-    "ipcc_areal_label",
-    "ipcc_corine_value",
-    "ipcc_corine_label",
+    "AS_Id",
+    "AS_Label",
+    "CORINE_Id",
+    "CORINE_Label",
+    "IPCC_AS_Id",
+    "IPCC_AS_Label",
+    "IPCC_CORINE_Id",
+    "IPCC_CORINE_Label",
     "diff_ipcc",
     "x",
     "y",
 ]
+
+# Export csv Tabelle
+gdf[desired_order].to_csv(output_csv, index=False, encoding="utf-8-sig")
+
+# Export Punkte als gpkg
+cols = [c for c in gdf.columns if c not in desired_order] + desired_order
+gdf[cols].to_file(output_gpkg, driver="GPKG")
 
 # 100 x 100 Raster Poygone erzeugen
 cell_size = 100
@@ -158,15 +163,9 @@ gdf_grid["geometry"] = gdf_grid.geometry.apply(
     lambda p: calculate_vectorbox(p, cell_size)
 )
 
-
-# Export csv Tabelle
-gdf[desired_order].to_csv(output_csv, index=False, encoding="utf-8-sig")
-
-# Export Punkte als gpkg
-gdf[desired_order + ["geometry"]].to_file(output_gpkg, driver="GPKG")
-
 # Export Vektorraster als gpkg
 gdf_grid.to_file(output_grid_gpkg, driver="GPKG")
+
 
 print("Tabelle gespeichert unter:", {output_csv})
 print("Geopackage gespeichert unter:", {output_gpkg})
