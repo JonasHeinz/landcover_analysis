@@ -39,7 +39,7 @@ data_long <- data_long %>%
   mutate(across(c(AS, WORLDCOVER, CORINE, AV),
                 ~ factor(.x, levels = ipcc_levels)))
 
-# Farben inkl. No Data
+# Farben definieren inkl. No Data
 ipcc_colors <- c(
   "Forest land" = "#228B22",
   "Cropland"    = "#8B4513",
@@ -54,6 +54,10 @@ comma_apostrophe <- function(x) {
   format(x, big.mark = "'", scientific = FALSE)
 }
 
+
+# Sichtbarkeits-Schwelle für Alluvien
+threshold <- 5000  # ab wann sichtbar (100% = komplett sichtbar, sonst unsichtbar)
+
 # Alluvial-Plot
 ggplot(data_long,
        aes(axis1 = AS,
@@ -61,22 +65,39 @@ ggplot(data_long,
            axis3 = CORINE,
            axis4 = AV,
            y = Freq)) +
-  geom_alluvium(aes(fill = AS), width = 1/12, alpha = 0.7) +
+  
+  # Flüsse abhängig von Häufigkeit sichtbar/unsichtbar machen
+  geom_alluvium(
+    aes(
+      fill = AS,
+      alpha = case_when(
+        Freq >= threshold ~ 0.6,
+        TRUE ~ 0
+      )
+    ),
+    width = 1/12
+  ) +
+  scale_alpha_identity() +
+  
   geom_stratum(aes(fill = after_stat(stratum)), width = 1/6, color = "NA") +
   scale_fill_manual(values = ipcc_colors, drop = FALSE) +
+  
   scale_x_discrete(
     limits = c("AS", "WORLDCOVER", "CORINE", "AV"),
     labels = c("Arealstatistik", "WorldCover", "CORINE", "Amtliche\nVermessung"),
     expand = c(.20, .1)
   ) +
+  
   scale_y_continuous(labels = comma_apostrophe) +
+  
   labs(
     fill = "IPCC Kategorien:",
     x = "Datensatz",
     y = "Häufigkeit",
     title = "Vergleich der IPCC-Landbedeckungskategorien in Datensätzen für die Schweiz",
-    subtitle = "Abweichungen und Übereinstimmungen der Klassifizierungen zwischen Arealstatistik, CORINE, WorldCover und Amtlicher Vermessung"
+    subtitle = "Abweichungen und Übereinstimmungen der Klassifizierungen zwischen verschiedenen Datensätzen"
   ) +
+  
   theme_minimal(base_size = 12) +
   theme(
     plot.title = element_text(hjust = 0.5, face = "bold", size = 16),
@@ -84,4 +105,3 @@ ggplot(data_long,
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()
   )
-

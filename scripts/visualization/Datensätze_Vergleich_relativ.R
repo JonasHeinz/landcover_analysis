@@ -8,7 +8,7 @@ library(scales)
 # GeoPackage einlesen
 gdf <- st_read(DATA_DIR,"/analysis/as_av_corine_wc_merged.gpkg")
 
-# IPCC-Mapping + fehlende Werte
+# Mapping der numerischen Codes 1-6 auf IPCC-Klassen + No Datae
 ipcc_levels <- c("Forest land", "Cropland", "Grassland", "Wetlands",
                  "Settlements", "Other Land", "No Data")
 
@@ -24,16 +24,14 @@ gdf <- gdf %>%
   mutate(across(c(AS, WORLDCOVER, CORINE, AV),
                 ~ ifelse(is.na(.x), "No Data", .x)))
 
-
-# Häufigkeiten berechnen
+# Häufigkeiten berechnen (relativ)
 data_long <- gdf %>%
   count(AS, WORLDCOVER, CORINE, AV, name = "Freq") %>%
   mutate(Freq_rel = Freq / sum(Freq)) %>%
   mutate(across(c(AS, WORLDCOVER, CORINE, AV),
                 ~ factor(.x, levels = ipcc_levels)))
 
-
-# Farben definieren (inkl. No Data)
+# Farben definieren inkl. No Data
 ipcc_colors <- c(
   "Forest land" = "#228B22",
   "Cropland"    = "#8B4513",
@@ -44,6 +42,9 @@ ipcc_colors <- c(
   "No Data"     = "#808080"
 )
 
+# Sichtbarkeits-Schwelle für Alluvien 0.125 %
+threshold <- 0.00125
+
 # Alluvial-Plot erstellen
 ggplot(data_long,
        aes(axis1 = AS,
@@ -52,8 +53,15 @@ ggplot(data_long,
            axis4 = AV,
            y = Freq_rel)) +
   
-  geom_alluvium(aes(fill = AS),
-                width = 1/12, alpha = 0.7, na.rm = TRUE) +
+  # Flüsse abhängig von Häufigkeit sichtbar/unsichtbar machen
+  geom_alluvium(
+    aes(
+      fill = AS,
+      alpha = ifelse(Freq_rel >= threshold, 0.6, 0)
+    ),
+    width = 1/12, na.rm = TRUE
+  ) +
+  scale_alpha_identity() +
   
   geom_stratum(aes(fill = after_stat(stratum)),
                width = 1/6, color = "NA", na.rm = TRUE) +
@@ -72,8 +80,8 @@ ggplot(data_long,
     fill = "IPCC Kategorien:",
     x = "Datensatz",
     y = "Anteil (%)",
-    title = "IPCC-Landbedeckungsvergleich in Datensätzen für die Schweiz",
-    subtitle = "Abweichungen und Übereinstimmungen der Klassifizierungen zwischen Arealstatistik, CORINE, WorldCover und Amtlicher Vermessung"
+    title = "Vergleich der IPCC-Landbedeckungskategorien in Datensätzen für die Schweiz",
+    subtitle = "Abweichungen und Übereinstimmungen der Klassifizierungen zwischen verschiedenen Datensätzen"
   ) +
   
   theme_minimal(base_size = 12) +
