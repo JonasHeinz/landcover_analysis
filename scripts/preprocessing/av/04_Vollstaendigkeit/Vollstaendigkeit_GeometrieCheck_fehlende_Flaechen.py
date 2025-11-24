@@ -53,7 +53,7 @@ BB_CH["geometry"] = BB_CH["geometry"].apply(make_valid)
 print("Geometrien repariert.")
 # 5. Erneut prüfen
 print(BB_CH.geometry.is_valid.value_counts())
-
+BB_CH.to_file(BB_CH_dir, driver="GPKG")
 # -------------------------------
 # Schritt 5: BB Flächen vereinigen für Overlay
 # -------------------------------

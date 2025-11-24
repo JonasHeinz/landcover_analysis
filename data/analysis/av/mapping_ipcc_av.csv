@@ -1,27 +1,44 @@
-﻿IPCC_ID;IPCC_NAME;AV_ID;AV_NAME
-5;Settlements;Gebaeude;Gebäude
-5;Settlements;Strasse_Weg;Strasse Weg
-5;Settlements;Trottoir;Trottoir
-5;Settlements;Verkehrsinsel;Verkehrsinsel
-5;Settlements;Bahn;Bahn
-5;Settlements;Flugplatz;Flugplatz
-5;Settlements;Wasserbecken;Wasserbecken
-5;Settlements;uebrige_befestigte;Übrige Befestigte
-2;Cropland;Acker_Wiese_Weide;Acker Wiese Weide
-2;Cropland;Reben;Reben
-2;Cropland;uebrige_Intensivkultur;Übrige Intensivkultur
-2;Cropland;Gartenanlage;Gartenanlage
-3;Grassland;Hoch_Flachmoor;Hoch- und Flachmoor
-3;Grassland;uebrige_humusierte;Übrige Humusierte
-4;Wetlands;Gewaesser_stehendes;Stehendes Gewässer
-4;Wetlands;Gewaesser_fliessendes;Fliessendes Gewässer
-4;Wetlands;Schilfguertel;Schilfgürtel
-1;Forest land;geschlossener_Wald;Geschlossener Wald
-1;Forest land;Wytweide_dicht;Dichte Wytweide
-1;Forest land;Wytweide_offen;Offene Wytweide
-1;Forest land;uebrige_bestockte;Übrige bestockte
-6;Other Land;Fels;Fels
-6;Other Land;Gletscher_Firn;Gletscher Firn
-6;Other Land;Geroell_Sand;Geröll Sand
-6;Other Land;Abbau_Deponie;Abbau Deponie
-6;Other Land;uebrige_vegetationslose;Übrige Vegetationslose
+﻿IPCC_ID;IPCC_NAME;AV_ID;AV_NAME;SYNONYM
+1;Forest land;geschlossener_Wald;Geschlossener Wald;geschlossener_Wald
+1;Forest land;geschlossener Wald;Geschlossener Wald;geschlossener Wald
+1;Forest land;uebrige_bestockte;Übrige bestockte;uebrige_bestockte
+1;Forest land;übrige bestockte Fläche;Übrige bestockte;übrige bestockte Fläche
+1;Forest land;Wytweide_dicht;Dichte Wytweide;Wytweide_dicht
+1;Forest land;dichte Wytweide;Dichte Wytweide;dichte Wytweide
+1;Forest land;Wytweide_offen;Offene Wytweide;Wytweide_offen
+1;Forest land;offene Wytweide;Offene Wytweide;offene Wytweide
+2;Cropland;Acker_Wiese_Weide;Acker Wiese Weide;Acker_Wiese_Weide
+2;Cropland;Acker, Wiese, Weide;Acker Wiese Weide;Acker, Wiese, Weide
+2;Cropland;Gartenanlage;Gartenanlage;Gartenanlage
+2;Cropland;Reben;Reben;Reben
+2;Cropland;uebrige_Intensivkultur;Übrige Intensivkultur;uebrige_Intensivkultur
+2;Cropland;übrige Intensivkultur;Übrige Intensivkultur;übrige Intensivkultur
+3;Grassland;Hoch_Flachmoor;Hoch- und Flachmoor;Hoch_Flachmoor
+3;Grassland;Hoch-, Flachmoor;Hoch- und Flachmoor;Hoch-, Flachmoor
+3;Grassland;uebrige_humusierte;Übrige Humusierte;uebrige_humusierte
+3;Grassland;übrige humusierte Fläche;Übrige Humusierte;übrige humusierte Fläche
+4;Wetlands;Gewaesser_fliessendes;Fliessendes Gewässer;Gewaesser_fliessendes
+4;Wetlands;fliessendes Gewässer;Fliessendes Gewässer;fliessendes Gewässer
+4;Wetlands;Gewaesser_stehendes;Stehendes Gewässer;Gewaesser_stehendes
+4;Wetlands;stehendes Gewässer;Stehendes Gewässer;stehendes Gewässer
+4;Wetlands;Schilfguertel;Schilfgürtel;Schilfguertel
+4;Wetlands;Schilfgürtel;Schilfgürtel;Schilfgürtel
+5;Settlements;Bahn;Bahn;Bahn
+5;Settlements;Flugplatz;Flugplatz;Flugplatz
+5;Settlements;Gebaeude;Gebäude;Gebaeude
+5;Settlements;Gebäude;Gebäude;Gebäude
+5;Settlements;Strasse_Weg;Strasse Weg;Strasse_Weg
+5;Settlements;Strasse, Weg;Strasse Weg;Strasse, Weg
+5;Settlements;Trottoir;Trottoir;Trottoir
+5;Settlements;uebrige_befestigte;Übrige Befestigte;uebrige_befestigte
+5;Settlements;übrige befestigte Fläche;Übrige Befestigte;übrige befestigte Fläche
+5;Settlements;Verkehrsinsel;Verkehrsinsel;Verkehrsinsel
+5;Settlements;Wasserbecken;Wasserbecken;Wasserbecken
+6;Other Land;Abbau_Deponie;Abbau Deponie;Abbau_Deponie
+6;Other Land;Abbau, Deponie;Abbau Deponie;Abbau, Deponie
+6;Other Land;Fels;Fels;Fels
+6;Other Land;Geroell_Sand;Geröll Sand;Geroell_Sand
+6;Other Land;Geröll, Sand;Geröll Sand;Geröll, Sand
+6;Other Land;Gletscher_Firn;Gletscher Firn;Gletscher_Firn
+6;Other Land;uebrige_vegetationslose;Übrige Vegetationslose;uebrige_vegetationslose
+6;Other Land;übrige vegetationslose Fläche;Übrige Vegetationslose;übrige vegetationslose Fläche

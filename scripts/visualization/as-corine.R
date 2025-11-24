@@ -3,6 +3,7 @@ library(sf)
 library(ggplot2)
 library(dplyr)
 library(patchwork)
+library(ggspatial)
 
 # --------------
 # Datengrundlage
@@ -38,6 +39,19 @@ map_plot <- ggplot(gdf) +
     values = c("TRUE" = "#fee0d2", "FALSE" = "#de2d26") # Festlegen der Farbwerte für TRUE und FALSE
   )+ 
   
+  annotation_scale(
+    location = "bl",     # bottom left
+    width_hint = 0.3,    # wie breit der Maßstab sein soll
+    line_width = 1
+  ) +
+  
+  # Nordpfeil hinzufügen (oben links)
+  annotation_north_arrow(
+    location = "tr",     # top left
+    which_north = "true",
+    style = north_arrow_fancy_orienteering()
+  ) +
+
   theme_minimal()+
   
   theme(

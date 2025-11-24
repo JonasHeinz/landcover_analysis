@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgb
 import matplotlib.patches as mpatches
+from matplotlib.ticker import ScalarFormatter
 
 def plot_av_vs_as(gdf: gpd.GeoDataFrame, As_Kategorie: str, Kategorie: str, Titel: str):
     """
@@ -14,9 +15,11 @@ def plot_av_vs_as(gdf: gpd.GeoDataFrame, As_Kategorie: str, Kategorie: str, Tite
     gdf : GeoDataFrame
         GeoDataFrame mit Polygonen und den Kategoriespalten.
     As_Kategorie : str
-        Name der ersten Kategorie-Spalte (z.B. "IPCC_AV_Id").
+        Name der Arealstatistik Kategorie-Spalte (z.B. "IPCC_AS_Id").
     Kategorie : str
-        Name der zweiten Kategorie-Spalte (z.B. "IPCC_AS_Id").
+        Name der zweiten Kategorie-Spalte (z.B. "IPCC_AV_Id").
+    Titel : str
+        Name des zweiten Datensatzes (z.B. "Amtliche Vermessung").
     """
 
     # Sicherstellen, dass CRS metrisch ist (EPSG:2056)
@@ -62,13 +65,19 @@ def plot_av_vs_as(gdf: gpd.GeoDataFrame, As_Kategorie: str, Kategorie: str, Tite
         accuracy_per_class.append((cat, pct))
 
     # Karte + Balken plotten
-    fig, (ax_map, ax_bar) = plt.subplots(1, 2, figsize=(14, 8), width_ratios=[2, 1])
+    fig, (ax_map, ax_bar) = plt.subplots(1, 2, figsize=(14, 8), width_ratios=[3, 1])
 
     # Karte
     gdf.plot(ax=ax_map, color=gdf["plot_color"], edgecolor="none", linewidth=0.2)
-    ax_map.set_title(Titel, fontsize=18, fontweight="bold")
+    ax_map.set_title(f"Übereinstimmung von Arealstatisik auf {Titel}", fontsize=18, fontweight="bold")
     ax_map.axis("on")
     ax_map.grid(True, linestyle='--', linewidth=0.5, alpha=0.5)
+
+    # Normale Zahlen für Achsen
+    ax_map.xaxis.set_major_formatter(ScalarFormatter(useOffset=False))
+    ax_map.yaxis.set_major_formatter(ScalarFormatter(useOffset=False))
+    ax_map.xaxis.get_major_formatter().set_scientific(False)
+    ax_map.yaxis.get_major_formatter().set_scientific(False)
 
     # Maßstab
     xlim = ax_map.get_xlim()

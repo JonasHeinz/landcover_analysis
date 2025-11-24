@@ -16,14 +16,14 @@
 2;Cropland;221;15;Vineyards
 2;Cropland;222;16;Fruit trees and berry plantations
 2;Cropland;223;17;Olive groves
-2;Cropland;231;18;Pastures
 2;Cropland;241;19;Annual crops associated with permanent crops
-2;Cropland;242;20;Complex cultivation patterns
 2;Cropland;243;21;Land principally occupied by agriculture with significant areas of natural vegetation
 2;Cropland;244;22;Agro-forestry areas
 1;Forest land;311;23;Broad-leaved forest
 1;Forest land;312;24;Coniferous forest
 1;Forest land;313;25;Mixed forest
+3;Grassland;242;20;Complex cultivation patterns
+3;Grassland;231;18;Pastures
 3;Grassland;321;26;Natural grasslands
 3;Grassland;322;27;Moors and heathland
 3;Grassland;323;28;Sclerophyllous vegetation
