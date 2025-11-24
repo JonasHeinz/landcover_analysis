@@ -7,10 +7,10 @@ from scripts import DATA_DIR
 from scripts.helpers import raster_helper
 
 # Polygone des CORINE Datensatzes
-polygons = gpd.read_file(DATA_DIR / "analysis/corine/2012/U2018_CLC2012_V2020_20u1_zug.gpkg")
+polygons = gpd.read_file(DATA_DIR / "analysis/corine/2012/U2018_CLC2012_V2020_20u1.gpkg")
 
 # Punktraster der Arealstatistik
-points = gpd.read_file(DATA_DIR / "analysis/arealstatistik/ag-b-00.03-37-area-all-gpkg_zug.gpkg")
+points = gpd.read_file(DATA_DIR / "analysis/arealstatistik/ag-b-00.03-37-area-all-gpkg.gpkg")
 
 # Länge resp. Breite der Boxen um die Punnkte der Arealstatistik
 cell_size = 100  
@@ -21,6 +21,7 @@ points["grid"] = points.geometry.apply(lambda p: raster_helper.calculate_vectorb
 # Überschreiben des ursprünglichen Geometriefeld der Arealstatistik durch die neuen Boxen
 points["geometry"] = points["grid"]
 squares = points.drop(columns="grid")  
+squares = squares[["RELI", "AS09_72", "geometry"]]
 
 reduced_squares = squares[["RELI", "geometry"]]
 
@@ -54,10 +55,10 @@ ipcc_arealstatistik_mapping_dict = pd.read_csv(DATA_DIR / "analysis/arealstatist
 
 # Speichern der CORINE Kategorie und der Arealstatistik Kategorie als IPCC Kategorie
 squares_with_categories["IPCC_CORINE_Id"] = squares_with_categories["Code_12_max"].astype(int).map(ipcc_corine_mapping_dict)
-squares_with_categories["IPCC_AS_Id"] = squares_with_categories["AS18_72"].astype(int).map(ipcc_arealstatistik_mapping_dict)
+squares_with_categories["IPCC_AS_Id"] = squares_with_categories["AS09_72"].astype(int).map(ipcc_arealstatistik_mapping_dict)
 
 # Prüfen der Gleichheit der IPCC Kategorien
 squares_with_categories["IPCC_Match"] = squares_with_categories["IPCC_CORINE_Id"] == squares_with_categories["IPCC_AS_Id"]
 
 # Speichern der Daten als Geopackage
-squares_with_categories.to_file(DATA_DIR / "analysis/corine/2012/test2.gpkg")
+squares_with_categories.to_file(DATA_DIR / "analysis/corine/2012/result.gpkg")
