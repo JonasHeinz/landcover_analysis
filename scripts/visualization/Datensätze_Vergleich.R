@@ -18,7 +18,7 @@ gdf <- gdf %>%
   mutate(
     AS = code_to_ipcc(IPCC_AS_Id),
     WORLDCOVER = code_to_ipcc(IPCC_WC_Id),
-    CORINE = code_to_ipcc(IPCC_Corine_Id),
+    CORINE = code_to_ipcc(IPCC_CORINE_Id),
     AV = code_to_ipcc(IPCC_AV_Id)
   ) %>%
   mutate(across(c(AS, WORLDCOVER, CORINE, AV),
