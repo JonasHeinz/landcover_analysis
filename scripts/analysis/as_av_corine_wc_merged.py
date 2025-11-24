@@ -1,14 +1,14 @@
+# AS AV CORINE WorldCover zusammenführen mit Centerpixel Methode
+
 from scripts import DATA_DIR
 import geopandas as gpd
 import pandas as pd
 
 # Dateien laden
 g1 = gpd.read_file(DATA_DIR / "analysis/av/Av_As_Center_Pixel.gpkg")  # AV
-g2 = gpd.read_file(
-    DATA_DIR / "analysis/corine/2018/areal_corine_ipcc_2018.gpkg"
-)  # Corine
+g2 = gpd.read_file(DATA_DIR / "analysis/corine/2018/result_center_point.gpkg")  # Corine
 g3 = gpd.read_file(
-    DATA_DIR / "analysis/worldcover/arealstatistik_mapped_2020.gpkg"
+    DATA_DIR / "analysis/worldcover/arealstatistik_mapped_points_2020.gpkg"
 )  # Worldcover
 
 
