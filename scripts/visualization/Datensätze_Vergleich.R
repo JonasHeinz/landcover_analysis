@@ -42,8 +42,8 @@ data_long <- data_long %>%
 # Farben inkl. No Data
 ipcc_colors <- c(
   "Forest land" = "#228B22",
-  "Grassland"   = "#BCFF1E",
   "Cropland"    = "#8B4513",
+  "Grassland"   = "#BCFF1E",
   "Settlements" = "#A9A9A9",
   "Wetlands"    = "#1E90FF",
   "Other Land"  = "#F31383",
