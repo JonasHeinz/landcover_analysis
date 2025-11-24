@@ -7,10 +7,10 @@ from scripts import DATA_DIR
 from scripts.helpers import raster_helper
 
 # Polygone des AV Datensatzes
-polygons = gpd.read_file(DATA_DIR / "analysis/av/lcsf_zug.gpkg")
+polygons = gpd.read_file(DATA_DIR / "analysis/av/BB_CH_Gesamt.gpkg")
 
 # Punktraster der Arealstatistik
-points = gpd.read_file(DATA_DIR / "analysis/arealstatistik/ag-b-00.03-37-area-all-gpkg_zug.gpkg")
+points = gpd.read_file(DATA_DIR / "analysis/arealstatistik/Arealstatistik_Zeitreihe.gpkg")
 
 # Länge resp. Breite der Boxen um die Punnkte der Arealstatistik
 cell_size = 100  
