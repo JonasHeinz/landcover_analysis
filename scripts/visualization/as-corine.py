@@ -3,63 +3,57 @@
 import os
 os.environ['PROJ_LIB'] = r"C:\Users\LeonardoS\miniconda3\envs\corine\Library\share\proj"
 
+import base64
 import geopandas as gpd
-import json
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
-from scripts import DATA_DIR
-from shiny import App, ui, reactive
-from shinywidgets import output_widget, render_plotly,render_widget
-from ipyleaflet import Map, GeoJSON
-from shapely.geometry import box
-from ipyleaflet import Map, ImageOverlay
-import rasterio
-from rasterio.warp import transform_bounds
-import numpy as np
-from PIL import Image
-import io, base64
 from io import BytesIO
-from rasterio.warp import transform_bounds
-from ipyleaflet import Map, TileLayer
-from shiny import App, ui, reactive
-from shinywidgets import output_widget, render_widget
-from ipyleaflet import Map, TileLayer
-import rasterio
-from rasterio.warp import calculate_default_transform, reproject, Resampling
-import numpy as np
-from PIL import Image
-from io import BytesIO
-import base64
-from scripts import DATA_DIR
+from ipyleaflet import Map, ImageOverlay, basemaps, basemap_to_tiles
 from ipywidgets import Layout
-from ipyleaflet import Map
-from ipyleaflet import basemaps, basemap_to_tiles
+from PIL import Image
+import rasterio
+from rasterio.warp import transform_bounds
+from scripts import DATA_DIR
+from shiny import App, ui, reactive
+from shinywidgets import output_widget, render_plotly, render_widget
 
 # -----------------------------
 # 1) Daten laden
 # -----------------------------
-gdf = gpd.read_file(DATA_DIR / "analysis/corine/2018/result_center_point.gpkg") 
-gdf = gdf.to_crs(epsg=3857)
-print("Initial Data loaded")
 
-# # Geodataframe und Geojson für True und False erstellen
-# gdf["IPCC_Match"] = gdf["IPCC_Match"].astype(bool)
-# gdf_true = gdf[gdf["IPCC_Match"] == True]
-# gdf_false = gdf[gdf["IPCC_Match"] == False]
+csv_path = DATA_DIR / "analysis/corine/2018/stats_center_point.csv"
 
-# gjson = json.loads(gdf.to_json())
-# gjson_true = json.loads(gdf_true.to_json())
-# gjson_false = json.loads(gdf_false.to_json())
+if not csv_path.exists():
+    gdf = gpd.read_file(DATA_DIR / "analysis/corine/2018/result_center_point.gpkg") 
+    gdf = gdf.to_crs(epsg=3857)
+    print("Initial Data loaded from Geopackage")
 
-# Geodataframe für das Balkendiagramm erstellen
-df_balken = pd.DataFrame({
-    "Art": ["AS","AS"],
-    "Uebereinstimmende_Klassifikation": ["Wahr", "Falsch"],
-    "Farbe":["#fee0d2","#de2d26"],
-    "Anzahl": [gdf["IPCC_Match"].sum(), len(gdf) - gdf["IPCC_Match"].sum()],
-    "Anteil": [gdf["IPCC_Match"].sum()/len(gdf), (len(gdf)-gdf["IPCC_Match"].sum())/len(gdf)]
-})
-print("Initial Data processed")
+    # # Geodataframe und Geojson für True und False erstellen
+    # gdf["IPCC_Match"] = gdf["IPCC_Match"].astype(bool)
+    # gdf_true = gdf[gdf["IPCC_Match"] == True]
+    # gdf_false = gdf[gdf["IPCC_Match"] == False]
+
+    # gjson = json.loads(gdf.to_json())
+    # gjson_true = json.loads(gdf_true.to_json())
+    # gjson_false = json.loads(gdf_false.to_json())
+
+    # Geodataframe für das Balkendiagramm erstellen
+    df_balken = pd.DataFrame({
+        "Art": ["AS","AS"],
+        "Uebereinstimmende_Klassifikation": ["Wahr", "Falsch"],
+        "Farbe":["#fee0d2","#de2d26"],
+        "Anzahl": [gdf["IPCC_Match"].sum(), len(gdf) - gdf["IPCC_Match"].sum()],
+        "Anteil": [gdf["IPCC_Match"].sum()/len(gdf), (len(gdf)-gdf["IPCC_Match"].sum())/len(gdf)]
+    })
+    print("Stats calculated from Geopackage")
+
+    df_balken.to_csv(csv_path, index=False)
+    print(f"Stats saved to CSV")
+
+else:
+    df_balken = pd.read_csv(csv_path)
+    print("Stats loaded from CSV")
 
 # -----------------------------
 # 2) UI
@@ -106,6 +100,7 @@ def server(input, output, session):
 
     # Ausgewählte Kategorie speichern
     selected_category = reactive.Value(None)
+    all_layers = []
     
     # Balkendiagram
     @output
@@ -116,30 +111,32 @@ def server(input, output, session):
         fig.update_xaxes(categoryorder='total ascending')
 
         w = go.FigureWidget(fig)
-        # w.data[0].on_click(on_point_click)
+        w.data[0].on_click(on_point_click)
 
         return w
     
     # Reaktion auf den Klick in das Balkendiagramm
-    # def on_point_click(trace, points, state): 
+    def on_point_click(trace, points, state): 
+        
+        if points.point_inds[0] == 0:
+            selected_category.set("True")   # Wert=0 sichtbar
+        elif points.point_inds[0] == 1:
+            selected_category.set("False")  # Wert=1 sichtbar
+        else:
+            selected_category.set(None)     # alles sichtbar
 
-    #     if points.point_inds[0] in [0,2]:
-    #         selected_category.set("True") 
-
-    #     if points.point_inds[0] in [1,3]:
-    #         selected_category.set("False") 
-            
-    #     if selected_category.get() == "True":
-    #         karte_fig.data[0].visible = True
-    #         karte_fig.data[1].visible = "legendonly"
-    #     elif selected_category.get() == "False":
-    #         karte_fig.data[0].visible = "legendonly"
-    #         karte_fig.data[1].visible = True
-    #     else:
-    #         karte_fig.data[0].visible = True
-    #         karte_fig.data[1].visible = True
+        # Sichtbarkeit der Layer steuern
+        for layer0, layer1 in all_layers:
+            if selected_category.get() == "True":
+                layer0.visible = False
+                layer1.visible = True
+            elif selected_category.get() == "False":
+                layer0.visible = True
+                layer1.visible = False
+            else:
+                layer0.visible = True
+                layer1.visible = True
     
-
     @output
     @render_widget
     def karte():
@@ -150,27 +147,38 @@ def server(input, output, session):
             zoom=8, #Zoomstufe
             layout=Layout(width='100%', height='80vh') # Layout der Kartenbox
         )
-
-        # Raster als ImageOverlay hinzufügen
-        layer1 = tif_to_png_overlay(DATA_DIR / "analysis/corine/2018/center_point_raster/ipcc_category_1.tif",("#2ca25f", "#006d2c"))
-        layer2 = tif_to_png_overlay(DATA_DIR / "analysis/corine/2018/center_point_raster/ipcc_category_2.tif",("#d95f0e", "#993404"))
-        layer3 = tif_to_png_overlay(DATA_DIR / "analysis/corine/2018/center_point_raster/ipcc_category_3.tif", ("#ffffcc", "#d9f0a3"))
-        layer4 = tif_to_png_overlay(DATA_DIR / "analysis/corine/2018/center_point_raster/ipcc_category_4.tif", ("#2c7fb8", "#253494"))
-        layer5 = tif_to_png_overlay(DATA_DIR / "analysis/corine/2018/center_point_raster/ipcc_category_5.tif", ("#d9d9d9", "#bdbdbd"))
-        layer6 = tif_to_png_overlay(DATA_DIR / "analysis/corine/2018/center_point_raster/ipcc_category_6.tif", ("#fa9fb5", "#f768a1"))
-
-        # Raster Overlays zur Karte hinzufügen
-        m.add(layer1)
-        m.add(layer2)
-        m.add(layer3)
-        m.add(layer4)
-        m.add(layer5)
-        m.add(layer6)
         
         # Hintergrundkarte festlegen
         tiles = basemap_to_tiles(basemaps.CartoDB.Positron)
         m.add(tiles)
         
+
+        # Farben für jede Kategorie (dunkel / hell)
+        color_list = [
+            ("#006d2c", "#2ca25f"),
+            ("#993404", "#d95f0e"),
+            ("#d9f0a3", "#ffffcc"),
+            ("#253494", "#2c7fb8"),
+            ("#bdbdbd", "#d9d9d9"),
+            ("#f768a1", "#fa9fb5")
+        ]
+
+        tif_paths = [
+            DATA_DIR / f"analysis/corine/2018/center_point_raster/ipcc_category_{i}.tif"
+            for i in range(1,7)
+        ]
+
+        # Funktion, die die Overlays verzögert hinzufügt
+
+        for path, colors in zip(tif_paths, color_list):
+            layer0 = tif_to_png_overlay_value(path, colors, value_to_show=0)
+            layer1 = tif_to_png_overlay_value(path, colors, value_to_show=1)
+            layer0.visible = True
+            layer1.visible = True
+            m.add(layer0)
+            m.add(layer1)
+            all_layers.append((layer0, layer1))
+
         return m
 
 # -----------------------------
@@ -182,24 +190,29 @@ app = App(app_ui, server)
 # ----------------------------------------------
 # Funktion zum Erzeugen eines Karten Overlay PNG
 # ----------------------------------------------
-def tif_to_png_overlay(path, colors, upscale=1):
+def tif_to_png_overlay_value(path, colors, value_to_show=255, upscale=1):
 
     # Laden der TIF Datein im Leaflet Koordinatensystem
     with rasterio.open(path) as src:
         arr = src.read(1)
         minx, miny, maxx, maxy = transform_bounds(src.crs, "EPSG:4326", *src.bounds)
 
-    # RGBA-Arrays mit den angegebenen Farben erstellen
     img = np.zeros((arr.shape[0], arr.shape[1], 4), dtype=np.uint8)
-    light = tuple(int(colors[0].lstrip("#")[i:i+2], 16) for i in (0,2,4))
-    dark  = tuple(int(colors[1].lstrip("#")[i:i+2], 16) for i in (0,2,4))
+    dark  = tuple(int(colors[0].lstrip("#")[i:i+2], 16) for i in (0,2,4))
+    light = tuple(int(colors[1].lstrip("#")[i:i+2], 16) for i in (0,2,4))
 
     # Festlegen der Farben und der Transparent für das Karten Overlay PNG
     img[arr == 0, :3] = dark
     img[arr == 1, :3] = light
     img[arr == 255, 3] = 0   
     img[arr != 255, 3] = 255
-
+    
+    if(value_to_show==0):
+        img[arr == 1, 3] = 0   
+    
+    elif(value_to_show==1):
+        img[arr == 0, 3] = 0  
+    
     # Karten Overlay PNG erstellen und vergrössern
     pil = Image.fromarray(img, mode="RGBA")
     pil = pil.resize((arr.shape[1]*upscale, arr.shape[0]*upscale), Image.NEAREST)
