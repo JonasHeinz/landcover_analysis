@@ -13,6 +13,9 @@ files = [
     {"dataset": "corine", "year": "2018", "analysis": "result_center_point", "output": "center_point_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
     {"dataset": "corine", "year": "2018", "analysis": "result_max_area", "output": "max_area_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
     
+    {"dataset": "corine", "year": "2012", "analysis": "areal_corine_ipcc_2012", "output": "center_point_raster_raster", "as_id": "IPCC_AS_Id", "match": "diff_ipcc"},
+    {"dataset": "corine", "year": "2018", "analysis": "areal_corine_ipcc_2018", "output": "center_point_raster_raster", "as_id": "IPCC_AS_Id", "match": "diff_ipcc"},
+    
     {"dataset": "worldcover", "year": "2020", "analysis": "arealstatistik_mapped_points_2020_cp", "output": "center_point_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
     {"dataset": "worldcover", "year": "2020", "analysis": "arealstatistik_mapped_2020_ma", "output": "max_area_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
     {"dataset": "worldcover", "year": "2021", "analysis": "arealstatistik_mapped_points_2021_cp", "output": "center_point_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
