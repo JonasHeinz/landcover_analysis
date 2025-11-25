@@ -217,6 +217,18 @@ def server(input, output, session):
         year = input.select_year()
         method = input.select_method()
         # Karte darstellen
+
+        # Alte Layer entfernen
+        for layers in all_layers.values():
+            for layer in layers:
+                if layer in m.layers:
+                    m.remove(layer)
+        all_layers.clear()
+        # Status zurücksetzen
+        for cat_id in category_display.keys():
+            category_display[cat_id]["true"].set(False)
+            category_display[cat_id]["false"].set(False)
+
         tif_paths = get_tif_paths(dataset, year, method)
 
         for ipcc_as_id, path in zip(ipcc_category_info.keys(), tif_paths):
