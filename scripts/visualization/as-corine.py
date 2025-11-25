@@ -29,23 +29,35 @@ if not csv_path.exists():
     gdf = gdf.to_crs(epsg=3857)
     print("Initial Data loaded from Geopackage")
 
-    # # Geodataframe und Geojson für True und False erstellen
-    # gdf["IPCC_Match"] = gdf["IPCC_Match"].astype(bool)
-    # gdf_true = gdf[gdf["IPCC_Match"] == True]
-    # gdf_false = gdf[gdf["IPCC_Match"] == False]
-
-    # gjson = json.loads(gdf.to_json())
-    # gjson_true = json.loads(gdf_true.to_json())
-    # gjson_false = json.loads(gdf_false.to_json())
-
     # Geodataframe für das Balkendiagramm erstellen
-    df_balken = pd.DataFrame({
-        "Art": ["AS","AS"],
-        "Uebereinstimmende_Klassifikation": ["Wahr", "Falsch"],
-        "Farbe":["#fee0d2","#de2d26"],
-        "Anzahl": [gdf["IPCC_Match"].sum(), len(gdf) - gdf["IPCC_Match"].sum()],
-        "Anteil": [gdf["IPCC_Match"].sum()/len(gdf), (len(gdf)-gdf["IPCC_Match"].sum())/len(gdf)]
-    })
+    color_list = [
+        ("#006d2c", "#2ca25f"),
+        ("#993404", "#d95f0e"),
+        ("#d9f0a3", "#ffffcc"),
+        ("#253494", "#2c7fb8"),
+        ("#bdbdbd", "#d9d9d9"),
+        ("#f768a1", "#fa9fb5")
+    ]
+
+    # Alle eindeutigen IPCC_AS_IDs sortieren
+    ipcc_as_ids = sorted(gdf["IPCC_AS_Id"].unique())
+
+    df_balken_list = []
+
+    for i, ipcc_as_id in enumerate(ipcc_as_ids):
+        dark, light = color_list[i]  # falls mehr AS_IDs als Farben, zyklisch
+        subset = gdf[gdf["IPCC_AS_Id"] == ipcc_as_id]
+        df_temp = pd.DataFrame({
+            "IPCC_AS_Id": [ipcc_as_id, ipcc_as_id],
+            "Art": ["AS", "AS"],
+            "Uebereinstimmende_Klassifikation": ["Wahr", "Falsch"],
+            "Farbe": [light, dark],  # hier kannst du je nach Präferenz dark/light tauschen
+            "Anzahl": [subset["IPCC_Match"].sum(), len(subset) - subset["IPCC_Match"].sum()],
+            "Anteil": [subset["IPCC_Match"].mean(), 1 - subset["IPCC_Match"].mean()]
+        })
+        df_balken_list.append(df_temp)
+
+    df_balken = pd.concat(df_balken_list, ignore_index=True)
     print("Stats calculated from Geopackage")
 
     df_balken.to_csv(csv_path, index=False)
@@ -58,55 +70,59 @@ else:
 # -----------------------------
 # 2) UI
 # -----------------------------
-app_ui = ui.page_fluid( 
-    ui.h2("Datendarstellung"),
-    output_widget("balken"), 
-    output_widget("karte")
+app_ui = ui.page_fillable(
+    ui.layout_columns(
+        ui.card(output_widget("karte")),
+        ui.card(output_widget("balken")),
+        col_widths=(8,4),
+    ),
 )
 
 # -----------------------------
 # 3) Server
 # -----------------------------
 def server(input, output, session):
-    
-#     karte_fig = go.FigureWidget()
 
-#     # True Punkte darstellen
-#     karte_fig.add_choropleth(
-#         geojson=gjson_true,
-#         locations=gdf_true.index,
-#         z = gdf_true["IPCC_Match"].map({False:0, True:1}),
-#         colorscale=[[0, "white"], [1, "white"]],
-#         showscale=False,
-#         name="True"
-#     )
-
-#     # False Punkte darstellen
-#     karte_fig.add_choropleth(
-#         geojson=gjson_false,
-#         locations=gdf_false.index,
-#         z = gdf_false["IPCC_Match"].map({False:0, True:1}),
-#         colorscale=[[0, "red"], [1, "red"]],
-#         showscale=False,
-#         name="False"
-#     )
+    all_layers = {}
     
-#     # Position der Karte auf die Daten zoomen
-#     karte_fig.update_geos(
-#         fitbounds="locations",
-#         visible=False
-#     )
+    ipcc_category_info = {
+        1: {"name": "FL","bar_ids": [0, 1]},
+        2: {"name": "Zweite", "bar_ids": [2, 3]},
+        3: {"name": "Dritte", "bar_ids": [4, 5]},
+        4: {"name": "Vierte", "bar_ids": [6, 7]},
+        5: {"name": "Fünfte", "bar_ids": [8, 9]},
+        6: {"name": "Sechste", "bar_ids": [10, 11]},
+    }
     
-
-    # Ausgewählte Kategorie speichern
-    selected_category = reactive.Value(None)
-    all_layers = []
+    category_display = {
+        cat_id: {"true": reactive.Value(False), "false": reactive.Value(False)}
+        for cat_id in ipcc_category_info.keys()
+    }
+    
+    #Karteneinstellungen
+    m = Map(
+        center=(46.8, 8.3), #Kartenzentrum
+        zoom=8, #Zoomstufe
+        layout=Layout(width='100%', height='80vh') # Layout der Kartenbox
+    )
+    
+    # Hintergrundkarte festlegen
+    tiles = basemap_to_tiles(basemaps.CartoDB.Positron)
+    m.add(tiles)
+    
+    # @reactive.Effect
+    # @reactive.event(input.action_button1)
+    # def counter():
+    #     for layer0, layer1 in all_layers:
+    #         m.add(layer0)
+    #         m.add(layer1)
+    #     #return f"Button wurde geklickt! Anzahl Klicks: {input.action_button()}"
     
     # Balkendiagram
     @output
     @render_plotly
     def balken():
-        fig = go.Figure([go.Bar(x=df_balken["Anteil"], y=df_balken["Art"],orientation='h', marker_color=df_balken["Farbe"])])
+        fig = go.Figure([go.Bar(x=df_balken["Anteil"], y=df_balken["IPCC_AS_Id"],orientation='h', marker_color=df_balken["Farbe"])])
         fig.update_layout(barmode='stack')
         fig.update_xaxes(categoryorder='total ascending')
 
@@ -115,45 +131,45 @@ def server(input, output, session):
 
         return w
     
+    #@reactive.Effect
     # Reaktion auf den Klick in das Balkendiagramm
     def on_point_click(trace, points, state): 
         
-        if points.point_inds[0] == 0:
-            selected_category.set("True")   # Wert=0 sichtbar
-        elif points.point_inds[0] == 1:
-            selected_category.set("False")  # Wert=1 sichtbar
-        else:
-            selected_category.set(None)     # alles sichtbar
+        #for ipcc_category_id, ipcc_category in ipcc_category_info.items():
 
-        # Sichtbarkeit der Layer steuern
-        for layer0, layer1 in all_layers:
-            if selected_category.get() == "True":
-                layer0.visible = False
-                layer1.visible = True
-            elif selected_category.get() == "False":
-                layer0.visible = True
-                layer1.visible = False
-            else:
-                layer0.visible = True
-                layer1.visible = True
+        for ipcc_category, ipcc_category_values in ipcc_category_info.items():
+                # Layer-Paar aus all_layers
+            idx = points.point_inds[0]
+            layer0, layer1 = all_layers[ipcc_category]  # assuming all_layers in order 1..6
+        
+            if idx == ipcc_category_values["bar_ids"][0]:
+                if category_display[ipcc_category]["true"].get():
+                    m.remove(layer1)
+                    category_display[ipcc_category]["true"].set(False)
+                else:
+                    m.add(layer1)
+                    category_display[ipcc_category]["true"].set(True)
+
+            if idx == ipcc_category_values["bar_ids"][1]:
+                if category_display[ipcc_category]["false"].get():
+                    m.remove(layer0)
+                    category_display[ipcc_category]["false"].set(False)
+                else:
+                    m.add(layer0)
+                    category_display[ipcc_category]["false"].set(True)
+            
+    
+    
+    
+    
+    
+    
     
     @output
     @render_widget
     def karte():
-        
-        #Karteneinstellungen
-        m = Map(
-            center=(46.8, 8.3), #Kartenzentrum
-            zoom=8, #Zoomstufe
-            layout=Layout(width='100%', height='80vh') # Layout der Kartenbox
-        )
-        
-        # Hintergrundkarte festlegen
-        tiles = basemap_to_tiles(basemaps.CartoDB.Positron)
-        m.add(tiles)
-        
-
         # Farben für jede Kategorie (dunkel / hell)
+        
         color_list = [
             ("#006d2c", "#2ca25f"),
             ("#993404", "#d95f0e"),
@@ -170,14 +186,15 @@ def server(input, output, session):
 
         # Funktion, die die Overlays verzögert hinzufügt
 
-        for path, colors in zip(tif_paths, color_list):
+        for ipcc_as_id, path, colors in zip(ipcc_category_info.keys(), tif_paths, color_list):
             layer0 = tif_to_png_overlay_value(path, colors, value_to_show=0)
             layer1 = tif_to_png_overlay_value(path, colors, value_to_show=1)
             layer0.visible = True
             layer1.visible = True
-            m.add(layer0)
-            m.add(layer1)
-            all_layers.append((layer0, layer1))
+            
+            # Speichern nach ID
+            all_layers[ipcc_as_id] = (layer0, layer1)
+            
 
         return m
 
@@ -190,7 +207,7 @@ app = App(app_ui, server)
 # ----------------------------------------------
 # Funktion zum Erzeugen eines Karten Overlay PNG
 # ----------------------------------------------
-def tif_to_png_overlay_value(path, colors, value_to_show=255, upscale=1):
+def tif_to_png_overlay_value(path, colors, value_to_show=255, upscale=2):
 
     # Laden der TIF Datein im Leaflet Koordinatensystem
     with rasterio.open(path) as src:
