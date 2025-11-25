@@ -7,12 +7,6 @@ library(ggplot2)
 library(ggspatial)  # für Maßstab & Nordpfeil
 library(patchwork)  # für Multi-Panel Layouts
 
-# -----------------------------
-# Dateipfade
-# -----------------------------
-gemeinden_path <- "data/base/swissBOUNDARIES3D/swissBOUNDARIES3D_1_5_LV95_LN02.gpkg"
-mapped_wc_path <- "data/analysis/worldcover/maxarea/arealstatistik_zug_mapped.gpkg"
-
 
 
 # -----------------------------
@@ -35,7 +29,7 @@ aggregate_lulc_percent <- function(changes, targets, target_id = "name", title, 
   
   # Gesamtfläche der Gemeinden
   gemeinden <- gemeinden %>%
-    mutate(total_area_m2 = st_area(.))
+    mutate(total_area_m2 = st_area(.)) 
   
   # Zusammenführen
   agg_df <- agg %>% st_set_geometry(NULL)  # Geometrie entfernen
@@ -45,7 +39,7 @@ aggregate_lulc_percent <- function(changes, targets, target_id = "name", title, 
       change_percent = as.numeric(change_area_m2 / total_area_m2 * 100)
     )
   
-
+  st_write(result, "data/analysis/worldcover/aggregated_as_kantone.gpkg", layer = "change")
 
 
 # -----------------------------
@@ -160,8 +154,12 @@ return(final_plot)
 # -----------------------------
 # Funktionsaufruf
 # -----------------------------
-gemeinden <- st_read(gemeinden_path, layer = "tlm_hoheitsgebiet") %>%
-  filter(kantonsnummer == 9)  # Kanton Zug
+
+gemeinden_path <- "data/base/swissBOUNDARIES3D/swissBOUNDARIES3D_1_5_LV95_LN02.gpkg"
+mapped_wc_path <- "data/analysis/worldcover/maxarea/arealstatistik_mapped_2021.gpkg"
+
+
+gemeinden <- st_read(gemeinden_path, layer = "tlm_kantonsgebiet")
 
 changes <- st_read(mapped_wc_path) %>%
   filter(AS_auf_WorldCover != WorldCover_2020_class_1)  # nur Änderungen
@@ -169,15 +167,15 @@ changes <- st_read(mapped_wc_path) %>%
 result <- aggregate_lulc_percent(changes, 
                                  gemeinden, 
                                  target_id = "name", 
-                                 "Übereinstimmung der Klassifikation pro Gemeinde", 
-                                 "Vergleich der ESA Landnutzungsklassifikation mit der Arealstatistik (in Prozent)",
-                                 "Gemeindename & Position"
+                                 "Übereinstimmung der Klassifikation pro Kanton", 
+                                 "Vergleich der ESA Landnutzungsklassifikation 2021 mit der Arealstatistik (in Prozent)",
+                                 "Kantonsname & Position"
                                  )
 print(result)
 ggsave(
-  "data/visualizations/landnutzung_aenderung_pro_gemeinde_zug_final.pdf",
+  "data/visualizations/lulcc_pro_kanton_esa_2021.pdf",
   plot = result,
   width = 10, height = 15, dpi = 300
 )
-
+0
 
