@@ -1,4 +1,4 @@
-# Start with: python -m shiny run -r scripts/visualization/as-corine.py
+# Start with: python -m shiny run -r scripts/visualization/ipcc_shiny.py
 import os
 os.environ['PROJ_LIB'] = r"C:\Users\LeonardoS\miniconda3\envs\corine\Library\share\proj"
 
