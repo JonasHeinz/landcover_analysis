@@ -31,9 +31,9 @@ with rasterio.open(fp21) as src21:
 assert arr20.shape == arr21.shape, "Raster unterschiedlich groß!"
 h, w = arr20.shape
 
-# ------------------------------------------
-# Farben definieren
-# ------------------------------------------
+# # ------------------------------------------
+# # Farben definieren
+# # ------------------------------------------
 category_colors = {
     10:  "#228B22",  # Forest
     20: "#8b4513",  # Shrubland
@@ -48,104 +48,104 @@ category_colors = {
 # Nur Kategorien, die im Raster vorkommen
 categories = sorted([c for c in np.unique(arr20) if c in category_colors])
 
-# ------------------------------------------
-# Einkanal-Bild erzeugen (RAM-schonend)
-# ------------------------------------------
-new = np.zeros((h, w), dtype=np.uint8)
-for cat in categories:
-    mask = arr20 == cat
-    # Korrekt
-    new[mask & (arr21 == cat)] = cat / 10
-    # Falsch
-    new[mask & (arr21 != cat)] = cat
+# # ------------------------------------------
+# # Einkanal-Bild erzeugen (RAM-schonend)
+# # ------------------------------------------
+# new = np.zeros((h, w), dtype=np.uint8)
+# for cat in categories:
+#     mask = arr20 == cat
+#     # Korrekt
+#     new[mask & (arr21 == cat)] = cat / 10
+#     # Falsch
+#     new[mask & (arr21 != cat)] = cat
 
 
-# 2Neues GeoTIFF abspeichern
-out_fp = DATA_DIR / "visualizations/2020_2021_comparison_wc.tif"
+# # Neues GeoTIFF abspeichern
+# out_fp = DATA_DIR / "visualizations/2020_2021_comparison_wc.tif"
 
-with rasterio.open(
-    out_fp,
-    'w',
-    driver='GTiff',
-    height=h,
-    width=w,
-    count=1,               # nur ein Band
-    dtype=new.dtype,
-    crs=profile['crs'],    # CRS übernehmen
-    transform=profile['transform'],
-) as dst:
-    dst.write(new, 1)  # Band 1 schreiben
+# with rasterio.open(
+#     out_fp,
+#     'w',
+#     driver='GTiff',
+#     height=h,
+#     width=w,
+#     count=1,               # nur ein Band
+#     dtype=new.dtype,
+#     crs=profile['crs'],    # CRS übernehmen
+#     transform=profile['transform'],
+# ) as dst:
+#     dst.write(new, 1)  # Band 1 schreiben
 
-print(f"Raster gespeichert unter: {out_fp}")
-# ------------------------------------------
-# Accuracy pro Kategorie berechnen
-# ------------------------------------------
-accuracy_per_class = []
-for c in categories:
-    total = np.sum(arr20 == c)
-    correct = np.sum((arr20 == c) & (arr21 == c))
-    pct = (correct / total * 100) if total else 0
-    accuracy_per_class.append((c, pct))
+# print(f"Raster gespeichert unter: {out_fp}")
+# # ------------------------------------------
+# # Accuracy pro Kategorie berechnen
+# # ------------------------------------------
+# accuracy_per_class = []
+# for c in categories:
+#     total = np.sum(arr20 == c)
+#     correct = np.sum((arr20 == c) & (arr21 == c))
+#     pct = (correct / total * 100) if total else 0
+#     accuracy_per_class.append((c, pct))
 
-# ------------------------------------------
-# Funktion zum Anpassen der Helligkeit
-# ------------------------------------------
-def adjust_brightness(color, factor):
-    rgb = np.array(to_rgb(color))
-    return np.clip(rgb * factor, 0, 1)
+# # ------------------------------------------
+# # Funktion zum Anpassen der Helligkeit
+# # ------------------------------------------
+# def adjust_brightness(color, factor):
+#     rgb = np.array(to_rgb(color))
+#     return np.clip(rgb * factor, 0, 1)
 
-# Farbzuweisung für Balken / Raster
-color_low  = {c: (np.array(to_rgb(category_colors[c])) * 255).astype(np.uint8)          # korrekt/unverändert
-              for c in categories}
-color_high = {c: (adjust_brightness(category_colors[c], 1.5) * 255).astype(np.uint8) # falsch/geändert
-              for c in categories}
+# # Farbzuweisung für Balken / Raster
+# color_low  = {c: (np.array(to_rgb(category_colors[c])) * 255).astype(np.uint8)          # korrekt/unverändert
+#               for c in categories}
+# color_high = {c: (adjust_brightness(category_colors[c], 1.5) * 255).astype(np.uint8) # falsch/geändert
+#               for c in categories}
 
-# ------------------------------------------
-# Karte + Balkendiagramm plotten
-# ------------------------------------------
-fig, (ax_map, ax_bar) = plt.subplots(1, 2, figsize=(16, 9), width_ratios=[3, 1])
+# # ------------------------------------------
+# # Karte + Balkendiagramm plotten
+# # ------------------------------------------
+# fig, (ax_map, ax_bar) = plt.subplots(1, 2, figsize=(16, 9), width_ratios=[3, 1])
 
-transform = profile["transform"]
+# transform = profile["transform"]
 
-# Colormap für Raster: unverändert = originalfarbe, geändert = heller
-cmap_colors = [(1,1,1)]  # weiß
-for c in categories:
-    cmap_colors.append(to_rgb(category_colors[c]))          # unverändert
-for c in categories:
-    cmap_colors.append(adjust_brightness(category_colors[c], 1.5))  # geändert = heller
+# # Colormap für Raster: unverändert = originalfarbe, geändert = heller
+# cmap_colors = [(1,1,1)]  # weiß
+# for c in categories:
+#     cmap_colors.append(to_rgb(category_colors[c]))          # unverändert
+# for c in categories:
+#     cmap_colors.append(adjust_brightness(category_colors[c], 1.5))  # geändert = heller
 
-cmap_vals = [0] +[c /10 for c in categories] + [c for c in categories]
-cmap = ListedColormap(cmap_colors)
-bounds = cmap_vals + [cmap_vals[-1] + 1]
-norm = BoundaryNorm(bounds, cmap.N)
+# cmap_vals = [0] +[c /10 for c in categories] + [c for c in categories]
+# cmap = ListedColormap(cmap_colors)
+# bounds = cmap_vals + [cmap_vals[-1] + 1]
+# norm = BoundaryNorm(bounds, cmap.N)
 
 
-# Karte
-ax_map.imshow(new, extent=[
-    transform.c,
-    transform.c + transform.a * w,
-    transform.f + transform.e * h,
-    transform.f
-], cmap=cmap, norm=norm)
-ax_map.axis("off")
-ax_map.grid(True, linestyle='--', linewidth=0.5, alpha=0.5)
+# # Karte
+# ax_map.imshow(new, extent=[
+#     transform.c,
+#     transform.c + transform.a * w,
+#     transform.f + transform.e * h,
+#     transform.f
+# ], cmap=cmap, norm=norm)
+# ax_map.axis("off")
+# ax_map.grid(True, linestyle='--', linewidth=0.5, alpha=0.5)
 
-# Normale Zahlen für Achsen
-ax_map.set_title("WorldCover 2020 → 2021: Pixelgenaue Übereinstimmung", fontsize=18, fontweight="bold")
-ax_map.xaxis.set_major_formatter(ScalarFormatter(useOffset=False))
-ax_map.yaxis.set_major_formatter(ScalarFormatter(useOffset=False))
-ax_map.xaxis.get_major_formatter().set_scientific(False)
-ax_map.yaxis.get_major_formatter().set_scientific(False)
+# # Normale Zahlen für Achsen
+# ax_map.set_title("WorldCover 2020 → 2021: Pixelgenaue Übereinstimmung", fontsize=18, fontweight="bold")
+# ax_map.xaxis.set_major_formatter(ScalarFormatter(useOffset=False))
+# ax_map.yaxis.set_major_formatter(ScalarFormatter(useOffset=False))
+# ax_map.xaxis.get_major_formatter().set_scientific(False)
+# ax_map.yaxis.get_major_formatter().set_scientific(False)
 
-# Maßstab
-xlim = ax_map.get_xlim()
-ylim = ax_map.get_ylim()
-scalebar_length = 1000
-sb_x = xlim[0] + (xlim[1] - xlim[0]) * 0.05
-sb_y = ylim[0] + (ylim[1] - ylim[0]) * 0.05
-ax_map.plot([sb_x, sb_x + scalebar_length], [sb_y, sb_y], color='black', linewidth=3)
-ax_map.text(sb_x + scalebar_length / 2, sb_y + (ylim[1] - ylim[0]) * 0.015,
-            "1000 m", ha='center', fontsize=10)
+# # Maßstab
+# xlim = ax_map.get_xlim()
+# ylim = ax_map.get_ylim()
+# scalebar_length = 1000
+# sb_x = xlim[0] + (xlim[1] - xlim[0]) * 0.05
+# sb_y = ylim[0] + (ylim[1] - ylim[0]) * 0.05
+# ax_map.plot([sb_x, sb_x + scalebar_length], [sb_y, sb_y], color='black', linewidth=3)
+# ax_map.text(sb_x + scalebar_length / 2, sb_y + (ylim[1] - ylim[0]) * 0.015,
+#             "1000 m", ha='center', fontsize=10)
 
 # Balkendiagramm: hell = geändert, dunkel = korrekt
 category_names = {
@@ -153,26 +153,26 @@ category_names = {
     50: "Siedlungsfläche", 60: "Karge Fläche", 70: "Schnee/Eis", 80: "Wasserfläche"
 }
 
-for idx, (c, pct) in enumerate(accuracy_per_class):
-    incorrect_pct = 100 - pct
-    ax_bar.barh(idx, pct, color=color_low[c]/255, edgecolor='black')      # korrekt/unverändert
-    ax_bar.barh(idx, incorrect_pct, left=pct, color=color_high[c]/255, edgecolor='black')  # geändert
+# for idx, (c, pct) in enumerate(accuracy_per_class):
+#     incorrect_pct = 100 - pct
+#     ax_bar.barh(idx, pct, color=color_low[c]/255, edgecolor='black')      # korrekt/unverändert
+#     ax_bar.barh(idx, incorrect_pct, left=pct, color=color_high[c]/255, edgecolor='black')  # geändert
 
-ax_bar.set_xlim(0, 100)
-ax_bar.set_xlabel("Prozentuale Übereinstimmung")
-ax_bar.set_title("Accuracy pro Klasse", fontsize=12)
-ax_bar.set_yticks(range(len(categories)))
-ax_bar.set_yticklabels([f"{category_names[cat]} {pct:.0f}%" for (cat, pct) in accuracy_per_class])
+# ax_bar.set_xlim(0, 100)
+# ax_bar.set_xlabel("Prozentuale Übereinstimmung")
+# ax_bar.set_title("Accuracy pro Klasse", fontsize=12)
+# ax_bar.set_yticks(range(len(categories)))
+# ax_bar.set_yticklabels([f"{category_names[cat]} {pct:.0f}%" for (cat, pct) in accuracy_per_class])
 
-legend_patches = [
-    mpatches.Patch(color="lightgrey", label="hell = korrekt"),
-    mpatches.Patch(color="darkgrey", label="dunkel = falsch")
-]
-ax_bar.legend(handles=legend_patches, loc="upper center", fontsize=8, ncol=2, frameon=False)
+# legend_patches = [
+#     mpatches.Patch(color="lightgrey", label="hell = korrekt"),
+#     mpatches.Patch(color="darkgrey", label="dunkel = falsch")
+# ]
+# ax_bar.legend(handles=legend_patches, loc="upper center", fontsize=8, ncol=2, frameon=False)
 
-plt.tight_layout()
-plt.savefig(DATA_DIR / "visualizations" / "2020_2021_comparison_wc_map.png", dpi=300, bbox_inches='tight')
-plt.show()
+# plt.tight_layout()
+# plt.savefig(DATA_DIR / "visualizations" / "2020_2021_comparison_wc_map.png", dpi=300, bbox_inches='tight')
+# plt.show()
 
 # ------------------------------------------
 # Übergangsmatrix berechnen und als Heatmap
