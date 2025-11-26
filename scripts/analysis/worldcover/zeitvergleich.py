@@ -1,3 +1,5 @@
+
+#Zum ausführen: python -m scripts.analysis.worldcover.zeitvergleich
 import rasterio
 import numpy as np
 import pandas as pd
@@ -33,12 +35,12 @@ h, w = arr20.shape
 # Farben definieren
 # ------------------------------------------
 category_colors = {
-    10: "#228B22",  # Forest
-    20: "#8B4513",  # Shrubland
-    30: "#BCFF1E",  # Grassland
-    40: "#1E90FF",  # Cropland
-    50: "#A9A9A9",  # Settlements
-    60: "#F31383",  # Sparse vegetation
+    10:  "#228B22",  # Forest
+    20: "#8b4513",  # Shrubland
+    30: "#bcff1e",  # Grassland
+    40: "#1e90ff",  # Cropland
+    50: "#a9a9a9",  # Settlements
+    60: "#f31383",  # Sparse vegetation
     70: "#9932CC",  # Snow/Ice
     80: "#00CED1",  # Water
 }
@@ -125,7 +127,7 @@ ax_map.imshow(new, extent=[
     transform.f + transform.e * h,
     transform.f
 ], cmap=cmap, norm=norm)
-ax_map.axis("on")
+ax_map.axis("off")
 ax_map.grid(True, linestyle='--', linewidth=0.5, alpha=0.5)
 
 # Normale Zahlen für Achsen
@@ -169,7 +171,7 @@ legend_patches = [
 ax_bar.legend(handles=legend_patches, loc="upper center", fontsize=8, ncol=2, frameon=False)
 
 plt.tight_layout()
-plt.savefig(DATA_DIR / "2020_2021_comparison_wc_map.png", dpi=300, bbox_inches='tight')
+plt.savefig(DATA_DIR / "visualizations" / "2020_2021_comparison_wc_map.png", dpi=300, bbox_inches='tight')
 plt.show()
 
 # ------------------------------------------
@@ -222,5 +224,5 @@ cbar.set_ticklabels([f"{b}%" for b in bounds])
 cbar.set_label("", rotation=270, labelpad=20)
 cbar.outline.set_visible(False)
 cbar.ax.tick_params(length=0)
-plt.savefig(DATA_DIR / "2020_2021_comparison_wc_matrix.png")
+plt.savefig(DATA_DIR / "visualizations" / "2020_2021_comparison_wc_matrix.png")
 plt.show()
