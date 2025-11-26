@@ -1,4 +1,6 @@
 # Start with: python -m shiny run -r scripts/visualization/as-corine.py
+import os
+os.environ['PROJ_LIB'] = r"C:\Users\LeonardoS\miniconda3\envs\corine\Library\share\proj"
 
 from shinywidgets import output_widget, render_plotly, render_widget
 from shiny import App, ui, reactive
@@ -14,8 +16,6 @@ import pandas as pd
 import numpy as np
 import geopandas as gpd
 import base64
-import os
-os.environ['PROJ_LIB'] = r"C:\Users\LeonardoS\miniconda3\envs\corine\Library\share\proj"
 
 
 # -----------------------------
@@ -32,74 +32,20 @@ ipcc_category_info = {
     6: {"name": "Other Land", "bar_ids": [10,11], "colors": ("#f768a1", "#fa9fb5")},
 }
 
-
-files = [
-    {"dataset": "corine", "year": "2012", "analysis": "result_center_point", "output": "center_point_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
-    {"dataset": "corine", "year": "2012", "analysis": "result_max_area", "output": "max_area_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
-    {"dataset": "corine", "year": "2018", "analysis": "result_center_point", "output": "center_point_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
-    {"dataset": "corine", "year": "2018", "analysis": "result_max_area", "output": "max_area_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
-    
-    {"dataset": "worldcover", "year": "2020", "analysis": "arealstatistik_mapped_points_2020_cp", "output": "center_point_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
-    {"dataset": "worldcover", "year": "2020", "analysis": "arealstatistik_mapped_2020_ma", "output": "max_area_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
-    {"dataset": "worldcover", "year": "2021", "analysis": "arealstatistik_mapped_points_2021_cp", "output": "center_point_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
-    {"dataset": "worldcover", "year": "2021", "analysis": "arealstatistik_mapped_2021_ma", "output": "max_area_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"},
-    
-    #{"dataset": "av", "year": "jahr", "analysis": "AV_As_Center_Pixel", "output": "center_point_raster", "as_id": "IPCC_AS_Id", "match": "IPCC_Match"}
-]
-
-
 # Verfügbare Jahre pro Datensatz für Select-Input
 dataset_years = {
-    "corine":[2012, 2018],
+    "corine_vector": [2012, 2018],
+    "corine_raster": [2012, 2018],
     "worldcover": [2020, 2021],
-    #"av": [2025]
+    "av": [2025]
 }
 
 def get_tif_paths(dataset, year, method):
-    base = DATA_DIR / f"analysis/{dataset}/{year}/{method}_raster"
+    base = DATA_DIR / f"analysis/{dataset}/{year}/{method}"
     return [
         base / f"ipcc_category_{i}.tif"
         for i in range(1, 7)
     ]
-for file in files:
- 
-    path = DATA_DIR / f"analysis/{file['dataset']}/{file['year']}/{file['output']}"
-    csv_path = path / "ipcc_category_stats.csv"
-    as_id_col = file["as_id"]
-    match_col = file["match"]
-    analysis_col = file["analysis"]
-    if not csv_path.exists():
-        gdf = gpd.read_file(
-            path / f"{analysis_col}.gpkg")
-        gdf = gdf.to_crs(epsg=3857)
-        print(f"Initial Data loaded from Geopackage from {analysis_col}.gpkg")
-        if file["dataset"] == "worldcover":
-                gdf["IPCC_Match"] = gdf["IPCC_AS_Id"] == gdf["IPCC_WC_Id"]
-        df_balken_list = []
-
-        for ipcc_as_id in sorted(gdf[as_id_col].unique()):
-            subset = gdf[gdf[as_id_col] == ipcc_as_id]
-            cat_info = ipcc_category_info.get(ipcc_as_id)
-            name = cat_info["name"]
-            dark, light = cat_info["colors"]
-
-            df_temp = pd.DataFrame({
-                "IPCC_AS_Id": [ipcc_as_id, ipcc_as_id],
-                "IPCC_AS_Name": [name, name],
-                "Art": ["AS", "AS"],
-                "Uebereinstimmende_Klassifikation": ["Wahr", "Falsch"],
-                "Farbe": [light, dark],
-                "Anzahl": [subset[match_col].sum(), len(subset) - subset[match_col].sum()],
-                "Anteil": [subset[match_col].mean(), 1 - subset[match_col].mean()]
-            })
-            df_balken_list.append(df_temp)
-
-        df_balken = pd.concat(df_balken_list, ignore_index=True)
-        print("Stats calculated from Geopackage")
-        df_balken.to_csv(csv_path, index=False)
-        print(f"Stats saved to CSV")
-    else:
-        print(f"Stats CSV already exists at {csv_path}, skipping processing.")
 
 # -----------------------------
 # 2) UI
@@ -111,7 +57,7 @@ app_ui = ui.page_fillable(
             ui.input_select(
                 id="select_dataset",
                 label="Wähle einen Datensatz:",
-                choices={"corine": "CORINE Land Cover",
+                choices={"corine_vector": "CORINE Land Cover Vektor", "corine_raster": "CORINE Land Cover Raster",
                          "worldcover": "ESA WorldCover", "av": "Amtliche Vermessung"},
 
             ),
@@ -172,7 +118,7 @@ def server(input, output, session):
 
         csv_path = (
             DATA_DIR /
-            f"analysis/{dataset}/{year}/{method}_raster/ipcc_category_stats.csv"
+            f"analysis/{dataset}/{year}/{method}/ipcc_category_stats.csv"
         )
         df_balken = pd.read_csv(csv_path)
 
