@@ -24,12 +24,12 @@ os.environ['PROJ_LIB'] = r"C:\Users\LeonardoS\miniconda3\envs\corine\Library\sha
  
 # Kategorien inkl. Farben zusammenfassen
 ipcc_category_info = {
-    1: {"name": "FL", "bar_ids": [0, 1], "colors": ("#006d2c", "#2ca25f")},
-    2: {"name": "Zweite", "bar_ids": [2, 3], "colors": ("#993404", "#d95f0e")},
-    3: {"name": "Dritte", "bar_ids": [4, 5], "colors": ("#d9f0a3", "#ffffcc")},
-    4: {"name": "Vierte", "bar_ids": [6, 7], "colors": ("#253494", "#2c7fb8")},
-    5: {"name": "Fünfte", "bar_ids": [8, 9], "colors": ("#bdbdbd", "#d9d9d9")},
-    6: {"name": "Sechste", "bar_ids": [10, 11], "colors": ("#f768a1", "#fa9fb5")},
+    1: {"name": "Forest Land", "bar_ids": [0, 1], "colors": ("#006d2c", "#2ca25f")},
+    2: {"name": "Cropland", "bar_ids": [2, 3], "colors": ("#993404", "#d95f0e")},
+    3: {"name": "Grasslands", "bar_ids": [4, 5], "colors": ("#d9f0a3", "#ffffcc")},
+    4: {"name": "Wetlands", "bar_ids": [6, 7], "colors": ("#253494", "#2c7fb8")},
+    5: {"name": "Settlements", "bar_ids": [8, 9], "colors": ("#bdbdbd", "#d9d9d9")},
+    6: {"name": "Other Land", "bar_ids": [10,11], "colors": ("#f768a1", "#fa9fb5")},
 }
 
 
