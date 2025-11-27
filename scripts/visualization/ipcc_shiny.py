@@ -1,27 +1,26 @@
 # Start with: python -m shiny run -r scripts/visualization/ipcc_shiny.py
+import base64
+import geopandas as gpd
+import numpy as np
+import pandas as pd
+import plotly.graph_objects as go
+from io import BytesIO
+from ipyleaflet import Map, ImageOverlay, basemaps, basemap_to_tiles
+from ipywidgets import Layout
+from PIL import Image
+import rasterio
+from rasterio.warp import transform_bounds
+from scripts import DATA_DIR
+from shiny import App, ui, reactive
+from shinywidgets import output_widget, render_plotly, render_widget
 import os
 os.environ['PROJ_LIB'] = r"C:\Users\LeonardoS\miniconda3\envs\corine\Library\share\proj"
-
-from shinywidgets import output_widget, render_plotly, render_widget
-from shiny import App, ui, reactive
-from scripts import DATA_DIR
-from rasterio.warp import transform_bounds
-import rasterio
-from PIL import Image
-from ipywidgets import Layout
-from ipyleaflet import Map, ImageOverlay, basemaps, basemap_to_tiles
-from io import BytesIO
-import plotly.graph_objects as go
-import pandas as pd
-import numpy as np
-import geopandas as gpd
-import base64
 
 
 # -----------------------------
 # 1) Daten laden
 # -----------------------------
- 
+
 # Kategorien inkl. Farben zusammenfassen
 ipcc_category_info = {
     1: {"name": "Forest Land", "bar_ids": [0, 1], "colors": ("#006d2c", "#2ca25f")},
@@ -29,7 +28,7 @@ ipcc_category_info = {
     3: {"name": "Grasslands", "bar_ids": [4, 5], "colors": ("#d9f0a3", "#ffffcc")},
     4: {"name": "Wetlands", "bar_ids": [6, 7], "colors": ("#253494", "#2c7fb8")},
     5: {"name": "Settlements", "bar_ids": [8, 9], "colors": ("#bdbdbd", "#d9d9d9")},
-    6: {"name": "Other Land", "bar_ids": [10,11], "colors": ("#f768a1", "#fa9fb5")},
+    6: {"name": "Other Land", "bar_ids": [10, 11], "colors": ("#f768a1", "#fa9fb5")},
 }
 
 # Verfügbare Jahre pro Datensatz für Select-Input
@@ -40,6 +39,7 @@ dataset_years = {
     "av": [2025]
 }
 
+
 def get_tif_paths(dataset, year, method):
     base = DATA_DIR / f"analysis/{dataset}/{year}/{method}"
     return [
@@ -47,10 +47,11 @@ def get_tif_paths(dataset, year, method):
         for i in range(1, 7)
     ]
 
+
 # -----------------------------
 # 2) UI
 # -----------------------------
-
+legend_colors = {"True": "#bdbdbd", "False": "#666666"}
 app_ui = ui.page_fillable(
     ui.card(
         ui.layout_columns(
@@ -72,12 +73,30 @@ app_ui = ui.page_fillable(
                 choices={"center_point": "Center Point",
                          "max_area": "Max Area"},
             ),
+                        style="margin:0px;"
         )
     ),
 
+
+
     ui.layout_columns(
         ui.card(output_widget("karte")),
-        ui.card(output_widget("balken")),
+        ui.card(
+            ui.tags.div(
+                ui.tags.div(
+                    # Legendensymbole
+                    ui.tags.span(
+                        style=f"display:inline-block;width:15px;height:15px;background-color:{legend_colors['True']};margin-right:5px;"),
+                    ui.tags.span("hell = korrekt", style="margin-right:15px;"),
+                    ui.tags.span(
+                        style=f"display:inline-block;width:15px;height:15px;background-color:{legend_colors['False']};margin-right:5px;"),
+                    ui.tags.span("dunkel = falsch", style="margin-right:15px;"),
+                ),
+                style="text-align:center;margin:0px;"
+            ),
+            output_widget("balken")
+        ),
+
         col_widths=(8, 4),
     )
 )
@@ -121,6 +140,7 @@ def server(input, output, session):
             f"analysis/{dataset}/{year}/{method}/ipcc_category_stats.csv"
         )
         df_balken = pd.read_csv(csv_path)
+        df_balken["Anteil"] = df_balken["Anteil"]
 
         # Balkendiagramm dynamisch darstellen
         fig = go.Figure([go.Bar(
@@ -129,11 +149,14 @@ def server(input, output, session):
             orientation='h',
             marker_color=df_balken["Farbe"]
         )])
+        fig.update_xaxes(tickformat=".0%")
         fig.update_layout(barmode='stack')
         fig.update_xaxes(categoryorder='total ascending')
+        
 
         w = go.FigureWidget(fig)
         w.data[0].on_click(on_point_click)
+        w._config = {"displayModeBar": False} 
         return w
 
     def on_point_click(trace, points, state):
