@@ -1,4 +1,4 @@
-# Funktionen der App Ticket to Escape
+# Vergleich Arealstatistik vs ESA WorldCover
 
 Anbei werden die Funktionalitäten der einzelnen Komponenten der App erklärt. 
 
@@ -98,9 +98,9 @@ Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="index.html">← Ticket to Escape</a>
+    <a href="05_arealstatistik_vs_corine.html">← Vergleich Arealstatistik vs Corine LandCover</a>
   </div>
   <div>
-    <a href="aufbauGDI.html">Aufbau GDI →</a>
+    <a href="07_vergleich_aller_analysen.html">Vergleich aller Analysen →</a>
   </div>
 </div>

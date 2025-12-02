@@ -1,4 +1,4 @@
-# Funktionen der App Ticket to Escape
+# Ergebnisse
 
 Anbei werden die Funktionalitäten der einzelnen Komponenten der App erklärt. 
 
@@ -98,9 +98,9 @@ Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="index.html">← Ticket to Escape</a>
+    <a href="08_zeitliche_veraenderungen.html">← Zeitliche Veränderung der LULC-Daten</a>
   </div>
   <div>
-    <a href="aufbauGDI.html">Aufbau GDI →</a>
+    <a href="10_prognose_modellierung.html">Prognose und Vorhersage der LULC-Daten →</a>
   </div>
 </div>

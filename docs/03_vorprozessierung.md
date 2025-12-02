@@ -1,4 +1,4 @@
-# Funktionen der App Ticket to Escape
+# Vorprozessierung
 
 Anbei werden die Funktionalitäten der einzelnen Komponenten der App erklärt. 
 
@@ -98,9 +98,9 @@ Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="index.html">← Ticket to Escape</a>
+    <a href="02_literaturrecherche.html">← Literaturrecherche</a>
   </div>
   <div>
-    <a href="aufbauGDI.html">Aufbau GDI →</a>
+    <a href="04_arealstatistik_vs_av.html">Vergleich Arealstatistik vs Amtliche Vermessung →</a>
   </div>
 </div>

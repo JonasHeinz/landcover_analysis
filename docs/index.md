@@ -31,27 +31,27 @@ Trotz dieser Vielfalt bestehen Unterschiede in Klassifikationssystemen, räumlic
 
 Die GitPage ist so strukturiert, dass alle inhaltlichen Kapitel der Arbeit als eigene gitPage-Seiten vorliegen und direkt sind.
 
-Die Literaturrecherche ist unter [Literaturrecherche](02_literaturrecherche.md) abgelegt und enthält die vollständige Literaturrecherche zu Grundlagen, Methoden, Datensätzen und bestehenden Ansätzen rund um LULC.
+Die Literaturrecherche ist unter [Literaturrecherche](02_literaturrecherche.html) abgelegt und enthält die vollständige Literaturrecherche zu Grundlagen, Methoden, Datensätzen und bestehenden Ansätzen rund um LULC.
 
-Der Abschnitt Vorprozessierung befindet sich in [Vorprozessierung](03_vorprozessierung.md) und dokumentiert die Datenaufbereitung sowie sämtliche Vorprozessierungsschritte.
+Der Abschnitt Vorprozessierung befindet sich in [Vorprozessierung](03_vorprozessierung.html) und dokumentiert die Datenaufbereitung sowie sämtliche Vorprozessierungsschritte.
 
 Die Vergleichsanalysen sind in 4 Seiten strukturiert:  
-- Vergleich Arealstatistik - Amtliche Vermessung: [04_arealstatistik_vs_av.md](04_arealstatistik_vs_av.md)  
-- Vergleich Arealstatistik - Corine LandCover: [05_arealstatistik_vs_corine.md](05_arealstatistik_vs_corine.md)  
-- Vergleich Arealstatistik - ESA WorldCover: [06_arealstatistik_vs_worldcover.md](06_arealstatistik_vs_worldcover.md)  
-- Vergleich aller Anlysen: [07_vergleich_aller_analysen.md](07_vergleich_aller_analysen.md)
+- Vergleich Arealstatistik - Amtliche Vermessung: [Arealstatistik vs Amtliche Vermessung](04_arealstatistik_vs_av.html)  
+- Vergleich Arealstatistik - Corine LandCover: [Arealstatistik vs Corine LandCover](05_arealstatistik_vs_corine.html)  
+- Vergleich Arealstatistik - ESA WorldCover: [Arealstatistik vs ESA WorldCover](06_arealstatistik_vs_worldcover.html)  
+- Vergleich aller Anlysen: [Vergleich aller Analysen](07_vergleich_aller_analysen.html)
 
-Die zeitliche Vergleichsanalyse liegt in [08_zeitliche_veraenderungen.md](08_zeitliche_veraenderungen.md) und zeigt die zeitliche Entwicklung der LULC-Klassen.
+Die zeitliche Vergleichsanalyse liegt in [zeitliche_veraenderungen](08_zeitliche_veraenderungen.html) und zeigt die zeitliche Entwicklung der LULC-Klassen.
 
-Die Zusammenfassung der aller Ergebnisse ist unter [09_ergebnisse.md](09_ergebnisse.md) und fasst die wesentlichen Resultate zusammen.
+Die Zusammenfassung der aller Ergebnisse ist unter [Ergebnisse](09_ergebnisse.html) und fasst die wesentlichen Resultate zusammen.
 
-Ein Ansatz zur Prognose und Modellierung ist gezeigt unter [10_prognose_modellierung.md](10_prognose_modellierung.md) und behandelt Ansätze zur Prognose von LULC-Änderungen.
+Ein Ansatz zur Prognose und Modellierung ist gezeigt unter [Prognose Modellierung](10_prognose_modellierung.html) und behandelt Ansätze zur Prognose von LULC-Änderungen.
 
-Die Interaktiven Visualisierungen auf Shiny sind erklärt auf der Seite [11_interaktive_visualisierung.md](11_interaktive_visualisierung.md)
+Die Interaktiven Visualisierungen auf Shiny sind erklärt auf der Seite [Interaktive Visualisierung](11_interaktive_visualisierung.html)
 
-Ausblick und Fazit umfasst den Schluss [12_schlussfolgerung.md](12_schlussfolgerung.md) und die zentralen Erkenntnisse zusammen.
+Ausblick und Fazit umfasst den Schluss [Schlussfolgerung](12_schlussfolgerung.html) und die zentralen Erkenntnisse zusammen.
 
-Die Quellen und Verwendeten Pythonmodule sind aufgführt unter: [13_quellenverzeichnis.md](13_quellenverzeichnis.md) 
+Die Quellen und Verwendeten Pythonmodule sind aufgführt unter: [Quellenverzeichnis](13_quellenverzeichnis.html) 
 
 
 
