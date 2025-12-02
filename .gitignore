@@ -230,4 +230,5 @@ __marimo__/
 !/data/analysis/corine/mapping_ipcc_corine.csv
 !/data/analysis/corine/Mapping_AS_WC.xlsx
 !/data/visualisations
+!/data/shiny
 .Rproj.user
