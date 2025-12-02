@@ -354,33 +354,20 @@ Die globalen Landbedeckungsprodukte ESA WorldCover und Impact Observatory LandCo
 Das ESA WorldCover-Programm ist ein Projekt der Europäischen Weltraumorganisation (ESA) im Rahmen des Copernicus Land Monitoring Service. Es wurde gemeinsam mit den Partnerinstitutionen VITO, Gamma Remote Sensing, UCLouvain und Wageningen University entwickelt (Van De Kerchove et al., 2022). Die Klassifikation gemäss Tabelle 3 erfolgt durch eine Deep-Learning-Auswertung von Sentinel-2 Zeitreihen, ergänzt durch globale Referenzdatensätze zur Validierung (Tsendbazar et al., 2022). Das Produkt deckt alle Landflächen zwischen 82° nördlicher und südlicher Breite ab und unterscheidet elf Hauptklassen: Wasser, Bäume, Gras, Ackerflächen, Strauchvegetation, Vegetation in Feuchtgebieten, bebaute Flächen, Schnee/Eis, nackter Boden und offene Flächen (Van De Kerchove et al., 2022). Laut dem WorldCover «Product Validation Report v2.0» (Tsendbazar et al., 2022) wird eine Gesamtgenauigkeit von 85,2 % erreicht, wobei die höchsten Genauigkeitswerte für Wasser-, Wald- und urbane Flächen berichtet werden (Zanaga et al., 2021). Die methodische Grundlage beruht auf einer konsistenten\
 Sentinel-2 Datenverarbeitung für die Jahre 2020 und 2021, wodurch ein global vergleichbarer Datensatz für Landbedeckungsanalysen entstanden ist (Van De Kerchove et al., 2022).
 
-  --------------------------------------------------------------------------------------------------------
-  **Klassen des WorldCover Datensatzes**                                                   
-  ---------------------------------------- ------------------------------- --------------- ---------------
-  **Englisch**                             **Deutsch**                     **Farbwerte**   **QGIS-Wert**
+| Englisch                 | Deutsch                          | Farbwert    | QGIS-Wert |
+|--------------------------|----------------------------------|------------ |-----------|
+| Tree Cover               | Baumbestand                      | #006400   | 10        |
+| Shrubland                | Strauchland                      | #ffbb22   | 20        |
+| Grassland                | Wiese                            | #ffff4c   | 30        |
+| Cropland                 | Ackerland                        | #f096ff   | 40        |
+| Built-up                 | Aufgebaut (Siedlung/Strassen)    | #fa0000   | 50        |
+| Bare / Sparse Vegetation | Karge / spärliche Vegetation     | #b4b4b4   | 60        |
+| Snow and Ice             | Schnee und Eis                   | #f0f0f0   | 70        |
+| Permanent Water Bodies   | Dauerhafte Gewässer              | #0064c8   | 80        |
+| Herbaceous Wetland       | Krautiges Feuchtgebiet           | #0096a0   | 90        |
+| Mangroves                | Mangroven                        | #00cf75   | 95        |
+| Moss and Lichen          | Moos und Flechten                | #fae6a0   | 100       |
 
-  Tree Cover                               Baumbestand                     #006400         10
-
-  Shrubland                                Shrubland                       #ffbb22         20
-
-  Grassland                                Wiese                           #ffff4c         30
-
-  Cropland                                 Ackerland                       #f096ff         40
-
-  Built-up                                 Aufgebaut (Siedlung/Strassen)   #fa0000         50
-
-  Bare / Spars Vegetation                  Karge / spärliche Vegetation    #b4b4b4         60
-
-  Snow and Ice                             Schnee und Eis                  #f0f0f0         70
-
-  Permanent Water Bodies                   Dauerhafte Gewässer             #0064c8         80
-
-  Herbaceous wetland                       Krautiges Feuchtgebiet          #0096a0         90
-
-  Mangroves                                Mangroven                       #00cf75         95
-
-  Moss and lichen                          Moos und Flechten               #fae6a0         100
-  --------------------------------------------------------------------------------------------------------
 
 Tabelle 3: Klassifikationen und Darstellung gemäss ESA & Google Earth Engine (Google Earth Engine, 2022)
 
