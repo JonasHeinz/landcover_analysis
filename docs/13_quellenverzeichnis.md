@@ -172,7 +172,7 @@ Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann,
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="ausblick.html">← Erweiterungsmöglichkeiten</a>
+    <a href="12_schlussfolgerung.html">← Schlussolgerung</a>
   </div>
   <div>
   </div>
