@@ -5,13 +5,13 @@ title: Vergleich LULC-Datensätze in der Schweiz
 
 <a id="top"></a>
 
-# TVergleich LULC-Datensätze in der Schweiz
+# Vergleich LULC-Datensätze in der Schweiz
 
-**_"Wer verstehen will, wohin sich Landschaften bewegen, braucht präzise Daten über ihre Nutzung und Bedeckung."_**
+**_"Wer verstehen will, wie sich Landschaften verändert haben, braucht präzise Daten über ihre Nutzung und Bedeckung."_**
 
 <div style="text-align: center; margin: 20px 0;">
   <video controls style="width: 100%; max-width: 640px; height: auto;">
-    <source src="{{ '/Videos/Video_Ticket_to_escape.mp4' | relative_url }}" type="video/mp4">
+    <source src="{{ '/Videos/IPCC_Shiny_App.mp4' | relative_url }}" type="video/mp4">
     Dein Browser unterstützt das Video-Tag nicht.
   </video>
 </div>
@@ -50,6 +50,9 @@ Ein Ansatz zur Prognose und Modellierung ist gezeigt unter [10_prognose_modellie
 Die Interaktiven Visualisierungen auf Shiny sind erklärt auf der Seite [11_interaktive_visualisierung.md](11_interaktive_visualisierung.md)
 
 Ausblick und Fazit umfasst den Schluss [12_schlussfolgerung.md](12_schlussfolgerung.md) und die zentralen Erkenntnisse zusammen.
+
+Die Quellen und Verwendeten Pythonmodule sind aufgführt unter: [13_quellenverzeichnis.md](13_quellenverzeichnis.md) 
+
 
 
 
