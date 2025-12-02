@@ -1,13 +1,13 @@
 <!-- <!-- <!-- ---
 layout: default
-title: Ticket to Escape
+title: Vergleich LULC-Datensätze in der Schweiz
 --- -->
 
 <a id="top"></a>
 
-# Ticket to Escape
+# TVergleich LULC-Datensätze in der Schweiz
 
-**_"Die Uhr tickt! Schaffen es die Räuber, vor den Polizisten über das SBB-Netz zu entkommen, gewinnen sie ihr Ticket to Escape."_**
+**_"Wer verstehen will, wohin sich Landschaften bewegen, braucht präzise Daten über ihre Nutzung und Bedeckung."_**
 
 <div style="text-align: center; margin: 20px 0;">
   <video controls style="width: 100%; max-width: 640px; height: auto;">
@@ -16,43 +16,47 @@ title: Ticket to Escape
   </video>
 </div>
 
-Das Detektivspiel Scotland Yard oder auch bekannt unter dem Namen Flucht durch die Schweiz oder Mister X wurde von einem Brettspiel in ein Fluchtspiel mit dem SBB-Netz erweitert. Dabei ist eine Räubergruppe mit Vorsprung auf der Flucht und wird von Polizistengruppen verfolgt. Schaffen es die Polizisten vor Ablauf der Zeit die Räuber in einem Zug oder an einem Bahnhof zu fangen, gewinnen sie.
+Landnutzungs- und Landbedeckungsdaten (LULC) sind für zahlreiche Bereiche von zentraler Bedeutung. Sie bilden die Grundlage für Umweltanalysen, unterstützen die Raumplanung und werden in der Klimaforschung intensiv genutzt. Unter anderem lassen sich mit ihrer Hilfe Veränderungen in der Landnutzung quantifizieren, Ökosystemleistungen bewerten oder auch Treibhausgasemissionen modellieren (NCCS, 2018). Globale Veränderungen in Landnutzung und Landbedeckung beeinflussen Kohlenstoffkreisläufe, Biodiversität und regionale Klimasysteme erheblich (Matthews et al., 2021). Gleichzeitig erfordert die Umsetzung nationaler Klimaziele, wie sie etwa in der Schweizer Klimastrategie und den CH2018-Klimaszenarien formuliert sind, eine konsistente und vergleichbare Datengrundlage zur Beurteilung von Landnutzungsdynamiken (NCCS, 2018).
 
-Mit dieser Webapp gelingt es ihnen, durch das SBB-Netz zu flüchten oder den Räubern auf die Schliche zu kommen. Suchen sie ihre nächsten Verbindung und schauen sie wo sich die anderen Gruppen befinden.
+## Ausgangslage und Relevanz der LULC-Daten
+In der Schweiz werden verschiedene Datensätze zur Erfassung von Landbedeckung und Landnutzung eingesetzt. Die Arealstatistik Schweiz des Bundesamts für Statistik (BFS) erhebt Bodennutzung und Bodenbedeckung in einem 100m-Raster auf Basis von Luftbildinterpretation und ermöglicht dadurch eine langfristige Beobachtung der Landschaftsentwicklung 
+(BFS, 2024b). Parallel dazu liefert die Amtliche Vermessung (AV) hochpräzise Informationen zur Bodenbedeckung, insbesondere in Siedlungsgebieten, mit Lagegenauigkeiten im Dezimeterbereich (swisstopo, 2024).
+Auch auf europäischer Ebene existieren vergleichbare Datensätze. Das CORINE Land Cover Programm (CLC) stellt einheitliche Landbedeckungsdaten für viele Länder bereit und arbeitet mit einem Mindestkartierstandard von 25ha (Büttner et al., 2017). Ergänzend bieten globale Produkte wie ESA WorldCover (Zanaga et al., 2021) hochaufgelöste, KI-ausgewertete Karten in einem 10m Raster an, die häufig aktualisiert werden.
+Trotz dieser Vielfalt bestehen Unterschiede in Klassifikationssystemen, räumlicher Auflösung, methodischer Grundlage und zeitlicher Abdeckung. Diese erschweren die Vergleichbarkeit und die direkte Integration in nationale Analysen. Studien von Leyk et al. (2005) und Black et al. (2023) betonen die Notwendigkeit einer systematischen Harmonisierung von Datensätzen, um Unsicherheiten zu quantifizieren und die Eignung für spezifische Anwendungen zu verbessern.
 
-## Teilnehmer
+## Diese Arbeit erfasst die folgenden zentralen Fragestellungen:
+•	Wie können nationale und globale LULC-Datensätze trotz unterschiedlicher Klassifikationen, Auflösungen und Genauigkeiten methodisch zusammengeführt werden, um eine bessere und häufigere Abschätzung von LULC-Veränderungen in der Schweiz zu ermöglichen?
+•	Mit welcher Auswirkung auf die Vergleichbarkeit unterscheiden sich verschiedenen nationale und globale Landnutzungs- und Landbedeckungsdatensätze in Klassifikation, Auflösung und Genauigkeit und können diese durch methodische Ansätze zusammengeführt werden?
+## Aufbau der GitPage
 
-Ein Spiel besteht aus einer Räubergruppe und 2–10 Polizistengruppen. Dabei ist die Gruppengrösse frei wählbar, empfohlen wird eine Gruppengrösse von 2–5 Spielenden.
+Die GitPage ist so strukturiert, dass alle inhaltlichen Kapitel der Arbeit als eigene gitPage-Seiten vorliegen und direkt sind.
 
-## Spielstart
+Die Literaturrecherche ist unter [02_literaturrecherche.md](0-2_literaturrecherche.md) abgelegt und enthält die vollständige Literaturrecherche zu Grundlagen, Methoden, Datensätzen und bestehenden Ansätzen rund um LULC.
 
-Die Räuber beginnen mit 30 Minuten Vorsprung an einem frei wählbaren Bahnhof. Dieser wird den Polizistengruppen bei Spielbeginn mitgeteilt.
+Der Abschnitt Vorprozessierung befindet sich in [03_vorprozessierung.md](03_vorprozessierung.md) und dokumentiert die Datenaufbereitung sowie sämtliche Vorprozessierungsschritte.
 
-## Spielablauf
+Die Vergleichsanalysen sind in 4 Seiten strukturiert:  
+- Vergleich Arealstatistik - Amtliche Vermessung: [04_arealstatistik_vs_av.md](04_arealstatistik_vs_av.md)  
+- Vergleich Arealstatistik - Corine LandCover: [05_arealstatistik_vs_corine.md](05_arealstatistik_vs_corine.md)  
+- Vergleich Arealstatistik - ESA WorldCover: [06_arealstatistik_vs_worldcover.md](06_arealstatistik_vs_worldcover.md)  
+- Vergleich aller Anlysen: [07_vergleich_aller_analysen.md](07_vergleich_aller_analysen.md)
 
-Die Räuber melden sich immer, wenn sie an einem Bahnhof aus dem Zug aussteigen _09:27 abgemeldet am Bahnhof Aarau_ und immer wenn sie vom Bahnhof abfahren _09:42 abgemeldet am Bahnhof Aarau_.
+Die zeitliche Vergleichsanalyse liegt in [08_zeitliche_veraenderungen.md](08_zeitliche_veraenderungen.md) und zeigt die zeitliche Entwicklung der LULC-Klassen.
 
-Die Räuber müssen sich direkt am Bahnhof anmelden, wenn sie aus dem Zug aussteigen. Innerhalb der nächsten 15 Minuten müssen sie den Bahnhof wieder verlassen. Aus taktischen Gründen kann es jedoch sinnvoll sein, länger am Bahnhof angemeldet zu bleiben, obwohl dieser bereits verlassen wurde.
+Die Zusammenfassung der aller Ergebnisse ist unter [09_ergebnisse.md](09_ergebnisse.md) und fasst die wesentlichen Resultate zusammen.
 
-Die Polizisten müssen jede zweite Verbindung melden _9:32 S26 Richtung Lenzburg_. Zusätzlich können sie, damit die Räuber am Bahnhof gefangen werden können, den Bahnhof melden _10:45 angemeldet am Bahnhof Aarau_ – dies ist optional.
+Ein Ansatz zur Prognose und Modellierung ist gezeigt unter [10_prognose_modellierung.md](10_prognose_modellierung.md) und behandelt Ansätze zur Prognose von LULC-Änderungen.
 
-## Zusätzliche Regeln
+Die Interaktiven Visualisierungen auf Shiny sind erklärt auf der Seite [11_interaktive_visualisierung.md](11_interaktive_visualisierung.md)
 
-- Die Räuber dürfen sich maximal 1 Stunde im gleichen Zug aufhalten. Fahren sie länger, kommt es zu einem Regelverstoss und die Polizisten gewinnen.
-- An einem Bahnhof aussteigen und in den gleichen Zug weiterfahren, ohne dass er die Richtung wechselt, ist nicht erlaubt.
-- Mit einem Zug, der an einem Endbahnhof hält und die Linie wechselt, kann weitergefahren werden – die Verbindung muss in der App gemeldet werden.
+Ausblick und Fazit umfasst den Schluss [12_schlussfolgerung.md](12_schlussfolgerung.md) und die zentralen Erkenntnisse zusammen.
 
-## Spielende
 
-Das Spiel endet bei Ablauf der definierten Spielzeit, wenn die Räuber gefangen werden oder es zu einem Regelbruch kommt:
-
-- Räuber werden gefangen, wenn sie gleichzeitig wie die Polizisten an einem Bahnhof sind.
-- Sind die Gruppen gleichzeitig in einem Zug und begegnen sie sich, so haben die Polizisten ebenfalls gewonnen.
 
 [↑](#top)
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="funktionen.html">Erklärung der Funktionen →</a>
+    <a href="02_literaturrecherche.md">Literaturrecherche →</a>
   </div>
 </div>
