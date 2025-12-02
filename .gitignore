@@ -219,16 +219,11 @@ __marimo__/
 /data/*
 
 # Exclude Testdata from Project Data
-!/data/analysis/arealstatistik/ag-b-00.03-37-area-all-gpkg_zug.gpkg
 !/data/analysis/arealstatistik/mapping_ipcc_arealstatistik.csv
-!/data/analysis/av/lcsf_zug.gpkg
 !/data/analysis/av/mapping_ipcc_av.csv
-!/data/analysis/corine/2012/U2018_CLC2012_V2020_20u1_zug.gpkg
-!/data/analysis/corine/2012/U2018_CLC2012_V2020_20u1_zug.tif
-!/data/analysis/corine/2018/U2018_CLC2018_V2020_20u1_zug.gpkg
-!/data/analysis/corine/2018/U2018_CLC2018_V2020_20u1_zug.tif
-!/data/analysis/corine/mapping_ipcc_corine.csv
-!/data/analysis/corine/Mapping_AS_WC.xlsx
+!/data/analysis/corine_raster/mapping_ipcc_corine.csv
+!/data/analysis/corine_vector/mapping_ipcc_corine.csv
+!/data/analysis/corine_vector/mapping_ipcc_worldcover.csv
 !/data/visualisations
 !/data/shiny
 .Rproj.user
