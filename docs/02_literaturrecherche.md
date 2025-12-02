@@ -320,7 +320,7 @@ Das IPCC unterscheidet in seinen Good Practice Guidance for Land Use, Land-Use C
 In der Schweiz basiert die offizielle Umsetzung auf der Arealstatistik des Bundesamts für Statistik (BFS). Im National Inventory Report (NIR) werden die Arealstatistik-Kategorien NOLU04 (Nutzung) und NOLC04 (Bedeckung) zu 18 Kombinationskategorien (CC) zusammengefasst. Diese sind auf der nächsten Seite in Abbildung 5 dargestellt.Abbildung 5 Die erste Ziffer der kombinierten Kategorien entspricht einer der sechs IPCC-Hauptkategorien (FOEN, 2022, p. 357). Dieses Vorgehen gewährleistet eine räumlich und zeitlich konsistente Grundlage für das Schweizer Treibhausgasinventar und stellt sicher, dass die Flächenveränderungen im LULUCF-Sektor nachvollziehbar abgebildet werden.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image5.png" alt="Startseite" style="width: 100%;">
+  <img src="Bilder/image5.png" alt="Startseite" style="width: 75%;">
 </p>
 
 Abbildung 5: Ableitung von 18 Kategorien (CC) aus den Arealstatistik NOLU04 und NOLC04 Kategorien gemäss (FOEN, 2022, Tables 6--6, p.352)
@@ -386,7 +386,7 @@ Abbildung 6 dargestellt sind, woraus sich die nachfolgenden Konstellationen erge
 -   Unten rechts: Regionen sind weder räumlich noch thematisch verbunden
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image6.png" alt="Startseite" style="width: 75%;">
+  <img src="Bilder/image6.png" alt="Startseite" style="width: 50%;">
 </p>
 
 Abbildung 6: Kombinationen der Verbindung zweier geografischer Regionen (Duckham et al., 2006, Figure 1)
@@ -397,7 +397,7 @@ Im Rahmen des Projekts werden analytische Legenden eingesetzt, um Visualisierung
 eingebettet sind.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image7.png" alt="Startseite" style="width: 75%;">
+  <img src="Bilder/image7.png" alt="Startseite" style="width: 50%;">
 </p>
 
 Abbildung 7: Karte mit Balkendiagramm als analytische Legende (Dykes et al., 2010, Figure 7)
@@ -405,7 +405,7 @@ Abbildung 7: Karte mit Balkendiagramm als analytische Legende (Dykes et al., 201
 Die konzeptionellen Ansätze von Livers & Felder (2015) zur Darstellung von Bodenbedeckungsveränderungen können als Ansatz für die geplante Visualisierung in diesem Projekt verwendet werden und sind in Abbildung 8 einsehbar. Die Autorinnen illustrieren in ihrer Bachelorarbeit, wie Veränderungen über Zeiträume hinweg kartografisch verdichtet und regional differenziert dargestellt werden können.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image8.png" alt="Startseite" style="width: 75%;">
+  <img src="Bilder/image8.png" alt="Startseite" style="width: 50%;">
 </p>
 
 Abbildung 8: Beispiel für eine Bodenbedeckungsveränderungskarte für Neuseeland (Livers & Felder, 2015, Figure 8)
@@ -413,7 +413,7 @@ Abbildung 8: Beispiel für eine Bodenbedeckungsveränderungskarte für Neuseelan
 Für die Darstellung von Veränderungen über Zeit greifen Thomas & Giuliani (2023) auf Diagrammformen zurück, die sich besonders für kategorische Daten eignen. Ihr Ansatz in Abbildung 9 zeigt, wie lineare und proportionale Diagrammtypen zur Ergänzung kartografischer Darstellungen eingesetzt werden können.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image9.png" alt="Startseite" style="width: 75%;">
+  <img src="Bilder/image9.png" alt="Startseite" style="width: 50%;">
 </p>
 
 Abbildung 9: Bodenbedeckungsveränderung über die Zeit (Thomas & Giuliani, 2023, Figure 4)
@@ -422,7 +422,7 @@ Darüber hinaus kann die Bodenbedeckungsveränderung über die Zeit mithilfe ein
 (siehe Tabelle 4). Dieser Ansatz lässt sich erweitern, indem die Veränderungen nicht absolut, sondern anteilsmässig beispielsweise in Prozent der Gesamtfläche dargestellt werden, um relative Unterschiede deutlicher sichtbar zu machen.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image10.png" alt="Startseite" style="width: 75%;">
+  <img src="Bilder/image10.png" alt="Startseite" style="width: 50%;">
 </p>
 
 Tabelle 4: Veränderungsmatrix (Livers & Felder, 2015, Table 2)
