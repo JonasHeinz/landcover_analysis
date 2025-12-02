@@ -31,29 +31,13 @@ Trotz dieser Vielfalt bestehen Unterschiede in Klassifikationssystemen, räumlic
 
 Die GitPage ist so strukturiert, dass alle inhaltlichen Kapitel der Arbeit als eigene gitPage-Seiten vorliegen und direkt sind.
 
-Die Literaturrecherche ist unter [Literaturrecherche](02_literaturrecherche.html) abgelegt und enthält die vollständige Literaturrecherche zu Grundlagen, Methoden, Datensätzen und bestehenden Ansätzen rund um LULC.
+Die GitPage ist so aufgebaut, dass jedes Kapitel als eigene Seite vorliegt und direkt geöffnet werden kann. Die theoretischen Grundlagen, Methoden, Datensätze und Ansätze zur Analyse und Harmonisierung von LULC sind in der Seite [Literaturrecherche](02_literaturrecherche.html) dargestellt.
 
-Der Abschnitt Vorprozessierung befindet sich in [Vorprozessierung](03_vorprozessierung.html) und dokumentiert die Datenaufbereitung sowie sämtliche Vorprozessierungsschritte.
+Die vollständige Dokumentation der Datenaufbereitung und Vorprozessierung steht unter [Vorprozessierung](03_vorprozessierung.html). Darauf folgen die drei Vergleichsanalysen zwischen Arealstatistik und weiteren Datensätzen. Die Analyse zwischen Arealstatistik und der amtlichen Vermessung findet sich unter [Arealstatistik – Amtliche Vermessung](04_arealstatistik_vs_av.html). Die Gegenüberstellung von Arealstatistik und CORINE LandCover ist unter [Arealstatistik – CORINE LandCover](05_arealstatistik_vs_corine.html) abgelegt. Der Vergleich zwischen Arealstatistik und ESA WorldCover ist in [Arealstatistik – ESA WorldCover](06_arealstatistik_vs_worldcover.html) dokumentiert. Der zusammenfassende Vergleich aller Resultate steht unter [Vergleich aller Analysen](07_vergleich_aller_analysen.html).
 
-Die Vergleichsanalysen sind in 4 Seiten strukturiert:  
-- Vergleich Arealstatistik - Amtliche Vermessung: [Arealstatistik vs Amtliche Vermessung](04_arealstatistik_vs_av.html)  
-- Vergleich Arealstatistik - Corine LandCover: [Arealstatistik vs Corine LandCover](05_arealstatistik_vs_corine.html)  
-- Vergleich Arealstatistik - ESA WorldCover: [Arealstatistik vs ESA WorldCover](06_arealstatistik_vs_worldcover.html)  
-- Vergleich aller Anlysen: [Vergleich aller Analysen](07_vergleich_aller_analysen.html)
+Die zeitliche Entwicklung der LULC-Klassen ist in [Zeitliche Veränderungen](08_zeitliche_veraenderungen.html) dargestellt. Eine verdichtete Darstellung aller Resultate ist in [Ergebnisse](09_ergebnisse.html) abgelegt. Ein methodischer Ansatz zur Prognose und Modellierung von LULC-Änderungen wird unter [Prognose und Modellierung](10_prognose_modellierung.html) beschrieben.
 
-Die zeitliche Vergleichsanalyse liegt in [zeitliche_veraenderungen](08_zeitliche_veraenderungen.html) und zeigt die zeitliche Entwicklung der LULC-Klassen.
-
-Die Zusammenfassung der aller Ergebnisse ist unter [Ergebnisse](09_ergebnisse.html) und fasst die wesentlichen Resultate zusammen.
-
-Ein Ansatz zur Prognose und Modellierung ist gezeigt unter [Prognose Modellierung](10_prognose_modellierung.html) und behandelt Ansätze zur Prognose von LULC-Änderungen.
-
-Die Interaktiven Visualisierungen auf Shiny sind erklärt auf der Seite [Interaktive Visualisierung](11_interaktive_visualisierung.html)
-
-Ausblick und Fazit umfasst den Schluss [Schlussfolgerung](12_schlussfolgerung.html) und die zentralen Erkenntnisse zusammen.
-
-Die Quellen und Verwendeten Pythonmodule sind aufgführt unter: [Quellenverzeichnis](13_quellenverzeichnis.html) 
-
-
+Interaktive Visualisierungen zur Unterstützung der Analyse stehen in [Interaktive Visualisierung](11_interaktive_visualisierung.html). Der Ausblick und die Schlussfolgerungen sind in [Schlussfolgerung](12_schlussfolgerung.html) zusammengefasst. Die verwendeten Quellen und Python-Module sind unter [Quellenverzeichnis](13_quellenverzeichnis.html) dokumentiert.
 
 
 [↑](#top)
