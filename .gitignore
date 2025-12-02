@@ -216,7 +216,7 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Project Data
-/data/*
+
 
 # Exclude Testdata from Project Data
 !/data/analysis/arealstatistik/mapping_ipcc_arealstatistik.csv
