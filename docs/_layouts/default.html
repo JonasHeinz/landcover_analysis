@@ -12,56 +12,72 @@
     <![endif]-->
     {% include head-custom.html %}
       <style>
-  .header-content {
-      display: flex;
-      align-items: center;
-  }
+        header {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+}
 
-  .header-content img {
-      height: 50px;
-  }
+/* Grundlayout Header */
+.header-content {
+    display: flex;
+    align-items: center;
+}
+.header-content img {
+    height: 50px;
+}
+.header-content h2 {
+    margin-left: 10px;
+}
 
-  .header-content h2 {
-      margin-left: 10px;
-  }
+/* Hauptnavigation */
+header nav ul {
+    list-style-type: disc;
+    padding-left: 1.2em;
+    margin: 0;
+}
+header nav li {
+    margin: 2px 0;
+}
+header nav a {
+    text-decoration: none;
+}
 
-  /* Standard-Listen im Nav erzwingen (Primer nimmt die sonst oft raus) */
-  header nav ul {
-      list-style-type: disc;
-      padding-left: 1.2em;
-      margin: 0;
-  }
+/* Menüpunkt mit Untermenü */
+.has-submenu > a {
+    font-weight: 600;
+    font-size: 0.95em;
+}
 
-  header nav li {
-      margin: 2px 0;
-  }
+/* Dropdown (Untermenü) */
+.submenu {
+    display: none;
+    list-style-type: circle;
+    padding-left: 1.4em;
+    margin-top: 4px;
 
-  header nav a {
-      text-decoration: none;
-  }
+    max-height: 260px;      /* eigenes Scrollen */
+    overflow-y: auto;
+    overflow-x: hidden;
 
-  /* Literaturrecherche mit Untermenue */
-  .has-submenu > a {
-      font-weight: 700;   /* fett */
-  }
+    border-left: 2px solid #ddd;
+}
 
-  .submenu {
-      list-style-type: circle;      /* andere Bullet-Form */
-      padding-left: 1.2em;          /* Einrueckung */
-      margin-top: 4px;
-      max-height: 260px;            /* hier scrollt nur das Untermenue */
-      overflow-y: auto;
-      border-left: 2px solid #ddd;  /* optische Kante links */
-  }
+/* Dropdown sichtbar bei Hover */
+.has-submenu:hover .submenu {
+    display: block;
+}
 
-  .submenu li {
-      margin: 1px 0;
-  }
+/* Einträge im Dropdown */
+.submenu li {
+    margin: 1px 0;
+}
+.submenu a {
+    font-size: 0.85em;      /* kleinerer Text */
+    font-weight: 400;
+}
 
-  .submenu a {
-      font-weight: 400;
-      font-size: 0.95em;
-  }
 </style>
 </head>
 <body>
