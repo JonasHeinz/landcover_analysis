@@ -31,9 +31,9 @@ Trotz dieser Vielfalt bestehen Unterschiede in Klassifikationssystemen, räumlic
 
 Die GitPage ist so strukturiert, dass alle inhaltlichen Kapitel der Arbeit als eigene gitPage-Seiten vorliegen und direkt sind.
 
-Die Literaturrecherche ist unter [02_literaturrecherche.md](0-2_literaturrecherche.md) abgelegt und enthält die vollständige Literaturrecherche zu Grundlagen, Methoden, Datensätzen und bestehenden Ansätzen rund um LULC.
+Die Literaturrecherche ist unter [Literaturrecherche](02_literaturrecherche.md) abgelegt und enthält die vollständige Literaturrecherche zu Grundlagen, Methoden, Datensätzen und bestehenden Ansätzen rund um LULC.
 
-Der Abschnitt Vorprozessierung befindet sich in [03_vorprozessierung.md](03_vorprozessierung.md) und dokumentiert die Datenaufbereitung sowie sämtliche Vorprozessierungsschritte.
+Der Abschnitt Vorprozessierung befindet sich in [Vorprozessierung](03_vorprozessierung.md) und dokumentiert die Datenaufbereitung sowie sämtliche Vorprozessierungsschritte.
 
 Die Vergleichsanalysen sind in 4 Seiten strukturiert:  
 - Vergleich Arealstatistik - Amtliche Vermessung: [04_arealstatistik_vs_av.md](04_arealstatistik_vs_av.md)  
