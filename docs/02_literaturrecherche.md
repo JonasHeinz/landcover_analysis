@@ -1,6 +1,6 @@
-# Funktionen der App Ticket to Escape
+# Literaturrecherche
 
-Anbei werden die Funktionalitäten der einzelnen Komponenten der App erklärt. 
+Diese Literaturrecherche befasst sich mit der Erfassung, Vergleichbarkeit und Harmonisierung von Landnutzungs- und Landbedeckungsdaten (LULC). Untersucht wird, wie sich verschiedene nationale, europäische und globale Datensätze in Auflösung, Klassifikation und Genauigkeit in der Schweiz unterscheiden und wie sie auf das IPCC-Kategoriensystem abgebildet werden können. Zudem werden Unsicherheiten, Harmonisierungsmethoden und geeignete Verfahren zur Analyse und Visualisierung von LULC-Veränderungen betrachtet.
 
 <a id="spielerstellen"></a>
 ## Spiel erstellen
@@ -98,9 +98,9 @@ Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="index.html">← Ticket to Escape</a>
+    <a href="index">← Kapitelübersicht</a>
   </div>
   <div>
-    <a href="aufbauGDI.html">Aufbau GDI →</a>
+    <a href="03_vorprozessierung">Vorprozessierung →</a>
   </div>
 </div>
