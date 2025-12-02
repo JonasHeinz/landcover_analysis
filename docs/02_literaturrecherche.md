@@ -42,7 +42,7 @@ Die Datenharmonisierung ist ein wichtiger Prozess, um unterschiedliche Datensät
 Die Rasterisierung von Landbedeckungsdaten ist wichtig, wenn man Vektor mit Rasterdaten vergleichen möchte. In ArcGIS Pro 3.2 und QGIS 3.34 wird standardmässig die «Cell Center Methode» zur Rasterisierung verwendet, bei welcher der Polygonwert des Zellzentrums übernommen wird. Durch die Anwendung dieses Verfahrens können schmale lineare Strukturen, wie 10m breite Strassen, im 100m-Raster nicht erfasst werden, was die räumliche Kontinuität zerstört (Kubacka & Piniarski, 2024, p. 6). Alternativ gibt es die «Max Area» Rasterisierung, bei der die Fläche innerhalb einer Zelle mit der grössten Ausdehnung übernommen wird. Bei aggregierten Landbedeckungsdaten führt dies jedoch zu ähnlichen Problemen wie die «Cell Center» Methode. Beide Methoden sind auf der Folgeseite in Abbildung 2 schematisch illustriert.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image1.jpeg" alt="Startseite" style="width: 75%;">
+  <img src="Bilder/image1.jpeg" alt="Startseite" style="width: 50%;">
 </p>
 
 Abbildung 2: Vergleich von Methoden zur Rasterisierung von Landbedeckungsdaten (vgl. Kubacka & Piniarski, 2024, Figure 2)
@@ -235,13 +235,14 @@ Aufgrund ihrer Lagegenauigkeit im Zentimeterbereich und der kontinuierlichen Nac
 Das europäische Corine Land Cover (CLC)-Programm und der dazugehörige Datensatz wird im Rahmen des Copernicus-Land-Überwachungsdienstes von der Europäischen Umweltagentur (EEA) koordiniert und liefert seit 1990 harmonisierte Informationen zur Landbedeckung und Landnutzung in Europa (Bossard et al., 2000; Büttner et al., 2021). Die Erfassung erfolgt durch visuelle Interpretation multispektraler Satellitenbilder von Sentinel-2, Landsat und SPOT, ergänzt durch nationale Referenzdaten. Die Daten werden auf eine geometrische Auflösung von 100 m generalisiert, mit einer minimalen Kartier Einheit von 25 ha und einer minimalen Linienbreite von 100 m (EEA, 2020a, 2020b).
 
 Die Klassifikation folgt einer dreistufigen hierarchischen Nomenklatur mit 44 Landbedeckungs- und Landnutzungsklassen, die in fünf Hauptgruppen aggregiert sind: künstliche Flächen, landwirtschaftliche Gebiete, Wälder und naturnahe Vegetation, Feuchtgebiete und Wasserflächen (Kosztra et al., 2019). Aufgeführt sind diese in Tabelle 2.
-| CLC_CODE | LABEL3                          | RGB        |
-|----------|----------------------------------|------------|
-| 111      | Continuous urban fabric          | 230-000-077 |
-| 112      | Discontinuous urban fabric       | 255-000-000 |
-| 121      | Industrial or commercial units   | 204-077-242 |
-| 122      | Road and rail networks and associated land | 204-000-000 |
-| 123      | Port areas                       | 230-204-204 |
+
+| CLC_CODE | LABEL3                                                                                  | RGB         |
+|----------|-----------------------------------------------------------------------------------------|-------------|
+| 111      | Continuous urban fabric                                                                 | 230-000-077 |
+| 112      | Discontinuous urban fabric                                                              | 255-000-000 |
+| 121      | Industrial or commercial units                                                          | 204-077-242 |
+| 122      | Road and rail networks and associated land                                              | 204-000-000 |
+| 123      | Port areas                                                                              | 230-204-204 |
 | 124      | Airports                                                                                | 230-204-230 |
 | 131      | Mineral extraction sites                                                                | 166-000-204 |
 | 132      | Dump sites                                                                              | 166-077-000 |
@@ -276,10 +277,11 @@ Die Klassifikation folgt einer dreistufigen hierarchischen Nomenklatur mit 44 La
 | 421      | Salt marshes                                                                            | 204-204-255 |
 | 422      | Salines                                                                                 | 230-230-255 |
 | 423      | Intertidal flats                                                                        | 166-166-230 |
-| 511      | Water courses        | 000-204-242 |
-| 512      | Water bodies         | 128-242-230 |
-| 521      | Coastal lagoons      | 000-255-166 |
-| 522      | Estuaries            | 166-255-230 |
+| 511      | Water courses                                                                           | 000-204-242 |
+| 512      | Water bodies                                                                            | 128-242-230 |
+| 521      | Coastal lagoons                                                                         | 000-255-166 |
+| 522      | Estuaries                                                                               | 166-255-230 |
+
 
 Tabelle 2: Klassen Corine Datensatz (EEA, 2025)
 
