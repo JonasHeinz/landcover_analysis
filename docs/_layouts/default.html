@@ -11,38 +11,58 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
     {% include head-custom.html %}
-    <style>
-      .header-content {
-          display: flex;
-          align-items: center;
-      }
-      .header-content img {
-          height: 50px;
-          
-      }
-      .header-content h2 {
-          margin-left: 10px;
-      }
-      .dropdown {
-          position: relative;
-      }
-      .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #dddcdc;
-          width: 260px;
-          box-shadow: 0px 8px 16px 0px rgba(192, 191, 191, 0.2);
-          z-index: 9999;
-          max-height: 250px;
-          overflow-y: auto;
-          overflow-x: hidden;
-          
-      }
-      header {
-        max-height: 100vh;
-        overflow-y: auto;
-      }
-    </style>
+      <style>
+  .header-content {
+      display: flex;
+      align-items: center;
+  }
+
+  .header-content img {
+      height: 50px;
+  }
+
+  .header-content h2 {
+      margin-left: 10px;
+  }
+
+  /* Standard-Listen im Nav erzwingen (Primer nimmt die sonst oft raus) */
+  header nav ul {
+      list-style-type: disc;
+      padding-left: 1.2em;
+      margin: 0;
+  }
+
+  header nav li {
+      margin: 2px 0;
+  }
+
+  header nav a {
+      text-decoration: none;
+  }
+
+  /* Literaturrecherche mit Untermenue */
+  .has-submenu > a {
+      font-weight: 700;   /* fett */
+  }
+
+  .submenu {
+      list-style-type: circle;      /* andere Bullet-Form */
+      padding-left: 1.2em;          /* Einrueckung */
+      margin-top: 4px;
+      max-height: 260px;            /* hier scrollt nur das Untermenue */
+      overflow-y: auto;
+      border-left: 2px solid #ddd;  /* optische Kante links */
+  }
+
+  .submenu li {
+      margin: 1px 0;
+  }
+
+  .submenu a {
+      font-weight: 400;
+      font-size: 0.95em;
+  }
+</style>
 </head>
 <body>
 <div class="wrapper">
@@ -66,56 +86,58 @@
       <h2 style="margin: 0;">Vergleich LULC-Datensätze in der Schweiz</h2>
     </div>    
     <nav>
-      <ul>
-        <li><a href="https://jonasheinz.github.io/landcover_analysis">Vergleich LULC-Datensätze in der Schweiz</a></li>
-        <li class="dropdown">
-          <div><a href="02_literaturrecherche.html">Literaturrecherche</a></div>
-          <div class="dropdown-content">
-            <div><a href="02_literaturrecherche.html#begriffserklarung-landbedeckung-und-landnutzung">Begriffserklärung Landbedeckung und Landnutzung</a></div>
-            <div><a href="02_literaturrecherche.html#unterschied-zwischen-land-use-und-land-cover">Unterschied zwischen Land Use und Land Cover</a></div>
-            <div><a href="02_literaturrecherche.html#datenqualitat-und-unsicherheiten-in-lulc-anderungen">Datenqualität und Unsicherheiten in LULC-Änderungen</a></div>
-            <div><a href="02_literaturrecherche.html#harmonisierung-der-daten">Harmonisierung der Daten</a></div>
-            <div><a href="02_literaturrecherche.html#rasterisierung-von-landesbedeckungsdaten">Rasterisierung von Landesbedeckungsdaten</a></div>
-            <div><a href="02_literaturrecherche.html#interpolation-von-raster-zu-punkt">Interpolation von Raster zu Punkt</a></div>
-            <div><a href="02_literaturrecherche.html#hochskalieren-von-rasterdaten">Hochskalieren von Rasterdaten</a></div>
-            <div><a href="02_literaturrecherche.html#herunterskalieren-von-rasterdaten">Herunterskalieren von Rasterdaten</a></div>
-            <div><a href="02_literaturrecherche.html#thematische-harmonisierung">Thematische Harmonisierung</a></div>
-            <div><a href="02_literaturrecherche.html#allgemeines-vorgehen-nach-ipcc">Allgemeines Vorgehen nach IPCC</a></div>
-            <div><a href="02_literaturrecherche.html#definitionen-fehler">Definitionen Fehler</a></div>
-            <div><a href="02_literaturrecherche.html#produktionsorientierte-unsicherheit">Produktionsorientierte Unsicherheit</a></div>
-            <div><a href="02_literaturrecherche.html#transformationsorientierte-unsicherheit">Transformationsorientierte Unsicherheit</a></div>
-            <div><a href="02_literaturrecherche.html#anwendungsorientierte-unsicherheit">Anwendungsorientierte Unsicherheit</a></div>
-            <div><a href="02_literaturrecherche.html#beurteilung-produktionsorientierte-unsicherheit">Beurteilung produktionsorientierte Unsicherheit</a></div>
-            <div><a href="02_literaturrecherche.html#beurteilung-transformationsorientierte-unsicherheit">Beurteilung transformationsorientierte Unsicherheit</a></div>
-            <div><a href="02_literaturrecherche.html#beurteilung-anwendungsorientierte-unsicherheit">Beurteilung anwendungsorientierte Unsicherheit</a></div>
-            <div><a href="02_literaturrecherche.html#erfassung-und-kategorieneinteilung">Erfassung und Kategorieneinteilung</a></div>
-            <div><a href="02_literaturrecherche.html#datensatzbeschreibung-arealstatistik">Datensatzbeschreibung Arealstatistik</a></div>
-            <div><a href="02_literaturrecherche.html#datensatzbeschreibung-amtliche-vermessung">Datensatzbeschreibung Amtliche Vermessung</a></div>
-            <div><a href="02_literaturrecherche.html#datensatzbeschreibung-corine-land-cover">Datensatzbeschreibung Corine Land Cover</a></div>
-            <div><a href="02_literaturrecherche.html#datensatzbeschreibung-esa-world-cover">Datensatzbeschreibung ESA World Cover</a></div>
-            <div><a href="02_literaturrecherche.html#kategorien-und-eignung-im-ipcc-kontext">Kategorien und Eignung im IPCC-Kontext</a></div>
-            <div><a href="02_literaturrecherche.html#methodische-ansatze-zum-vergleich-von-lulc-daten">Methodische Ansätze zum Vergleich von LULC-Daten</a></div>
-            <div><a href="02_literaturrecherche.html#cellular-automata">Cellular Automata</a></div>
-            <div><a href="02_literaturrecherche.html#datengrundlage-und-pradiktoren">Datengrundlage und Prädiktoren</a></div>
-            <div><a href="02_literaturrecherche.html#modellierung-der-ubergangswahrscheinlichkeit">Modellierung der Übergangswahrscheinlichkeit</a></div>
-            <div><a href="02_literaturrecherche.html#modellvalidierung">Modellvalidierung</a></div>
-            <div><a href="02_literaturrecherche.html#darstellung-und-visualisierung-raumlicher-veranderungen">Darstellung und Visualisierung räumlicher Veränderungen</a></div>
-            <div><a href="02_literaturrecherche.html#analytische-legenden">Analytische Legenden</a></div>
-            <div><a href="02_literaturrecherche.html#lulc-prognose-und-interpolation-zwischen-zeitstanden">LULC-Prognose und Interpolation zwischen Zeitständen</a></div>
-          </div>
-        </li>
-        <li><a href="03_vorprozessierung.html">03 Vorprozessierung</a></li>
-        <li><a href="04_arealstatistik_vs_av.html">04 Arealstatistik - Amtliche Vermessung</a></li>
-        <li><a href="05_arealstatistik_vs_corine.html">05 Arealstatistik - CORINE Land Cover</a></li>
-        <li><a href="06_arealstatistik_vs_worldcover.html">06 Arealstatistik - ESA WorldCover</a></li>
-        <li><a href="07_vergleich_aller_analysen.html">07 Vergleich aller Analysen</a></li>
-        <li><a href="08_zeitliche_veraenderungen.html">08 Zeitliche Veränderungen</a></li>
-        <li><a href="09_ergebnisse.html">09 Ergebnisse</a></li>
-        <li><a href="10_prognose_modellierung.html">10 Prognose und Modellierung</a></li>
-        <li><a href="11_interaktive_visualisierung.html">11 Interaktive Visualisierung</a></li>
-       <li><a href="12_schlussfolgerung.html">12 Schlussfolgerung</a></li>
-        <li><a href="13_quellenverzeichnis.html">13 Quellenverzeichnis</a></li>
-      </nav>
+  <ul>
+    <li><a href="https://jonasheinz.github.io/landcover_analysis">Vergleich LULC-Datensätze in der Schweiz</a></li>
+
+    <li class="has-submenu">
+      <a href="02_literaturrecherche.html">Literaturrecherche</a>
+      <ul class="submenu">
+        <li><a href="02_literaturrecherche.html#begriffserklärung-landbedeckung-und-landnutzung">Begriffserklärung Landbedeckung und Landnutzung</a></li>
+        <li><a href="02_literaturrecherche.html#unterschied-zwischen-land-use-und-land-cover">Unterschied zwischen Land Use und Land Cover</a></li>
+        <li><a href="02_literaturrecherche.html#datenqualitat-und-unsicherheiten-in-lulc-änderungen">Datenqualität und Unsicherheiten in LULC-Änderungen</a></li>
+        <li><a href="02_literaturrecherche.html#harmonisierung-der-daten">Harmonisierung der Daten</a></li>
+        <li><a href="02_literaturrecherche.html#rasterisierung-von-landesbedeckungsdaten">Rasterisierung von Landesbedeckungsdaten</a></li>
+        <li><a href="02_literaturrecherche.html#interpolation-von-raster-zu-punkt">Interpolation von Raster zu Punkt</a></li>
+        <li><a href="02_literaturrecherche.html#hochskalieren-von-rasterdaten">Hochskalieren von Rasterdaten</a></li>
+        <li><a href="02_literaturrecherche.html#herunterskalieren-von-rasterdaten">Herunterskalieren von Rasterdaten</a></li>
+        <li><a href="02_literaturrecherche.html#thematische-harmonisierung">Thematische Harmonisierung</a></li>
+        <li><a href="02_literaturrecherche.html#allgemeines-vorgehen-nach-ipcc">Allgemeines Vorgehen nach IPCC</a></li>
+        <li><a href="02_literaturrecherche.html#definitionen-fehler">Definitionen Fehler</a></li>
+        <li><a href="02_literaturrecherche.html#produktionsorientierte-unsicherheit">Produktionsorientierte Unsicherheit</a></li>
+        <li><a href="02_literaturrecherche.html#transformationsorientierte-unsicherheit">Transformationsorientierte Unsicherheit</a></li>
+        <li><a href="02_literaturrecherche.html#anwendungsorientierte-unsicherheit">Anwendungsorientierte Unsicherheit</a></li>
+        <li><a href="02_literaturrecherche.html#beurteilung-produktionsorientierte-unsicherheit">Beurteilung produktionsorientierte Unsicherheit</a></li>
+        <li><a href="02_literaturrecherche.html#beurteilung-transformationsorientierte-unsicherheit">Beurteilung transformationsorientierte Unsicherheit</a></li>
+        <li><a href="02_literaturrecherche.html#beurteilung-anwendungsorientierte-unsicherheit">Beurteilung anwendungsorientierte Unsicherheit</a></li>
+        <li><a href="02_literaturrecherche.html#erfassung-und-kategorieneinteilung">Erfassung und Kategorieneinteilung</a></li>
+        <li><a href="02_literaturrecherche.html#datensatzbeschreibung-arealstatistik">Datensatzbeschreibung Arealstatistik</a></li>
+        <li><a href="02_literaturrecherche.html#datensatzbeschreibung-amtliche-vermessung">Datensatzbeschreibung Amtliche Vermessung</a></li>
+        <li><a href="02_literaturrecherche.html#datensatzbeschreibung-corine-land-cover">Datensatzbeschreibung Corine Land Cover</a></li>
+        <li><a href="02_literaturrecherche.html#datensatzbeschreibung-esa-world-cover">Datensatzbeschreibung ESA World Cover</a></li>
+        <li><a href="02_literaturrecherche.html#kategorien-und-eignung-im-ipcc-kontext">Kategorien und Eignung im IPCC-Kontext</a></li>
+        <li><a href="02_literaturrecherche.html#methodische-ansatze-zum-vergleich-von-lulc-daten">Methodische Ansätze zum Vergleich von LULC-Daten</a></li>
+        <li><a href="02_literaturrecherche.html#cellular-automata">Cellular Automata</a></li>
+        <li><a href="02_literaturrecherche.html#datengrundlage-und-pradiktoren">Datengrundlage und Prädiktoren</a></li>
+        <li><a href="02_literaturrecherche.html#modellierung-der-übergangswahrscheinlichkeit">Modellierung der Übergangswahrscheinlichkeit</a></li>
+        <li><a href="02_literaturrecherche.html#modellvalidierung">Modellvalidierung</a></li>
+        <li><a href="02_literaturrecherche.html#darstellung-und-visualisierung-räumlicher-veränderungen">Darstellung und Visualisierung räumlicher Veränderungen</a></li>
+        <li><a href="02_literaturrecherche.html#analytische-legenden">Analytische Legenden</a></li>
+        <li><a href="02_literaturrecherche.html#lulc-prognose-und-interpolation-zwischen-zeitständen">LULC-Prognose und Interpolation zwischen Zeitständen</a></li>
+      </ul>
+    </li>
+    <li><a href="03_vorprozessierung.html">Vorprozessierung</a></li>
+    <li><a href="04_arealstatistik_vs_av.html">Arealstatistik - Amtliche Vermessung</a></li>
+    <li><a href="05_arealstatistik_vs_corine.html">Arealstatistik - CORINE Land Cover</a></li>
+    <li><a href="06_arealstatistik_vs_worldcover.html">Arealstatistik - ESA WorldCover</a></li>
+    <li><a href="07_vergleich_aller_analysen.html">Vergleich aller Analysen</a></li>
+    <li><a href="08_zeitliche_veraenderungen.html">Zeitliche Veränderungen</a></li>
+    <li><a href="09_ergebnisse.html">Ergebnisse</a></li>
+    <li><a href="10_prognose_modellierung.html">Prognose und Modellierung</a></li>
+    <li><a href="11_interaktive_visualisierung.html">Interaktive Visualisierung</a></li>
+    <li><a href="12_schlussfolgerung.html">Schlussfolgerung</a></li>
+    <li><a href="13_quellenverzeichnis.html">Quellenverzeichnis</a></li>
+  </ul>
+</nav>
     <div>
         <div style="margin-top: 10px;">
         <h4 style="margin-bottom: 5px;">Projektteam</h4>
