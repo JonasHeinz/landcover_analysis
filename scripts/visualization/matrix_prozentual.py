@@ -12,7 +12,7 @@ label_names = {
     2: "Cropland",
     3: "Grassland",
     4: "Wetlands",
-    5: "Settelmants",
+    5: "Settelments",
     6: "Other Land"
 }
 
