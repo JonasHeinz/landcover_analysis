@@ -41,7 +41,7 @@ dataset_years = {
 
 
 def get_tif_paths(dataset, year, method):
-    base = DATA_DIR / f"analysis/{dataset}/{year}/{method}"
+    base = DATA_DIR / f"shiny/{dataset}/{year}/{method}"
     return [
         base / f"ipcc_category_{i}.tif"
         for i in range(1, 7)
@@ -70,7 +70,7 @@ app_ui = ui.page_fillable(
             ui.input_select(
                 id="select_method",
                 label="Wähle die Methode:",
-                choices={"center_point": "Center Point",
+                choices={"cell_center": "Cell Center",
                          "max_area": "Max Area"},
             ),
                         style="margin:0px;"
@@ -135,9 +135,22 @@ def server(input, output, session):
         if not dataset or not year or not method:
             return pd.DataFrame()
 
+        match dataset:
+            case "av":
+                statsfile=f"AV-{year}-AS-{method}-stats.csv"
+            case "corine_raster":
+                statsfile=f"CORINER-{year}-AS-{method}-stats.csv"
+            case "corine_vector":
+                statsfile=f"CORINEV-{year}-AS-{method}-stats.csv"
+            case "worldcover":
+                statsfile=f"WC-{year}-AS-{method}-stats.csv"
+            case _:
+                statsfile=""
+                raise ValueError("Unbekannter Datensatz")
+
         csv_path = (
             DATA_DIR /
-            f"analysis/{dataset}/{year}/{method}/ipcc_category_stats.csv"
+            f"shiny/{dataset}/{year}/{method}/{statsfile}"
         )
         df_balken = pd.read_csv(csv_path)
         df_balken["Anteil"] = df_balken["Anteil"]
