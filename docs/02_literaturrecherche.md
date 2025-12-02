@@ -42,7 +42,7 @@ Die Datenharmonisierung ist ein wichtiger Prozess, um unterschiedliche Datensät
 Die Rasterisierung von Landbedeckungsdaten ist wichtig, wenn man Vektor mit Rasterdaten vergleichen möchte. In ArcGIS Pro 3.2 und QGIS 3.34 wird standardmässig die «Cell Center Methode» zur Rasterisierung verwendet, bei welcher der Polygonwert des Zellzentrums übernommen wird. Durch die Anwendung dieses Verfahrens können schmale lineare Strukturen, wie 10m breite Strassen, im 100m-Raster nicht erfasst werden, was die räumliche Kontinuität zerstört (Kubacka & Piniarski, 2024, p. 6). Alternativ gibt es die «Max Area» Rasterisierung, bei der die Fläche innerhalb einer Zelle mit der grössten Ausdehnung übernommen wird. Bei aggregierten Landbedeckungsdaten führt dies jedoch zu ähnlichen Problemen wie die «Cell Center» Methode. Beide Methoden sind auf der Folgeseite in Abbildung 2 schematisch illustriert.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image1.jpeg" alt="Startseite" style="width: 32%;">
+  <img src="Bilder/image1.jpeg" alt="Startseite" style="width: 75%;">
 </p>
 
 Abbildung 2: Vergleich von Methoden zur Rasterisierung von Landbedeckungsdaten (vgl. Kubacka & Piniarski, 2024, Figure 2)
@@ -128,7 +128,7 @@ oder unklare Definitionen und ist häufig das Ergebnis subjektiver Interpretatio
 (Leyk et al., 2005, p. 295)
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image2.png" alt="Startseite" style="width: 32%;">
+  <img src="Bilder/image2.png" alt="Startseite" style="width: 100%;">
 </p>
 
 Abbildung 3: Klassifikationsschema von Unsicherheiten auf Englisch (Klir & Wierman, 1999)
@@ -217,12 +217,12 @@ Zur Sicherung der Qualität werden Hilfsdaten der Amtlichen Vermessung, des Geb�
 (Jeannet & Willi-Tobler, 2024).Seit 2022 wird die manuelle Interpretation teilweise durch ein Deep-Learning-System (Arealstatistik Deep Learning) unterstützt, welches rund ein Viertel der unveränderten Stichprobenpunkte automatisch klassifiziert (Beyeler et al., 2023). Durch den unveränderten Stichprobenrasteransatz sind konsistente Zeitvergleiche zwischen den bisherigen Erhebungsperioden möglich. Jeder Gitterschnittpunkt bildet eine fortlaufende Zeitreihe, wodurch sich ein hochdimensionaler Zeitreihenraum ergibt (Ferster & Assoulin, 2019).
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image4.png" alt="Startseite" style="width: 32%;">
+  <img src="Bilder/image4.png" alt="Startseite" style="width: 100%;">
 </p>
 
 Abbildung 4: Standartnomenklatur NOAS04 welches die Klassifikationen der NOLU04 und NOLC04 umfasst (BFS, 2006)
 
-Die räumliche Genauigkeit der Arealstatistik ergibt sich aus dem 100m Stichprobenraster, wobei jeder Punkt eine Fläche von 1ha repräsentiert. Daraus ergibt sich ein geometrischer Unsicherheitsbereich von ± 50 m (BFS, 2024b). Aus den Einzelklassierungen der Stichprobenpunkte werden pro Gebietseinheit (Gemeinde, Kanton, Schweiz) Flächen- und Anteilswerte abgeleitet. Ferster & Assoulin (2019) beschreiben diese Aggregation der Punktwerte $y_{t}(i,j)$ über definierte Räume d und weisen auf die zeitliche Streuung der Überflugsjahre hin, die bei der Interpretation berücksichtigt werden muss. (BFS, 2022).
+Die räumliche Genauigkeit der Arealstatistik ergibt sich aus dem 100m Stichprobenraster, wobei jeder Punkt eine Fläche von 1ha repräsentiert. Daraus ergibt sich ein geometrischer Unsicherheitsbereich von ± 50 m (BFS, 2024b). Aus den Einzelklassierungen der Stichprobenpunkte werden pro Gebietseinheit (Gemeinde, Kanton, Schweiz) Flächen- und Anteilswerte abgeleitet. Ferster & Assoulin (2019) beschreiben diese Aggregation der Punktwerte \($y_{t}(i,j)\) über definierte Räume d und weisen auf die zeitliche Streuung der Überflugsjahre hin, die bei der Interpretation berücksichtigt werden muss. (BFS, 2022).
 
 ### Datensatzbeschreibung Amtliche Vermessung
 
@@ -235,112 +235,51 @@ Aufgrund ihrer Lagegenauigkeit im Zentimeterbereich und der kontinuierlichen Nac
 Das europäische Corine Land Cover (CLC)-Programm und der dazugehörige Datensatz wird im Rahmen des Copernicus-Land-Überwachungsdienstes von der Europäischen Umweltagentur (EEA) koordiniert und liefert seit 1990 harmonisierte Informationen zur Landbedeckung und Landnutzung in Europa (Bossard et al., 2000; Büttner et al., 2021). Die Erfassung erfolgt durch visuelle Interpretation multispektraler Satellitenbilder von Sentinel-2, Landsat und SPOT, ergänzt durch nationale Referenzdaten. Die Daten werden auf eine geometrische Auflösung von 100 m generalisiert, mit einer minimalen Kartier Einheit von 25 ha und einer minimalen Linienbreite von 100 m (EEA, 2020a, 2020b).
 
 Die Klassifikation folgt einer dreistufigen hierarchischen Nomenklatur mit 44 Landbedeckungs- und Landnutzungsklassen, die in fünf Hauptgruppen aggregiert sind: künstliche Flächen, landwirtschaftliche Gebiete, Wälder und naturnahe Vegetation, Feuchtgebiete und Wasserflächen (Kosztra et al., 2019). Aufgeführt sind diese in Tabelle 2.
-
-  -------------------------------------------------------------------------------
-  **CLC_CODE**   **LABEL3**                                         **RGB**
-  -------------- -------------------------------------------------- -------------
-  111            Continuous urban fabric                            230-000-077
-
-  112            Discontinuous urban fabric                         255-000-000
-
-  121            Industrial or commercial units                     204-077-242
-
-  122            Road and rail networks and associated land         204-000-000
-
-  123            Port areas                                         230-204-204
-  -------------------------------------------------------------------------------
-
-  ---------------------------------------------------------------------------------------------------------------------
-  **CLC_CODE**   **LABEL3**                                                                               **RGB**
-  -------------- ---------------------------------------------------------------------------------------- -------------
-  124            Airports                                                                                 230-204-230
-
-  131            Mineral extraction sites                                                                 166-000-204
-
-  132            Dump sites                                                                               166-077-000
-
-  133            Construction sites                                                                       255-077-255
-
-  141            Green urban areas                                                                        255-166-255
-
-  142            Sport and leisure facilities                                                             255-230-255
-
-  211            Non-irrigated arable land                                                                255-255-168
-
-  212            Permanently irrigated land                                                               255-255-000
-
-  213            Rice fields                                                                              230-230-000
-
-  221            Vineyards                                                                                230-128-000
-
-  222            Fruit trees and berry plantations                                                        242-166-077
-
-  223            Olive groves                                                                             230-166-000
-
-  231            Pastures                                                                                 230-230-077
-
-  241            Annual crops associated with permanent crops                                             255-230-166
-
-  242            Complex cultivation patterns                                                             255-230-077
-
-  243            Land principally occupied by agriculture, with significant areas of natural vegetation   230-204-077
-
-  244            Agro-forestry areas                                                                      242-204-166
-
-  311            Broad-leaved forest                                                                      128-255-000
-
-  312            Coniferous forest                                                                        000-166-000
-
-  313            Mixed forest                                                                             077-255-000
-
-  321            Natural grasslands                                                                       204-242-077
-
-  322            Moors and heathland                                                                      166-255-128
-
-  323            Sclerophyllous vegetation                                                                166-230-077
-
-  324            Transitional woodland-shrub                                                              166-242-000
-
-  331            Beaches, dunes, sands                                                                    230-230-230
-
-  332            Bare rocks                                                                               204-204-204
-
-  333            Sparsely vegetated areas                                                                 204-255-204
-
-  334            Burnt areas                                                                              000-000-000
-
-  335            Glaciers and perpetual snow                                                              166-230-204
-
-  411            Inland marshes                                                                           166-166-255
-
-  412            Peat bogs                                                                                077-077-255
-
-  421            Salt marshes                                                                             204-204-255
-
-  422            Salines                                                                                  230-230-255
-
-  423            Intertidal flats                                                                         166-166-230
-  ---------------------------------------------------------------------------------------------------------------------
-
-  -------------------------------------------------------------------------------
-  **CLC_CODE**   **LABEL3**                                         **RGB**
-  -------------- -------------------------------------------------- -------------
-  511            Water courses                                      000-204-242
-
-  512            Water bodies                                       128-242-230
-
-  521            Coastal lagoons                                    000-255-166
-
-  522            Estuaries                                          166-255-230
-
-  523            Sea and ocean                                      230-242-255
-
-  999            NODATA                                             
-
-  990            UNCLASSIFIED LAND SURFACE                          
-
-  995            UNCLASSIFIED WATER BODIES                          230-242-255
-  -------------------------------------------------------------------------------
+| CLC_CODE | LABEL3                          | RGB        |
+|----------|----------------------------------|------------|
+| 111      | Continuous urban fabric          | 230-000-077 |
+| 112      | Discontinuous urban fabric       | 255-000-000 |
+| 121      | Industrial or commercial units   | 204-077-242 |
+| 122      | Road and rail networks and associated land | 204-000-000 |
+| 123      | Port areas                       | 230-204-204 |
+| 124      | Airports                                                                                | 230-204-230 |
+| 131      | Mineral extraction sites                                                                | 166-000-204 |
+| 132      | Dump sites                                                                              | 166-077-000 |
+| 133      | Construction sites                                                                      | 255-077-255 |
+| 141      | Green urban areas                                                                       | 255-166-255 |
+| 142      | Sport and leisure facilities                                                            | 255-230-255 |
+| 211      | Non-irrigated arable land                                                               | 255-255-168 |
+| 212      | Permanently irrigated land                                                              | 255-255-000 |
+| 213      | Rice fields                                                                             | 230-230-000 |
+| 221      | Vineyards                                                                               | 230-128-000 |
+| 222      | Fruit trees and berry plantations                                                       | 242-166-077 |
+| 223      | Olive groves                                                                            | 230-166-000 |
+| 231      | Pastures                                                                                | 230-230-077 |
+| 241      | Annual crops associated with permanent crops                                            | 255-230-166 |
+| 242      | Complex cultivation patterns                                                            | 255-230-077 |
+| 243      | Land principally occupied by agriculture, with significant areas of natural vegetation  | 230-204-077 |
+| 244      | Agro-forestry areas                                                                     | 242-204-166 |
+| 311      | Broad-leaved forest                                                                     | 128-255-000 |
+| 312      | Coniferous forest                                                                       | 000-166-000 |
+| 313      | Mixed forest                                                                            | 077-255-000 |
+| 321      | Natural grasslands                                                                      | 204-242-077 |
+| 322      | Moors and heathland                                                                     | 166-255-128 |
+| 323      | Sclerophyllous vegetation                                                               | 166-230-077 |
+| 324      | Transitional woodland-shrub                                                             | 166-242-000 |
+| 331      | Beaches, dunes, sands                                                                   | 230-230-230 |
+| 332      | Bare rocks                                                                              | 204-204-204 |
+| 333      | Sparsely vegetated areas                                                                | 204-255-204 |
+| 334      | Burnt areas                                                                             | 000-000-000 |
+| 335      | Glaciers and perpetual snow                                                             | 166-230-204 |
+| 411      | Inland marshes                                                                          | 166-166-255 |
+| 412      | Peat bogs                                                                               | 077-077-255 |
+| 421      | Salt marshes                                                                            | 204-204-255 |
+| 422      | Salines                                                                                 | 230-230-255 |
+| 423      | Intertidal flats                                                                        | 166-166-230 |
+| 511      | Water courses        | 000-204-242 |
+| 512      | Water bodies         | 128-242-230 |
+| 521      | Coastal lagoons      | 000-255-166 |
+| 522      | Estuaries            | 166-255-230 |
 
 Tabelle 2: Klassen Corine Datensatz (EEA, 2025)
 
@@ -348,8 +287,7 @@ Feranec et al. (2010) analysieren die CLC-Zeitreihen 1990--2000 für 24 europäi
 
 ### Datensatzbeschreibung ESA World Cover
 
-Die globalen Landbedeckungsprodukte ESA WorldCover und Impact Observatory LandCover basieren auf multispektralen Sentinel-2-Daten und automatisierten Klassifikationsverfahren auf Basis neuronaler Netzwerke. Sie wurden entwickelt, um den physischen Zustand der Erdoberfläche (Land Cover) weltweit mit hoher räumlicher Auflösung zu erfassen\
-(Van De Kerchove et al., 2022).
+Die globalen Landbedeckungsprodukte ESA WorldCover und Impact Observatory LandCover basieren auf multispektralen Sentinel-2-Daten und automatisierten Klassifikationsverfahren auf Basis neuronaler Netzwerke. Sie wurden entwickelt, um den physischen Zustand der Erdoberfläche (Land Cover) weltweit mit hoher räumlicher Auflösung zu erfassen (Van De Kerchove et al., 2022).
 
 Das ESA WorldCover-Programm ist ein Projekt der Europäischen Weltraumorganisation (ESA) im Rahmen des Copernicus Land Monitoring Service. Es wurde gemeinsam mit den Partnerinstitutionen VITO, Gamma Remote Sensing, UCLouvain und Wageningen University entwickelt (Van De Kerchove et al., 2022). Die Klassifikation gemäss Tabelle 3 erfolgt durch eine Deep-Learning-Auswertung von Sentinel-2 Zeitreihen, ergänzt durch globale Referenzdatensätze zur Validierung (Tsendbazar et al., 2022). Das Produkt deckt alle Landflächen zwischen 82° nördlicher und südlicher Breite ab und unterscheidet elf Hauptklassen: Wasser, Bäume, Gras, Ackerflächen, Strauchvegetation, Vegetation in Feuchtgebieten, bebaute Flächen, Schnee/Eis, nackter Boden und offene Flächen (Van De Kerchove et al., 2022). Laut dem WorldCover «Product Validation Report v2.0» (Tsendbazar et al., 2022) wird eine Gesamtgenauigkeit von 85,2 % erreicht, wobei die höchsten Genauigkeitswerte für Wasser-, Wald- und urbane Flächen berichtet werden (Zanaga et al., 2021). Die methodische Grundlage beruht auf einer konsistenten\
 Sentinel-2 Datenverarbeitung für die Jahre 2020 und 2021, wodurch ein global vergleichbarer Datensatz für Landbedeckungsanalysen entstanden ist (Van De Kerchove et al., 2022).
@@ -380,7 +318,7 @@ Das IPCC unterscheidet in seinen Good Practice Guidance for Land Use, Land-Use C
 In der Schweiz basiert die offizielle Umsetzung auf der Arealstatistik des Bundesamts für Statistik (BFS). Im National Inventory Report (NIR) werden die Arealstatistik-Kategorien NOLU04 (Nutzung) und NOLC04 (Bedeckung) zu 18 Kombinationskategorien (CC) zusammengefasst. Diese sind auf der nächsten Seite in Abbildung 5 dargestellt.Abbildung 5 Die erste Ziffer der kombinierten Kategorien entspricht einer der sechs IPCC-Hauptkategorien (FOEN, 2022, p. 357). Dieses Vorgehen gewährleistet eine räumlich und zeitlich konsistente Grundlage für das Schweizer Treibhausgasinventar und stellt sicher, dass die Flächenveränderungen im LULUCF-Sektor nachvollziehbar abgebildet werden.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image5.png" alt="Startseite" style="width: 32%;">
+  <img src="Bilder/image5.png" alt="Startseite" style="width: 100%;">
 </p>
 
 Abbildung 5: Ableitung von 18 Kategorien (CC) aus den Arealstatistik NOLU04 und NOLC04 Kategorien gemäss (FOEN, 2022, Tables 6--6, p.352)
@@ -446,7 +384,7 @@ Abbildung 6 dargestellt sind, woraus sich die nachfolgenden Konstellationen erge
 -   Unten rechts: Regionen sind weder räumlich noch thematisch verbunden
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image6.png" alt="Startseite" style="width: 32%;">
+  <img src="Bilder/image6.png" alt="Startseite" style="width: 75%;">
 </p>
 
 Abbildung 6: Kombinationen der Verbindung zweier geografischer Regionen (Duckham et al., 2006, Figure 1)
@@ -457,7 +395,7 @@ Im Rahmen des Projekts werden analytische Legenden eingesetzt, um Visualisierung
 eingebettet sind.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image7.png" alt="Startseite" style="width: 32%;">
+  <img src="Bilder/image7.png" alt="Startseite" style="width: 75%;">
 </p>
 
 Abbildung 7: Karte mit Balkendiagramm als analytische Legende (Dykes et al., 2010, Figure 7)
@@ -465,7 +403,7 @@ Abbildung 7: Karte mit Balkendiagramm als analytische Legende (Dykes et al., 201
 Die konzeptionellen Ansätze von Livers & Felder (2015) zur Darstellung von Bodenbedeckungsveränderungen können als Ansatz für die geplante Visualisierung in diesem Projekt verwendet werden und sind in Abbildung 8 einsehbar. Die Autorinnen illustrieren in ihrer Bachelorarbeit, wie Veränderungen über Zeiträume hinweg kartografisch verdichtet und regional differenziert dargestellt werden können.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image8.png" alt="Startseite" style="width: 32%;">
+  <img src="Bilder/image8.png" alt="Startseite" style="width: 75%;">
 </p>
 
 Abbildung 8: Beispiel für eine Bodenbedeckungsveränderungskarte für Neuseeland (Livers & Felder, 2015, Figure 8)
@@ -473,7 +411,7 @@ Abbildung 8: Beispiel für eine Bodenbedeckungsveränderungskarte für Neuseelan
 Für die Darstellung von Veränderungen über Zeit greifen Thomas & Giuliani (2023) auf Diagrammformen zurück, die sich besonders für kategorische Daten eignen. Ihr Ansatz in Abbildung 9 zeigt, wie lineare und proportionale Diagrammtypen zur Ergänzung kartografischer Darstellungen eingesetzt werden können.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image9.png" alt="Startseite" style="width: 32%;">
+  <img src="Bilder/image9.png" alt="Startseite" style="width: 75%;">
 </p>
 
 Abbildung 9: Bodenbedeckungsveränderung über die Zeit (Thomas & Giuliani, 2023, Figure 4)
@@ -482,7 +420,7 @@ Darüber hinaus kann die Bodenbedeckungsveränderung über die Zeit mithilfe ein
 (siehe Tabelle 4). Dieser Ansatz lässt sich erweitern, indem die Veränderungen nicht absolut, sondern anteilsmässig beispielsweise in Prozent der Gesamtfläche dargestellt werden, um relative Unterschiede deutlicher sichtbar zu machen.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image10.png" alt="Startseite" style="width: 32%;">
+  <img src="Bilder/image10.png" alt="Startseite" style="width: 75%;">
 </p>
 
 Tabelle 4: Veränderungsmatrix (Livers & Felder, 2015, Table 2)
@@ -495,10 +433,10 @@ Die Bestimmung der erwarteten Mengenänderungen zwischen Zeitpunkten lässt sich
 
 Für die räumliche Abbildung dieser Mengenänderungen stellen Cellular-Automata-Modelle ein Konzept dar, wie bereits in Kapitel 2.7.1 beschrieben wird. Black (2022, Folios 4--5) beschreibt diese Modelle als patterns-basierte Rasterverfahren, in denen jede Zelle ihren Zustand als Funktion von Nachbarschaft, eigenen Übergangswahrscheinlichkeiten und Prädiktoren anpasst.
 
-Abbildung 10 zeigt diesen Mechanismus in kompakter Form, indem der Übergang von einem Landnutzungsraster zum Zeitpunkt t=0 und zu einem Zustand t=1 dargestellt wird. Das Übergangspotenzial $tP_{j,i}$ setzt sich dabei aus der standortspezifischen Eignung $tS_{j,i}$, einer externen Steuerungsgrösse $tA_{j,i}$ sowie einem Nachbarschaftseffekt $tN_{j,i}$ zusammen. Die Abbildung macht damit sichtbar, wie CA-Modelle Mengenänderungen räumlich verteilen, indem jene Zellen bevorzugt umklassiert werden, die ein hohes Übergangspotenzial aufweisen. Dies bildet der strukturelle Mechanismus ab, welcher Black et al. (2024, pp. 8--9) in ihrem Szenario für die Schweiz anwenden.
+Abbildung 10 zeigt diesen Mechanismus in kompakter Form, indem der Übergang von einem Landnutzungsraster zum Zeitpunkt \(t=0\) und zu einem Zustand \(t=1\) dargestellt wird. Das Übergangspotenzial \(tP_{j,i}\) setzt sich dabei aus der standortspezifischen Eignung \(tS_{j,i}\), einer externen Steuerungsgrösse \(tA_{j,i}\) sowie einem Nachbarschaftseffekt \(tN_{j,i}\) zusammen. Die Abbildung macht damit sichtbar, wie CA-Modelle Mengenänderungen räumlich verteilen, indem jene Zellen bevorzugt umklassiert werden, die ein hohes Übergangspotenzial aufweisen. Dies bildet der strukturelle Mechanismus ab, welcher Black et al. (2024, pp. 8--9) in ihrem Szenario für die Schweiz anwenden.
 
 <p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/image11.png" alt="Startseite" style="width: 32%;">
+  <img src="Bilder/image11.png" alt="Startseite" style="width: 75%;">
 </p>
 
 Abbildung 10 Konzeptionelle Darstellung eines Cellular-Automata-Prozesses zur räumlichen Allokation von LULC-Änderungen (Black, 2022, Folio 4)
