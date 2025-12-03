@@ -2,6 +2,8 @@
 
 Diese Literaturrecherche befasst sich mit der Erfassung, Vergleichbarkeit und Harmonisierung von Landnutzungs- und Landbedeckungsdaten (LULC). Untersucht wird, wie sich verschiedene nationale, europäische und globale Datensätze in Auflösung, Klassifikation und Genauigkeit in der Schweiz unterscheiden und wie sie auf das IPCC-Kategoriensystem abgebildet werden können. Zudem werden Unsicherheiten, Harmonisierungsmethoden und geeignete Verfahren zur Analyse und Visualisierung von LULC-Veränderungen betrachtet.
 
+---
+
 ## Begriffserklärung Landbedeckung und Landnutzung
 
 Der Begriff Land Use beschreibt menschliche Aktivitäten auf einer Fläche, also die Art und Weise, wie Menschen das Land nutzen (z. B. für Land- oder Forstwirtschaft). Clawson und Stewart definieren Land Use als menschliche Aktivität, welche direkt mit dem Landboden verbunden ist (Anderson et al., 1976, p. 4). Diese Nutzung ist dynamisch und verändert sich infolge ökonomischer, sozialer und ökologischer Prozesse. Land Use ist somit ein funktionaler Begriff, der eng mit Ökosystemen und menschlichen Eingriffen verbunden ist.
@@ -10,6 +12,8 @@ Demgegenüber bezeichnet Land Cover die physische Bedeckung der Erdoberfläche. 
 der Landnutzungs- und der Landbedeckungsebene als zentrales Merkmal moderner Erdbeobachtungsmodelle hervorheben. Ihr Model kombiniert satellitenbasierte Daten mit Kontextinformationen, um sowohl Land Cover als auch Land Use simultan zu klassifizieren.
 
 Während Land Cover häufig als objektiv erfassbare physische Bedeckung der Erdoberfläche verstanden wird, weisen Comber et al. (2005, pp. 1--3, 9--10) darauf hin, dass es sich dabei um eine konzeptuelle Kategorie handelt. Diese entsteht im Zuge von Klassifikations- und Entscheidungsprozessen, bei denen technische, institutionelle und gesellschaftliche Faktoren miteinander verflochten werden. Ob eine Fläche als Wald oder Siedlung bezeichnet wird, hängt folglich nicht allein von Beobachtungen ab, sondern auch von den zugrunde gelegten Definitionen. Comber et al. (2005, pp. 5--6) beziehen sich in diesem Zusammenhang auf Arbeiten von Rosch (1978) sowie Smith und Mark (2001). Die Arbeiten zeigen, dass Kategorien keine naturgegebenen Entitäten darstellen, sondern das Ergebnis menschlicher Konzeptbildung sind. Aus dieser Perspektive erscheint Land Cover weniger als objektiv messbare Eigenschaft, sondern vielmehr als interpretatives System, das physische Charakteristika in sozial geteilte Bedeutungsräume übersetzt.
+
+---
 
 ## Unterschied zwischen Land Use und Land Cover
 
@@ -20,6 +24,8 @@ Das Intergovernmental Panel on Climate Change (IPCC) (2003, p. 2.8-2.18) betont 
 Ferner betont das IPCC, dass ein konsistentes Klassifikationssystem sicherstellen muss, dass jede Flächeneinheit eindeutig einer Kategorie zugeordnet wird, auch wenn Mischformen (etwa landwirtschaftlich genutzte Wälder) existieren (IPCC, 2003, p. 2.9-2.14). Die Harmonisierung dieser Systeme ermöglicht eine präzisere Nachverfolgung von Landnutzungsänderungen über Zeitreihen und verbessert die globale Berichterstattung über Emissionen und Senken.
 
 Moderne Ansätze zeigen, dass fortschrittliche KI-Modelle durch semantische Einbettungen und multimodale Datenanalyse fähig sind, Land Cover und Land Use in einer skalierbaren Klassifikationsarchitektur zu vereinen (Brown et al., 2025, pp. 27 & 33--35). Diese Integration markiert einen methodischen Fortschritt gegenüber früheren beobachtungsbasierten Systemen wie dem von Anderson et al. (1976).
+
+---
 
 ## Datenqualität und Unsicherheiten in LULC-Änderungen
 
@@ -33,9 +39,13 @@ Um Änderungen in Bodennutzung und Bodenbedeckung, welche für die Treibhausgasi
 
 -   **Transparenz:** Alle verwendeten Datenquellen, Definitionen, Methoden und Annahmen müssen klar beschrieben und nachvollziehbar dokumentiert sein.
 
+---
+
 ### Harmonisierung der Daten
 
 Die Datenharmonisierung ist ein wichtiger Prozess, um unterschiedliche Datensätze vergleichbar und kombinierbar zu machen. Sie sorgt dafür, dass Daten aus verschiedenen Quellen gemeinsam analysiert werden können und dadurch verlässliche Ergebnisse entstehen. Im Gegensatz zur Standardisierung schreibt Harmonisierung keine festen Regeln vor, sondern sucht flexible Wege unterschiedliche Daten sinnvoll zusammenzuführen (Cheng et al., 2024, pp. 2--3). Vor allem für den Vergleich von Bodenbedeckungs- und Bodennutzungsdaten ist es essenziell mit harmonisierten Daten zu arbeiten. Jansen et al. (2008, p. 133) beschreibt, dass die Harmonisierung hier konzeptionelle-, räumliche-, zeitliche-, semantische und Qualitätsaspekte umfassten soll.
+
+---
 
 ### Rasterisierung von Landesbedeckungsdaten
 
@@ -55,9 +65,13 @@ Kubacka & Piniarski (2024, p. 6) beschreiben ebenfalls, dass zur besseren Erhalt
 
 3\. Siedlung 6. Landwirtschaft.
 
+---
+
 ### Interpolation von Raster zu Punkt
 
 Die «Weighted Neighbourhood Methode» ist ein lokales, regelbasiertes Verfahren zur Zuordnung von Rasterwerten zu Punktpositionen (Mitas & Mitasova, 1999). Sie basiert auf der Annahme, dass benachbarte Rasterzellen einen Einfluss auf den Wert eines Punktes haben, wobei nahe Zellen stärker gewichtet werden als weiter entfernte. Für jeden Punkt wird eine Nachbarschaft definiert, die alle Rasterzellen innerhalb eines festgelegten Radius umfasst. Jede Zelle erhält ein Gewicht, das typischerweise invers proportional zur Entfernung oder über einen Gauss-Kernel bestimmt wird (Mitas & Mitasova, 1999). Für kontinuierliche Variablen wird der Punktwert als gewichtetes Mittel der Nachbarzellen berechnet. Bei kategorialen Daten, wie Landnutzungsklassen, erfolgt die Zuordnung anhand der gewichteten Mehrheitsklasse, sodass die Klasse mit der höchsten gewichteten Summe der Nachbarzellen dem Punkt zugewiesen wird (Mitas & Mitasova, 1999). Diese Methode reduziert Artefakte an Rasterzellenrändern, berücksichtigt lokale räumliche Strukturen und ist flexibel, da Parameter wie Suchradius, Distanzgewichtung oder Kernelbreite an die Daten angepasst werden können. Sie eignet sich insbesondere für den Vergleich von Punktdaten mit Rasterinformationen. Laut Mitas und Mitasova (1999) erlaubt die «Weighted Neighbourhood Methode» eine reproduzierbare und realistische Darstellung der räumlichen Variabilität, während lokale Strukturen erhalten bleiben.
+
+---
 
 ### Hochskalieren von Rasterdaten
 
@@ -69,39 +83,45 @@ Die Punktverteilungsfunktion berücksichtigt die umliegenden Pixel mit unterschi
 
 Die distanzgewichtete Methode arbeitet mit einem gewichteten Raster um den Mittelpunkt der neuen Zelle. Sie berücksichtigt sowohl die relative Häufigkeit der Klassen als auch die räumliche Struktur, sodass die Aggregation genauer ist und Klassenanteile sowie Muster besser erhalten bleiben.
 
+---
+
 ### Herunterskalieren von Rasterdaten
 
 Ebenfalls beschreibt Markham et al. (Markham et al., 2023, pp. 620--625), dass beim statistischen Herunterskalieren geschaut wird, wie grobe Landbedeckungsdaten mit feineren Umweltfaktoren wie Klima, Geländeform oder menschlicher Nutzung zusammenhängen. Mit Rechenmodellen kann man daraus genauere Karten ableiten. Eine andere Möglichkeit ist, nicht die Landbedeckung selbst, sondern Kennzahlen der Landschaft (z.B. wie zerschnitten oder vielfältig sie ist) zu verkleinern. Diese Kennzahlen folgen oft bestimmten Musterregeln über verschiedene Massstäbe hinweg. Insgesamt liegt das Problem darin, dass beim Vergröbern der Daten, Fehler und Verzerrungen entstehen.
+
+---
 
 ## Thematische Harmonisierung
 
 Die thematische Harmonisierung ist der Prozess der systematischen Angleichung unterschiedlicher Klassifikationssysteme für Landnutzung und Landbedeckung, damit Daten unterschiedlicher Herkunft vergleichbar, konsistent und berichtsfähig nach den Standards des IPCC (2003) werden. Die Standards geben hierfür keine einzelne algorithmische Lösung vor, sondern ein methodisches Rahmenwerk, das auf Transparenz, Nachvollziehbarkeit und Konsistenz der angewandten Klassifikationslogik beruht. Das Ziel besteht darin, die Landnutzungsinformationen aus unterschiedlichen Quellen auf ein gemeinsames, standardisiertes Kategoriensystem abzubilden, um eine konsistente Darstellung zu gewährleisten. (Cheng et al., 2024, pp. 2--3)
 
+---
+
 ### Allgemeines Vorgehen nach IPCC
 
 Im Report der IPCC (2003, pp. 25--36) wird ein allgemeines Vorgehen zur Harmonisierung beschrieben, das folgende Schritte umfasst:
 
-1\. Ausgangsanalyse der Quellsysteme
+**1. Ausgangsanalyse der Quellsysteme**
 
 Zu Beginn der Harmonisierung werden die vorhandenen Datensätze und ihre Klassifikationssysteme systematisch analysiert. Dabei werden die Legenden, Klassendefinitionen, Hierarchieebenen, räumliche Abdeckung und zeitliche Referenzen der jeweiligen Datenquellen erfasst. Diese Ausgangsanalyse bildet die Grundlage für die spätere Zuordnung und dient zugleich als Dokumentation der Quellen. Es entsteht ein Metadatenblatt zu den Daten, in dem alle relevanten Informationen zu den Quellsystemen festgehalten werden.
 
-2\. Wahl des Zielklassenschemas
+**2. Wahl des Zielklassenschemas**
 
 Im nächsten Schritt wird das Zielklassensystem definiert. Der IPCC (2003) empfiehlt als minimalen Standard die sechs Hauptkategorien: Forest Land, Cropland, Grassland, Wetlands, Settlements und Other Land. Abhängig vom Zweck der Analyse und der Datenqualität kann entschieden werden, ob Unterklassen z.B. zur etwa die Differenzierung von Waldtypen sinnvoll sind.
 
-3\. Erstellung der Mapping-Tabelle
+**3. Erstellung der Mapping-Tabelle**
 
 Die Zuordnung der Quellklassen zu den Zielkategorien erfolgt über eine sogenannte Mapping-Tabelle. Jede Quellklasse erhält dabei eine eindeutige oder, falls notwendig, mehrere Zielklassen-Zuweisungen, die durch Regeln oder Schwellenwerte gesteuert werden. Bei Mehrdeutigkeiten, wie sie beispielsweise in Übergangs- oder Mischklassen auftreten, werden Prioritätsregeln oder zusätzliche Attribute verwendet. Darüber hinaus werden Quelle, Regeltext, Begründung und die geschätzte Unsicherheit der Zuordnung dokumentiert. Es resultiert eine tabellarische, maschinenlesbare Tabelle, die alle Zuordnungsregeln transparent enthält.
 
-4\. Konfliktbehandlung und Regelwerk
+**4. Konfliktbehandlung und Regelwerk**
 
 In diesem Schritt wird definiert, wie mit Klassen umzugehen ist, die sich nicht eindeutig zuordnen lassen. Dazu zählen etwa Mischlandschaften oder Übergangszonen zwischen zwei Landnutzungstypen. Es wird entschieden, ob solche Klassen aggregiert werden sollen oder ob sie als separate Kategorie (z.B. «mixed» oder «unknown») erhalten bleiben. Ein klar definiertes Regelwerk stellt sicher, dass Zuordnungen konsistent angewendet und nachvollziehbar dokumentiert werden.
 
-5\. Umsetzung der Zuordnung
+**5. Umsetzung der Zuordnung**
 
 Nach der Definition der Zuordnungsregeln wird die Harmonisierung praktisch umgesetzt. Dabei werden die Mapping-Regeln auf die Datensätze angewendet, beispielsweise durch Attributänderungen in Punktdaten oder Reklassifikation in Rasterdaten. Anschliessend werden Plausibilitätsprüfungen durchgeführt, um sicherzustellen, dass die Flächenbilanzen vor und nach der Harmonisierung konsistent sind und keine Flächenverluste oder Doppelzählungen auftreten. Es ergeben sich die harmonisierten Datensätze sowie eine Datei, welche die angewendeten Regeln und Änderungen dokumentiert.
 
-6\. Qualitätskontrolle und Validierung
+**6. Qualitätskontrolle und Validierung**
 
 Die Qualität und Konsistenz der harmonisierten Daten wird durch verschiedene Prüfverfahren überprüft. Dazu gehören Konfusionsmatrizen zur Bewertung der Übereinstimmung zwischen den harmonisierten Datensätzen, Flächenvergleiche (absolute und relative Differenzen pro Zielklasse) sowie punktbasierte Validierungen mit unabhängigen Referenzdaten oder visueller Fotointerpretation. Diese Qualitätskontrolle stellt sicher, dass die Harmonisierung reproduzierbar und methodisch belastbar ist und beschreibt diese in einem Qualitätsbericht mit Kennzahlen zur Genauigkeit und Konsistenz.
 
@@ -114,6 +134,8 @@ Geeignete Methoden umfassen die Fehlerfortpflanzung, Monte-Carlo-Simulationen od
 **8. Transparenz und Reporting**
 
 Der IPCC (2003) betont die vollständige Transparenz des gesamten Harmonisierungsprozess. Alle verwendeten Mapping-Tabellen, Regeltexte, Flächenbilanzen, Qualitätsprotokolle und Unsicherheitsannahmen müssen offengelegt und nachvollziehbar dokumentiert werden. Insgesamt entsteht ein transparenter Gesamtbericht mit allen harmonisierten Datensätzen, Dokumentationen und Metadaten.
+
+---
 
 ## Definitionen Fehler 
 
@@ -134,6 +156,8 @@ oder unklare Definitionen und ist häufig das Ergebnis subjektiver Interpretatio
 Abbildung 3: Klassifikationsschema von Unsicherheiten auf Englisch (Klir & Wierman, 1999)
 
 Zusammenfassend lässt sich sagen, dass die drei Formen der Unsicherheit zwar miteinander in Beziehung stehen, aber unterschiedliche Ursachen haben. Fehler entstehen durch Messabweichungen, Unschärfe durch ungenaue Definitionen, und Mehrdeutigkeiten durch oder widersprüchliche Begriffe. In der Abbildung 3 ist die Unsicherheitsdefinition schematisch dargestellt.
+
+---
 
 ### Produktionsorientierte Unsicherheit
 
@@ -160,6 +184,8 @@ Fuzzy Sets
 
 Weiter führen Leyk et al. (2005) aus, dass eine weitere Möglichkeit zur besseren Anpassung der Fehlermatrix an die Realität in der Gewichtung von «Fuzzy Sets» besteht. Die Unsicherheit von Grenzen wird durch die Rasterisierung nur noch verstaut. Daher kann pro Zelle ein Prozentwert definiert werden. Es wird von beispielsweise der Kategorie Wald eine Minimalgeometrie und Maximalgeometrie definiert. Und je nach Position des Pixels in diesem Rahmen wird eine 1 für 100% Wald bis zu einer 0 für 0% Wald vergeben. Beim Vergleich mit den Referenzdaten können die Unsicherheiten als Fehler oder als Unsicherheit erkannt und somit in die Beurteilung der Qualität miteinbezogen werden.
 
+---
+
 ### Transformationsorientierte Unsicherheit
 
 Die Verwendeten Referenzdaten sind oft in Form von historischen Karten zu finden. Diese Karten müssen für den digitalen Gebrauch zuerst digitalisiert und transformiert werden. Beide Prozesse sind quellen für Fehler, genauer definiert Unsicherheiten.
@@ -175,6 +201,8 @@ In Leyk et al. (2005, p. 303) wird beschreiben, dass die Genauigkeit historische
 Fehlerbänder
 
 Für lokale Angaben können um Geometrien sogenannte Fehlerbänder (Leyk et al., 2005, p. 305) erfasst werden. Mithilfe des G-Model (Love et al., 2010, p. 10) können entlang einer Linie mehrere Fehlerellipsoide platziert werden. Diese verkörpern schlussendlich eine 2D- oder gar 3D-Eigenschaft, welches die Genauigkeit der Geometrie von der Ursprungslinie darstellt.
+
+---
 
 ###  Anwendungsorientierte Unsicherheit
 
@@ -192,21 +220,31 @@ Fitness-for-Use
 
 «Fitness for Use» bezeichnet die Eignung eines räumlichen Datensatzes für einen spezifischen Anwendungszweck (Bruin et al., 2001, pp. 458--459). Die Beurteilung dieser Eignung basiert nicht nur auf formalen Genauigkeitsmassen, sondern auch auf der Übereinstimmung zwischen den Eigenschaften eines Datensatzes und den Anforderungen der beabsichtigten Nutzung. Dabei wird vorgeschlagen, den «Expected Value of Control» (EVC) als Mass für die «Fitness for Use» zu verwenden (Dan Costelloe et al., 2001, p. 546). Der EVC sagt aus, ob ein Datensatz trotz seiner Unsicherheit immer noch einen Mehrwert zu einer Aussage beisteuert. Die Beurteilung setzt voraus, dass die Unsicherheit probabilistisch quantifiziert werden kann (durch RMSE, Standardabweichung, Fehlerverteilungen) und eine Verlustfunktion definiert wird, die die Kosten falscher Entscheidungen in Bezug auf eine Zielgrösse ausdrückt. «Fitness for Use» bezieht sich nicht auf absolute Datenqualität, sondern auf deren praktischen Wert im Anwendungskontext.
 
+---
+
 ### Beurteilung Produktionsorientierte Unsicherheit
 
 Die Fehlermatrix und der Kappakoeffizient dienen zur Bestimmung der Klassifikationsgenauigkeit im Vergleich zu den Referenzdaten im globalen Rahmen. Stratifizierte Genauigkeitsanalyse zeigen regionale Unsicherheiten. Fuzzy Sets oder Error-Bands können Unsicherheiten an Grenzbereichen probabilistisch zu modellieren. Je höher die Klassifikationsgenauigkeit je geringer die Unschärfe in Grenzbereichen, desto höher ist der erwartete Nutzen der LULC-Daten für Anwendungen wie Landschaftsanalyse.
+
+---
 
 ### Beurteilung Transformationsorientierte Unsicherheit
 
 Der RMSE dient als Mass der globalen geometrischen Genauigkeit. Fehlerbänder mit G-Model zur Erfassung zeigen lokale geometrische Unsicherheiten. Ein geringer RMSE und schmale Fehlerbänder bedeuten geringere geometrische Unsicherheit, somit kann der Datensatz mit höherer Wahrscheinlichkeit für quantitative verwendet werden.
 
+---
+
 ### Beurteilung Anwendungsorientierte Unsicherheit
 
 Der Semantischer Vergleich, sowie die Analyse der Generalisierung grades zeigen den benötigten Aufwand zu Normalisierung eines Datensatzes und demensprechend die Wirtschaftlichkeit seines Nutzens. Wenn semantische und geometrische Definitionen zwischen LULC-Datensatz und Anwendungsanforderungen konsistent sind, ist die Datengrundlage geeignet.
 
+---
+
 ## Erfassung und Kategorieneinteilung
 
 Die Erfassung von Landnutzungs- und Landbedeckungsdaten (LULC) stellt die zentrale Grundlage dar. Die Methoden reichen von visueller Interpretation hochauflösender Luftbilder über geodätische Erhebungen bis hin zu KI-basierten Fernerkundungsverfahren. Die folgenden Abschnitte beleuchten die methodischen Grundlagen und Genauigkeitsaspekte sowie den groben Überblick über die verwendeten Kategorien der vier im Projekt berücksichtigten Datensätze: Arealstatistik der Schweiz, Amtliche Vermessung, Corine Land Cover und ESA WorldCover.
+
+---
 
 ### Datensatzbeschreibung Arealstatistik
 
@@ -224,11 +262,15 @@ Abbildung 4: Standartnomenklatur NOAS04 welches die Klassifikationen der NOLU04 
 
 Die räumliche Genauigkeit der Arealstatistik ergibt sich aus dem 100m Stichprobenraster, wobei jeder Punkt eine Fläche von 1ha repräsentiert. Daraus ergibt sich ein geometrischer Unsicherheitsbereich von ± 50 m (BFS, 2024b). Aus den Einzelklassierungen der Stichprobenpunkte werden pro Gebietseinheit (Gemeinde, Kanton, Schweiz) Flächen- und Anteilswerte abgeleitet. Ferster & Assoulin (2019) beschreiben diese Aggregation der Punktwerte \($y_{t}(i,j)\) über definierte Räume d und weisen auf die zeitliche Streuung der Überflugsjahre hin, die bei der Interpretation berücksichtigt werden muss. (BFS, 2022).
 
+---
+
 ### Datensatzbeschreibung Amtliche Vermessung
 
 Die Bodenbedeckung ist eines der Themenmodelle des Geodatenmodells der Amtlichen Vermessung (DMAV), das den Aufbau, die Inhalte und die Qualitätsanforderungen der AV-Daten festlegt (Grütter, 2025, p. 6 ff). Gemäss den Modellierungsgrundsätzen DMAV Version 1.0 umfasst das DMAV verschiedene Themenmodelle, darunter Bodenbedeckung, Einzelobjekte, Gebäudeadressen und Liegenschaften (Grütter, 2025, p. 10ff). Das Themenmodel Bodenbedeckung beschreibt den physischen Zustand der Erdoberfläche, unabhängig von deren Nutzung. Die Klassen werden im INTERLIS-Model «DMAV_Bodenbedeckung_V1_0» definiert und umfassen u.A. befestigte, unbefestigte, Vegetations-, Gewässer- und Sonderflächen. Jede Klasse besitzt eindeutige Objekt-IDs, Attribute und Kodierungen (swisstopo, 2025). Die praktische Erfassung erfolgt nach der Weisung «Erfassungsgrundsätze Bodenbedeckung und Einzelobjekte» (swisstopo, 2024). Diese ersetzt die früheren TVAV-Regelungen und legt grundlegende Erfassungs-, Flächen- und Zusammenführungsregeln fest. Die rechtliche Grundlage für die Ausführungsbestimmungen bildet die Verordnung über die amtliche Vermessung (VAV, 1992). Die geometrische Genauigkeit richtet sich nach den Modellierungsgrundsätzen DMAV und den Erfassungsgrundsätzen Bodenbedeckung und Einzelobjekte (swisstopo, 2024, p. 5 ff).
 
 Aufgrund ihrer Lagegenauigkeit im Zentimeterbereich und der kontinuierlichen Nachführung gemäss den Modellierungsgrundsätzen DMAV Version 1.0 stellt die Bodenbedeckung der Amtlichen Vermessung eine hochpräzise Referenz für die geometrische Überprüfung und Validierung thematischer Landbedeckungs- und Nutzungsmodelle dar (Leyk et al., 2019).
+
+---
 
 ### Datensatzbeschreibung Corine Land Cover
 
@@ -287,6 +329,8 @@ Tabelle 2: Klassen Corine Datensatz (EEA, 2025)
 
 Feranec et al. (2010) analysieren die CLC-Zeitreihen 1990--2000 für 24 europäische Länder und identifizieren daraus typische Prozesse des Landschaftswandels, sogenannte «Land Cover Flows», wie Urbanisierung, Landwirtschaftsintensivierung oder Aufforstung. Ihre Studie zeigt auch eine methodische Übersetzung der CLC-Klassen auf die sechs IPCC-Land-Use-Kategorien (IPCC, 2003). Die Eignung von CLC liegt insbesondere in der europaweiten Harmonisierung und der mehrdekadischen Zeitreihe, wodurch der Datensatz als konsistente Grundlage für regionale Trend- und Veränderungsanalysen dient (Büttner et al., 2017). Die thematische Genauigkeit wurde überprüft und beträgt für CLC2000 rund 87 % (Feranec et al., 2006), wobei die höchsten Zuverlässigkeitswerte für urbane und forstliche Klassen erzielt wurden. Damit bildet CLC eine stabile und europaweit einheitliche Basis, die eine Aggregation auf die sechs IPCC-Land-Use-Kategorien erlaubt und zunehmend für modellbasierte Flächen- und Kohlenstoffbilanzen genutzt wird (Leyk et al., 2005).
 
+---
+
 ### Datensatzbeschreibung ESA World Cover
 
 Die globalen Landbedeckungsprodukte ESA WorldCover und Impact Observatory LandCover basieren auf multispektralen Sentinel-2-Daten und automatisierten Klassifikationsverfahren auf Basis neuronaler Netzwerke. Sie wurden entwickelt, um den physischen Zustand der Erdoberfläche (Land Cover) weltweit mit hoher räumlicher Auflösung zu erfassen (Van De Kerchove et al., 2022).
@@ -311,6 +355,8 @@ Sentinel-2 Datenverarbeitung für die Jahre 2020 und 2021, wodurch ein global ve
 
 Tabelle 3: Klassifikationen und Darstellung gemäss ESA & Google Earth Engine (Google Earth Engine, 2022)
 
+---
+
 ### Kategorien und Eignung im IPCC-Kontext
 
 Die beschriebenen LULC-Datensätze unterscheiden sich zwar hinsichtlich Methodik, Auflösung und regionaler Abdeckung, lassen sich jedoch über das IPCC-Framework vergleichend bewerten, das eine gemeinsame Klassifikationsbasis schafft.
@@ -325,9 +371,13 @@ In der Schweiz basiert die offizielle Umsetzung auf der Arealstatistik des Bunde
 
 Abbildung 5: Ableitung von 18 Kategorien (CC) aus den Arealstatistik NOLU04 und NOLC04 Kategorien gemäss (FOEN, 2022, Tables 6--6, p.352)
 
+---
+
 ## Methodische Ansätze zum Vergleich von LULC-Daten
 
 Gemäss Gomes et al. (2021) sind terrestrische Ökosystemdienstleistungen empfindlich gegenüber Veränderungen der Landnutzung und Landbedeckung. Diese Veränderungen werden durch verschiedene Faktoren wie Wirtschaft, Gesellschaft, Politik und Klima ausgelöst. Ein Verständnis der zukünftigen LULCC hilft, die Folgen für die Ökosystemdienstleistung besser abzuschätzen. Mit über 30% das mit Abstand am meisten verwendete Modell, um zukünftige Bodenbedeckungen vorhersagen ist Cellular Automata.
+
+---
 
 ### Cellular Automata
 
@@ -341,6 +391,8 @@ und Landbedeckungszuständen (LULC) unterteilt wird. Wie Black et al. (2023) Die
 
 -   Übergangsregeln oder Übergangspotenzialmodellen, die die Beziehung zwischen Zustandsänderungen und externen Einflussfaktoren beschreiben.
 
+---
+
 ### Datengrundlage und Prädiktoren
 
 Gemäss Black et al. (2023, p. 4) basieren die Vorhersage zukünftiger LULCC auf Datensätzen aus zwei Zeitpunkten. Aufgrund von diesen Daten werden alle möglichen Übergänge zwischen den Klassen mithilfe einer Kreuzmatrix bestimmt die als Übergangsdatensatz auf Rasterebene definiert wurde.Neben den Basisdaten braucht es auch Prädiktoren, welche erklären, warum und wo sich Landnutzung verändert, diese können in drei Kategorien eingeteilt werden:
@@ -353,10 +405,14 @@ Gemäss Black et al. (2023, p. 4) basieren die Vorhersage zukünftiger LULCC auf
 
 Wie Black et al. (2023) betonen, ist zur Vermeidung von Überanpassungen eine sorgfältige Auswahl und Filterung der Prädiktoren erforderlich.
 
+---
+
 ### Modellierung der Übergangswahrscheinlichkeit
 
 In der Modellierung der Übergangswahrscheinlichkeiten kommen nach Black et al. (2023, p. 5) zwei verschiedene Modelltypen zum Einsatz: die logistische Regression (LR) und der random Forest (RF). Die logistische Regression dient dabei als klassisches, lineares Referenzmodell, das vor allem aufgrund seiner interpretierbaren Struktur eingesetzt wurde. Im Gegensatz dazu handelt es sich beim Random Forest um ein nichtlineares Entscheidungsbaumverfahren, das komplexe Zusammenhänge und Wechselwirkungen zwischen den Prädiktorvariablen abbilden kann. Um eine robuste Validierung zu gewährleisten wird gemäss Escobar und Mas\
 (2018, pp. 11--25), ein Split-Sample-Ansatz verwendet, bei dem 70% der Daten zur Kalibrierung und 30% zur Überprüfung der Modelle dienen. Dieser Prozess wurde fünfmal wiederholt, um zufällige Einflüsse durch die Datenaufteilung zu minimieren und stabilere Ergebnisse zu erzielen. Da Landnutzungsänderungen in der Regel unausgeglichene Klassenverteilungen aufweisen, also deutlich mehr Flächen ohne, als Flächen mit tatsächlicher Änderung empfehlen Black et al. (2023, p. 5) ein Downsampling-Verfahren.
+
+---
 
 ### Modellvalidierung
 
@@ -366,6 +422,8 @@ den tatsächlich beobachteten Veränderungen verglichen, um die räumliche\
 
 Für die quantitative Bewertung der Modelle verwenden Black et al. (Black et al., 2023) zwei gebräuchliche Kennzahlen: die Area Under the Receiver Operating Characteristic Curve\
 (AUC-ROC), die angibt, wie gut das Modell zwischen Übergangs- und Nichtübergangspixeln unterscheiden kann, sowie der Boyce-Index, der überprüft, ob höhere vorhergesagte Wahrscheinlichkeiten tatsächlich häufiger bei beobachteten Übergängen auftreten. Um beide Masse vergleichbar zu machen, wird die AUC auf denselben Wertebereich wie der Boyce-Index (--1 bis 1) skaliert. Der Mittelwert beider Kennzahlen bildet den zusammengesetzten Model Score, der als Gesamtmass für die Modellgüte dient. Zur Überprüfung signifikanter Unterschiede zwischen den Modellvarianten kommen anschliessend Friedman-Tests und paarweise Conover-Tests zum Einsatz.
+
+---
 
 ## Darstellung und Visualisierung räumlicher Veränderungen
 
@@ -390,6 +448,8 @@ Abbildung 6 dargestellt sind, woraus sich die nachfolgenden Konstellationen erge
 </p>
 
 Abbildung 6: Kombinationen der Verbindung zweier geografischer Regionen (Duckham et al., 2006, Figure 1)
+
+---
 
 ### Analytische Legenden
 
@@ -426,6 +486,8 @@ Darüber hinaus kann die Bodenbedeckungsveränderung über die Zeit mithilfe ein
 </p>
 
 Tabelle 4: Veränderungsmatrix (Livers & Felder, 2015, Table 2)
+
+---
 
 ## LULC-Prognose und Interpolation zwischen Zeitständen
 
