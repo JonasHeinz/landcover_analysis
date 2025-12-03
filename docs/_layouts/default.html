@@ -12,14 +12,12 @@
     <![endif]-->
     {% include head-custom.html %}
     <style>
-        /* Header nicht mehr hart auf 100vh begrenzen,
-           damit die Seite normal nach unten scrollt */
+        /* Header nicht auf 100vh begrenzen, Seite normal scrollen lassen */
         header {
             overflow-wrap: break-word;
             padding-bottom: 40px;
         }
 
-        /* Grundlayout Header */
         .header-content {
             display: flex;
             align-items: center;
@@ -52,7 +50,7 @@
             cursor: pointer;
         }
 
-        /* Dropdown (Untermenue) standardmaessig versteckt */
+        /* Untermenue */
         .submenu {
             display: none;
             list-style-type: circle;
@@ -66,12 +64,16 @@
             border-left: 2px solid #ddd;
         }
 
-        /* Dropdown sichtbar, wenn per Klick geoeffnet */
-        .has-submenu.open > .submenu {
-            display: block;
+        /* Hover-Verhalten des Themes explizit deaktivieren */
+        header nav li:hover > ul.submenu {
+            display: none !important;
         }
 
-        /* Eintraege im Dropdown */
+        /* Nur bei Klick (Klasse .open) anzeigen */
+        .has-submenu.open > .submenu {
+            display: block !important;
+        }
+
         .submenu li {
             margin: 1px 0;
         }
@@ -238,7 +240,6 @@ async function buildNav() {
   initSubmenuClicks();
 }
 
-// Klick statt Hover: Untermenues toggeln
 function initSubmenuClicks() {
   const nav = document.getElementById("main-nav");
   if (!nav) return;
@@ -247,6 +248,7 @@ function initSubmenuClicks() {
     const link = e.target.closest(".has-submenu > a");
     if (!link) return;
 
+    // Klick fuer Toggle verwenden, Link nicht sofort folgen
     e.preventDefault();
     const li = link.parentElement;
     li.classList.toggle("open");
