@@ -153,6 +153,8 @@ const PAGES = [
   { title: "Quellenverzeichnis", url: "13_quellenverzeichnis.html" }
 ];
 
+const GLOBAL_TITLE = "Vergleich LULC-Datensätze in der Schweiz";
+
 function slugify(text) {
   return text
     .toString()
@@ -167,8 +169,10 @@ function slugify(text) {
 function extractHeadings(doc) {
   const container = doc.querySelector("section, main, .page, .page-content, body");
   if (!container) return [];
+
   const headings = Array.from(container.querySelectorAll("h1, h2, h3"));
-  return headings.map(h => {
+
+  let list = headings.map(h => {
     const text = h.textContent.trim();
     let id = h.id;
     if (!id || id === "") {
@@ -176,6 +180,14 @@ function extractHeadings(doc) {
     }
     return { text, id };
   });
+
+  // Globale H1 "Vergleich LULC-Datensaetze in der Schweiz" rausfiltern
+  list = list.filter(h => {
+    const norm = h.text.replace(/\s+/g, " ").trim();
+    return norm !== GLOBAL_TITLE;
+  });
+
+  return list;
 }
 
 function buildSubmenuFromHeadings(headings, pageUrl) {
@@ -199,7 +211,6 @@ async function buildNav() {
 
   const ul = document.createElement("ul");
 
-  // erster Eintrag: Link zur GitHub-Page
   const topLi = document.createElement("li");
   const topA = document.createElement("a");
   topA.href = "https://jonasheinz.github.io/landcover_analysis";
@@ -228,7 +239,7 @@ async function buildNav() {
         }
       }
     } catch (e) {
-      // bei Fehler nur Haupteintrag
+      // nur Haupteintrag
     }
 
     ul.appendChild(li);
@@ -248,7 +259,6 @@ function initSubmenuClicks() {
     const link = e.target.closest(".has-submenu > a");
     if (!link) return;
 
-    // Klick fuer Toggle verwenden, Link nicht sofort folgen
     e.preventDefault();
     const li = link.parentElement;
     li.classList.toggle("open");
@@ -257,6 +267,7 @@ function initSubmenuClicks() {
 
 document.addEventListener("DOMContentLoaded", buildNav);
 </script>
+
 
 </body>
 </html>
