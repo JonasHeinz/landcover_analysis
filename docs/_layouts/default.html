@@ -139,7 +139,8 @@ const PAGES = [
   { title: "Prognose und Modellierung", url: "10_prognose_modellierung.html" },
   { title: "Interaktive Visualisierung", url: "11_interaktive_visualisierung.html" },
   { title: "Schlussfolgerung", url: "12_schlussfolgerung.html" },
-  { title: "Quellenverzeichnis", url: "13_quellenverzeichnis.html" }
+  { title: "Quellenverzeichnis", url: "13_quellenverzeichnis.html" },
+  { title: "Impressum", url: "14_impressum.html" }
 ];
 
 const GLOBAL_TITLE = "Vergleich LULC-Datensätze in der Schweiz";
@@ -170,7 +171,7 @@ function extractHeadings(doc) {
     return { text, id };
   });
 
-  // Globale H1 "Vergleich LULC-Datensaetze in der Schweiz" rausfiltern
+  // Globale H1 "Vergleich LULC-Datensätze in der Schweiz" rausfiltern
   list = list.filter(h => {
     const norm = h.text.replace(/\s+/g, " ").trim();
     return norm !== GLOBAL_TITLE;
@@ -250,7 +251,35 @@ function initSubmenuClicks() {
 
     e.preventDefault();
     const li = link.parentElement;
+    const willOpen = !li.classList.contains("open");
+
+    // zuerst Zustand toggeln
     li.classList.toggle("open");
+
+    if (!willOpen) {
+      return;
+    }
+
+    // nach dem Oeffnen pruefen, ob gescrollt werden muss
+    setTimeout(() => {
+      const headerEl = document.querySelector("header");
+      if (!headerEl) return;
+
+      const liRect = li.getBoundingClientRect();
+      const headerRect = headerEl.getBoundingClientRect();
+
+      // nach unten scrollen, falls Untermenue unten abgeschnitten
+      if (liRect.bottom > headerRect.bottom) {
+        const delta = liRect.bottom - headerRect.bottom + 8;
+        headerEl.scrollTop += delta;
+      }
+
+      // nach oben scrollen, falls Eintrag oberhalb sichtbarem Bereich
+      if (liRect.top < headerRect.top) {
+        const deltaTop = headerRect.top - liRect.top + 8;
+        headerEl.scrollTop -= deltaTop;
+      }
+    }, 0);
   });
 }
 
