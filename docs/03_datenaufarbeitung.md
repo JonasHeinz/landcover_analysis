@@ -138,6 +138,11 @@ Tabellen und Python Skript zur automatischen Generierung der Visualisierung sind
 
 <p align="center">
   <img src="Bilder/image12.png" alt="Startseite" style="width: 100%">
+  <img src="Bilder/image13.png" alt="Startseite" style="width: 100%">
+  <img src="Bilder/image14.png" alt="Startseite" style="width: 100%">
+  <img src="Bilder/image15.png" alt="Startseite" style="width: 100%">
+  <img src="Bilder/image16.png" alt="Startseite" style="width: 100%">
+  <img src="Bilder/image17.png" alt="Startseite" style="width: 100%">
 </p>
 
 **Abbildung 11:** Zuordnungen der Kategorien aller Datensätze auf die IPCC Kategorien
