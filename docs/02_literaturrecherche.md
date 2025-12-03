@@ -451,9 +451,9 @@ Liang et al. (2021, pp. 1--3) erweitern diesen Ansatz um Mixed-Cells, in denen m
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="index">← Kapitelübersicht</a>
+    <a href="index.html">← Kapitelübersicht</a>
   </div>
   <div>
-    <a href="03_vorprozessierung">Vorprozessierung →</a>
+    <a href="03_datenaufarbeitung.html">Datenaufarbeitung →</a>
   </div>
 </div>

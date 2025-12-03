@@ -98,7 +98,7 @@ Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="03_vorprozessierung.html">← Vorprozessierung</a>
+    <a href="03_datenaufarbeitung.html">← Datenaufarbeitung</a>
   </div>
   <div>
     <a href="05_arealstatistik_vs_corine.html">Vergleich Arealstatistik vs Corine LandCover →</a>
