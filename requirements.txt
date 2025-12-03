@@ -1,0 +1,10 @@
+shiny
+shinywidgets
+geopandas
+numpy
+pandas
+plotly
+ipyleaflet
+ipywidgets
+Pillow
+rasterio
