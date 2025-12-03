@@ -40,6 +40,7 @@
         }
         header nav li {
             margin: 2px 0;
+            position: relative;
         }
         header nav a {
             text-decoration: none;
@@ -66,7 +67,7 @@
         }
 
         /* Dropdown sichtbar bei Hover */
-        .has-submenu:hover .submenu {
+        .has-submenu:hover > .submenu {
             display: block;
         }
 
@@ -106,7 +107,6 @@
       <h2 style="margin: 0;">Vergleich LULC-Datensätze in der Schweiz</h2>
     </div>
 
-    <!-- Dynamische Navigation -->
     <nav id="main-nav"></nav>
 
     <div>
@@ -117,7 +117,7 @@
           <li><a href="https://github.com/JonasHeinz">Jonas Heinz</a></li>
           <li><a href="https://github.com/pasika23">Pascal Kalbermatten</a></li>
           <li><a href="https://github.com/ckeller888">Céline Keller</a></li>
-          <li><a href="https://github.com/159Alex951">Alexander Rühli</a></li>
+          <li><a href="https://github.com/159Alex951">Alexander Ruehli</a></li>
           <li><a href="https://github.com/leo4410">Leonardo Seminatore</a></li>
           <li><a href="https://github.com/Pwol99">Patrick Wuersten</a></li>
         </ul>
@@ -134,7 +134,7 @@
 <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
 
 <script>
-// Seitenkonfiguration fuer das Menue
+// Seitenkonfiguration
 const PAGES = [
   { title: "Aufbau", url: "01_aufbau.html" },
   { title: "Literaturrecherche", url: "02_literaturrecherche.html" },
@@ -151,7 +151,6 @@ const PAGES = [
   { title: "Quellenverzeichnis", url: "13_quellenverzeichnis.html" }
 ];
 
-// Slugify (ungefaehr wie bei kramdown)
 function slugify(text) {
   return text
     .toString()
@@ -163,67 +162,32 @@ function slugify(text) {
     .replace(/^-|-$/g, "");
 }
 
-// headings aus HTML-Dokument extrahieren
 function extractHeadings(doc) {
   const container = doc.querySelector("section, main, .page, .page-content, body");
   if (!container) return [];
-
-  const headings = Array.from(
-    container.querySelectorAll("h1, h2, h3")
-  );
-
+  const headings = Array.from(container.querySelectorAll("h1, h2, h3"));
   return headings.map(h => {
-    const level = parseInt(h.tagName.substring(1), 10);
     const text = h.textContent.trim();
     let id = h.id;
     if (!id || id === "") {
       id = slugify(text);
     }
-    return { level, text, id };
+    return { text, id };
   });
 }
 
-// hierarchisches Submenue aus h1/h2/h3
 function buildSubmenuFromHeadings(headings, pageUrl) {
   if (!headings.length) return null;
-
   const ul = document.createElement("ul");
   ul.classList.add("submenu");
-
-  let currentUl = ul;
-  const ulStack = [{ level: headings[0].level, ul: currentUl }];
-
   headings.forEach(h => {
     const li = document.createElement("li");
     const a = document.createElement("a");
     a.textContent = h.text;
     a.href = pageUrl + "#" + h.id;
     li.appendChild(a);
-
-    const lvl = h.level;
-    let last = ulStack[ulStack.length - 1];
-
-    if (lvl > last.level) {
-      const newUl = document.createElement("ul");
-      newUl.classList.add("submenu");
-      if (last.ul.lastElementChild) {
-        last.ul.lastElementChild.appendChild(newUl);
-      } else {
-        last.ul.appendChild(newUl);
-      }
-      ulStack.push({ level: lvl, ul: newUl });
-      currentUl = newUl;
-    } else {
-      while (ulStack.length && ulStack[ulStack.length - 1].level > lvl) {
-        ulStack.pop();
-      }
-      last = ulStack[ulStack.length - 1] || { level: lvl, ul: ul };
-      currentUl = last.ul;
-    }
-
-    currentUl.appendChild(li);
+    ul.appendChild(li);
   });
-
   return ul;
 }
 
@@ -233,7 +197,7 @@ async function buildNav() {
 
   const ul = document.createElement("ul");
 
-  // erster Eintrag: Link zur Hauptseite / GitHub Page
+  // erster Eintrag: Link zur GitHub-Page
   const topLi = document.createElement("li");
   const topA = document.createElement("a");
   topA.href = "https://jonasheinz.github.io/landcover_analysis";
@@ -243,8 +207,6 @@ async function buildNav() {
 
   for (const page of PAGES) {
     const li = document.createElement("li");
-    li.classList.add("has-submenu");
-
     const a = document.createElement("a");
     a.href = page.url;
     a.textContent = page.title;
@@ -252,22 +214,19 @@ async function buildNav() {
 
     try {
       const resp = await fetch(page.url);
-      if (!resp.ok) {
-        ul.appendChild(li);
-        continue;
-      }
-      const html = await resp.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, "text/html");
-
-      const headings = extractHeadings(doc);
-      const submenu = buildSubmenuFromHeadings(headings, page.url);
-
-      if (submenu) {
-        li.appendChild(submenu);
+      if (resp.ok) {
+        const html = await resp.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const headings = extractHeadings(doc);
+        const submenu = buildSubmenuFromHeadings(headings, page.url);
+        if (submenu) {
+          li.classList.add("has-submenu");
+          li.appendChild(submenu);
+        }
       }
     } catch (e) {
-      // bei Fehler nur Haupteintrag anzeigen
+      // bei Fehler nur Haupteintrag
     }
 
     ul.appendChild(li);
