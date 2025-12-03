@@ -12,76 +12,98 @@
     <![endif]-->
     {% include head-custom.html %}
     <style>
-        /* Header nicht auf 100vh begrenzen, Seite normal scrollen lassen */
-        header {
-            overflow-wrap: break-word;
-            padding-bottom: 40px;
-        }
 
-        .header-content {
-            display: flex;
-            align-items: center;
-        }
-        .header-content img {
-            height: 50px;
-        }
-        .header-content h2 {
-            margin-left: 10px;
-        }
+/* gesamte Seite: zwei Spalten */
+.wrapper {
+    display: flex;
+    height: 100vh;            /* gesamte Fensterhöhe */
+    overflow: hidden;         /* verhindert Doppel-Scrollbalken */
+}
 
-        /* Hauptnavigation */
-        header nav ul {
-            list-style-type: disc;
-            padding-left: 1.2em;
-            margin: 0;
-        }
-        header nav li {
-            margin: 2px 0;
-            position: relative;
-        }
-        header nav a {
-            text-decoration: none;
-        }
+/* Linke Spalte (Navigation) */
+header {
+    width: 320px;
+    flex-shrink: 0;
+    overflow-y: auto;         /* eigene Scrollbar links */
+    overflow-x: hidden;
+    padding-bottom: 40px;
+    border-right: 1px solid #ddd;
+}
 
-        /* Menuepunkt mit Untermenue */
-        .has-submenu > a {
-            font-weight: 600;
-            font-size: 0.95em;
-            cursor: pointer;
-        }
+/* Rechte Spalte (Inhalt) */
+section {
+    flex: 1;
+    overflow-y: auto;         /* Inhalt scrollt separat */
+    padding: 20px;
+}
 
-        /* Untermenue */
-        .submenu {
-            display: none;
-            list-style-type: circle;
-            padding-left: 1.4em;
-            margin-top: 4px;
+/* Layout im Header */
+.header-content {
+    display: flex;
+    align-items: center;
+}
+.header-content img {
+    height: 50px;
+}
+.header-content h2 {
+    margin-left: 10px;
+}
 
-            max-height: 260px;
-            overflow-y: auto;
-            overflow-x: hidden;
+/* Navigation */
+header nav ul {
+    list-style-type: disc;
+    padding-left: 1.2em;
+    margin: 0;
+}
 
-            border-left: 2px solid #ddd;
-        }
+header nav li {
+    margin: 2px 0;
+    position: relative;
+}
 
-        /* Hover-Verhalten des Themes explizit deaktivieren */
-        header nav li:hover > ul.submenu {
-            display: none !important;
-        }
+header nav a {
+    text-decoration: none;
+}
 
-        /* Nur bei Klick (Klasse .open) anzeigen */
-        .has-submenu.open > .submenu {
-            display: block !important;
-        }
+/* Titel mit Untermenü */
+.has-submenu > a {
+    font-weight: 600;
+    font-size: 0.95em;
+    cursor: pointer;
+}
 
-        .submenu li {
-            margin: 1px 0;
-        }
-        .submenu a {
-            font-size: 0.85em;
-            font-weight: 400;
-        }
-    </style>
+/* Untermenü */
+.submenu {
+    display: none;
+    list-style-type: circle;
+    padding-left: 1.4em;
+    margin-top: 4px;
+    max-height: 260px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-left: 2px solid #ddd;
+}
+
+/* Hover deaktivieren */
+header nav li:hover > ul.submenu {
+    display: none !important;
+}
+
+/* Klick aktiviert */
+.has-submenu.open > .submenu {
+    display: block !important;
+}
+
+.submenu li {
+    margin: 1px 0;
+}
+.submenu a {
+    font-size: 0.85em;
+    font-weight: 400;
+}
+
+</style>
+
 </head>
 <body>
 <div class="wrapper">
