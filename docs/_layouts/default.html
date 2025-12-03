@@ -12,10 +12,9 @@
     <![endif]-->
     {% include head-custom.html %}
     <style>
+        /* Header nicht mehr hart auf 100vh begrenzen,
+           damit die Seite normal nach unten scrollt */
         header {
-            height: 100vh;
-            overflow-y: auto;
-            overflow-x: hidden;
             overflow-wrap: break-word;
             padding-bottom: 40px;
         }
@@ -46,13 +45,14 @@
             text-decoration: none;
         }
 
-        /* Menüpunkt mit Untermenü */
+        /* Menuepunkt mit Untermenue */
         .has-submenu > a {
             font-weight: 600;
             font-size: 0.95em;
+            cursor: pointer;
         }
 
-        /* Dropdown (Untermenü) */
+        /* Dropdown (Untermenue) standardmaessig versteckt */
         .submenu {
             display: none;
             list-style-type: circle;
@@ -66,12 +66,12 @@
             border-left: 2px solid #ddd;
         }
 
-        /* Dropdown sichtbar bei Hover */
-        .has-submenu:hover > .submenu {
+        /* Dropdown sichtbar, wenn per Klick geoeffnet */
+        .has-submenu.open > .submenu {
             display: block;
         }
 
-        /* Einträge im Dropdown */
+        /* Eintraege im Dropdown */
         .submenu li {
             margin: 1px 0;
         }
@@ -234,6 +234,23 @@ async function buildNav() {
 
   nav.innerHTML = "";
   nav.appendChild(ul);
+
+  initSubmenuClicks();
+}
+
+// Klick statt Hover: Untermenues toggeln
+function initSubmenuClicks() {
+  const nav = document.getElementById("main-nav");
+  if (!nav) return;
+
+  nav.addEventListener("click", function (e) {
+    const link = e.target.closest(".has-submenu > a");
+    if (!link) return;
+
+    e.preventDefault();
+    const li = link.parentElement;
+    li.classList.toggle("open");
+  });
 }
 
 document.addEventListener("DOMContentLoaded", buildNav);
