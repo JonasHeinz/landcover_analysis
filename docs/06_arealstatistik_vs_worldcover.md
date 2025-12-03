@@ -1,97 +1,66 @@
-# Vergleich Arealstatistik vs ESA WorldCover
+# Vergleich Arealstatistik - CORINE Land Cover
 
-Anbei werden die Funktionalitäten der einzelnen Komponenten der App erklärt. 
+Dieses Kapitel untersucht die inhaltlichen Unterschiede zwischen der Arealstatistik und dem CORINE Land Cover Datensatz. Im Zentrum steht der Vergleich der Unterschied der jeweiligen Klassifikationssysteme, die räumliche und thematische Auflösung sowie der unterschiedliche methodische Ansatz der den beiden Produkten zugrunde liegen.
 
-<a id="spielerstellen"></a>
-## Spiel erstellen
-Der erste Spieler erstellt mit dem Button ***Neues Spiel*** ein Spiel und definiert die *Maximale Spieldauer (Stunden)* und die *Anzahl Polizisten*. Die maximale Spieldauer wurde auf 10 Stunden begrenzt und mindestens eine Polizistengruppe muss dem Spiel beitreten. 
+---
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/01_Startseite.png" alt="Startseite" style="width: 32%;">
-  <img src="Bilder/02_Neues_Spiel.png" alt="Neues Spiel" style="width: 32%;">
+##	Vorgehen und Methodik
+Da der Datensatz von CORINE Land Cover einerseits als Raster- als auch als Vektordatensatz vorliegt, wurden für beide Datensätze verschiedene Untersuchungsmethoden verwendet.
+
+---
+
+###	Rasteranalyse
+Das Arealstatistik Punktraster und das CORINE Land Cover Raster besitzen dieselbe räumliche Auflösung. Sie unterscheiden sich jedoch leicht in ihrer räumlichen Ausrichtung. Das bedeutet, dass die Gitterzellen der beiden Rasterdatensätze nicht exakt deckungsgleich sind. Um einen direkten Vergleich zu ermöglichen, wurde das CORINE Land Cover Raster auf die Stichprobenpunkte der Arealstatistik projiziert. Dabei wurde der Pixelwert des CORINE Land Cover Rasters an den exakten Koordinaten der Arealstatistikpunkte abgefragt. Auf diese Weise erhält jeder Arealstatistikpunkt den entsprechenden CORINE Land Cover Klassenwert, der am gleichen Ort in der Landschaft vorliegt.
+Anschliessend erfolgte eine Kategorisierung beider Datensätze nach dem 
+IPCC-Landklassifikationsschema. Dazu wurde eine Zuordnungstabelle erstellt, welche die einzelnen Klassen der Arealstatistik bzw. des CORINE Land Cover Datensatzes den übergeordneten IPCC-Hauptkategorien zuordnet. Durch diese Zuordnung entsteht eine Vergleichstabelle, die für jeden Punkt folgende Informationen enthält:
+•	den ursprünglichen Klassenwert und die Bezeichnung der Arealstatistik,
+•	den gesampelten Klassenwert und die Bezeichnung des CORINE Land Cover Rasters,
+•	sowie die jeweiligen IPCC-Kategorien numerisch und textuell.
+Diese Tabelle bildet die Grundlage für den quantitativen und räumlichen Vergleich der Landbedeckungsinformationen. Auf Basis dieser Daten können Abweichungen zwischen den beiden Datensätzen identifiziert, räumliche Muster analysiert und Hotspots der Klassifikationsunterschiede kartiert werden. Die Punkte wurden dann als Vektorraster gespeichert, sodass sie dem 100m Raster der Arealstatistik entsprechen. Für die weiteren Schritte und die Visualisierungen wurden die Daten von der Vektoranalyse verwendet.
+
+---
+
+###	Vektoranalyse
+Der CORINE Land Cover Vektordatensatz liegt als Geopackage vor und bildet sämtliche CORINE Land Cover Kategorien ab. Der Datensatz ist auf der Folgeseite in Abbildung 21 dargestellt. Um die CORINE Land Cover Daten mit anderen Datensätzen, im Speziellen demjenigen der Arealstatistik zu vergleichen, wurden zwei Methoden zur Rasterisierung von Landbedeckungsdaten aus Kapitel 2.3.2 angewendet. In einem ersten Schritt wurde die Methode Max Area angewendet, woraufhin auch die Methode Cell Center eingesetzt wurde. Grundsätzlich ist die Anwendung beider Methoden nicht notwendig und wurde durchgeführt, um einen Vergleich zwischen den Methoden möglich zu machen. 
+Letztendlich wurden die Resultate genauso wie im vorhergehenden Kapitel 6.1.1 den entsprechenden IPCC-Kategorien zugeordnet. Die Arealstatistik aus dem Jahr 2009 wurde mit den CORINE Land Cover Daten von 2012 verglichen und für das Jahr 2018 lagen beide 
+Datensätze vor. 
+ 
+<p align="center">
+  <img src="Bilder/image27.png" alt="Startseite" style="width: 100%">
 </p>
 
-Anschliessend kann die eigene Rolle im Spiel gewählt werden und der Spielname angegeben. Im Warteraum erscheint die **Spiel-ID** welche den anderen Gruppen mitgeteilt werden muss. Sind alle Gruppen im Warteraum eingeloggt, kann das Spiel gestartet werden. 
+**Abbildung 21**: CORINE Land Cover Vektordatensatz
 
+---
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/03_Rolle_Auswahl.png" alt="Rolle auswählen" style="width: 30%;">
-  <img src="Bilder/04_Gruppen_Name.png" alt="Gruppenname" style="width: 30%;">
-    <img src="Bilder/05_Warteliste.png" alt="Warteraum" style="width: 30%;">
+##	Ergebnisse der Analyse
+Die Resultate der Vergleichsanalyse wurden in verschiedene Formen visualisiert und analysiert. In der explorativen Phase wurde dann eine Anpassung an der Zuordnungsabelle zwischen den CORINE Land Cover und den IPCC-Kategorien durchgeführt. Die zuvor als Cropland eingestuften CORINE Land Cover Kategorien «Complex cultivation patterns» und «Pastures» wurden neu der IPCC-Kategorie Grassland zugeordnet. 
+Insgesamt ist über alle CORINE Land Cover Datensätze erkennbar, dass es vor allem in den 
+IPCC-Kategorien Grassland und Seattlements zu Unstimmigkeiten zwischen der Arealstatistik und CORINE Land Cover kam. Vor allem in der Kategorie Grassland ist es nach wie vor möglich, dass es in der Zuordnungstabelle zu systematischen Abweichungen kommt. Ein gehäuftes Auftreten der Abweichungen finden sich in den Gebirgen der Westschweiz und sind in Abbildung 22 einsehbar. Eine erhöhte Anzahl wurde als Cropland statt als Grassland eingeordnet. 
+
+<p align="center">
+  <img src="Bilder/image28.png" alt="Startseite" style="width: 100%">
 </p>
 
-<a id="spielbeitreten"></a>
-## Spiel beitreten
-Wurde das Spiel bereits erstellt, kann man mit der
-**Spiel-ID** einem Spiel beitreten, die eigene Rolle und den Name angeben. Anschliessend tritt man zum Warteraum hinzu und kann das Spiel starten sobald die Räuber und eine Polizistengruppe bereit ist.
+**Abbildung 22**: Bereiche mit Unterschieden zwischen Arealstatistik und CORINE Land Cover in der IPCC-Kategorie Grassland
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/21_Speil_beitreten.png" alt="Speil beitreten" style="width: 30%;">
-  <img src="Bilder/22_Auswahl_Bahnhof.png" alt="Auswahl_Gruppe" style="width: 30%;">
-    <img src="Bilder/23_Warteliste.png" alt="Warteraum" style="width: 30%;">
-</p>
+Eine besonders gute Übereinstimmung wurde in der Kategorie Other Land erreicht. In der nachfolgenden Tabelle 5 ist zudem ersichtlich, dass sich die statistischen Grössen zwischen den Methoden Cell Center und Max Area kaum variieren. Detaillierte Einblicke in die Statistik aller Vergleichsanalysen finden sich in Kapitel 9.
+ 
+| Kennzahl   | Cell Center | Max Area |
+|------------|-------------|----------|
+| accuracy   | 0.753       | 0.752    |
+| precision  | 0.768       | 0.766    |
+| recall     | 0.753       | 0.752    |
+| f1_score   | 0.751       | 0.750    |
+| kappa      | 0.682       | 0.680    |
 
-<a id="bahnhofverbindungen"></a>
-## Bahnhof und Verbindungen suchen
-Von einem Bahnhof aus lassen sich die nächsten Verbindungen samt Abfahrtszeit, Linie, Richtung und Gleis anzeigen. mittels  dem Button ***Nächste Verbindung*** werden spätere Verbindungen geladen. Wählt man eine dieser Verbindungen aus, erscheinen die Haltestellen der Verbindung. 
+**Tabelle 5**: Statistischer Vergleich zwischen der Arealstatistik 2009 und dem CORINE Land Cover Vektordatensatz 2012
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/11_Startbahnhof.png" alt="Bahnhof wählen" style="width: 32%;">
-  <img src="Bilder/12_Verbindungen.png" alt="Verbindungen" style="width: 32%;">
-    <img src="Bilder/13_Detail_Verbindung.png" alt="Warteraum" style="width: 32%;">
-</p>
+##	Diskussion der Vergleichsanalyse AS und CLC
+Insgesamt konnten mit dem CORINE Land Cover Datensatz gute Resultate erzielt werden. Die Methode Cell Center führte insgesamt zu einer minim besseren Übereinstimmung mit der Arealstatistik als die Methode Max Area. Ob diese dadurch eine bessere Abbildung der Realität darstellt, bleibt ungewiss. 
+Vor einer weiteren Anwendung des CORINE Land Cover Datensatzes, sollte man die Zuordnung der Kategorien zwischen den Datensätzen vor allem in den Bereichen Grassland und Seattlements überprüft werden. Können diese Abweichungen minimiert werden, ist eine grosse Verbesserung der Resultate möglich. 
+ 
 
-<a id="informationenpolizisten"></a>
-## Informationen teilen Polizisten
-Die Polizisten können grösstenteils entscheiden wie viele Informationen sie mit dem anderen Gruppen teilen. Dabei kann entscheiden werden ob sie den Bahnhof mit den anderen Gruppen teilen. Beim Auswählen des Bahnhof erscheint ein Pop-up mit der Meldung ***Bahnhof im Chat speichern?***
-
-<p style="display: flex; flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/25_Bahnhof_im_Chat_Senden.png" alt="Bahnhof im Chat senden" style="width: 32%;">
-</p>
-
-Jede zweite Route muss den anderen Gruppen gemeldet werden. Somit kann im Pop-up ***Trip im Chat speichern?*** ausgewählt werden ob die Verbindung im [Chat](##Chat) gesendet werden soll.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/26_Trip_Speichern.png" alt="Trip speichern" style="width: 32%;">
-</p>
-
-<a id="informationenraeuber"></a>
-## Informationen teilen Räuber
-Die Räuber müssen sich immer melden, wenn sie einen Bahnhof verlassen. Dabei wird jeweils wenn man eine Verbindung ausgewählt hat mit dem Button ***Route Speichern*** die Route erfasst. Aus taktischen Gründen können sie sich dafür entscheiden länger angemeldet zu bleiben. Ist dies der Fall, meldsen sie die Route und spätestens nach 15 Minuten können sie mit dem Button ***von Bahnhof abmelden*** den Räubern eine Nachricht im [Chat](##Chat) schicken. 
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/14_Von_Bahnhof_abmelden.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-Nachdem die Verbindung erfasst wurde und die Räubergruppe sich am Bahnhof abgemeldet hat, erhält man ein Überblick der ausgewählten Strecke. Während der Fahrt können neue Verbindungen gesucht werden. Bestätigt man die neue Route erhalten die Polizisten automatisch eine Nachricht, dass die Räuber am Bahnhof aussteigen. Die Ausstiegszeit wird aus dem Fahrplannetz abgegriffen und Verspätungen werden dabei nicht abgefangen
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/15_Nächste_Verbindung.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="chat"></a>
-## Chat
-Im Chat erscheinen alle geteilten Informationen der anderen Gruppen chronologisch. Zudem sind die Informationen der Gruppen farblich unterteilt.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/24_Chat.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="karte"></a>
-## Karte
-Auf der Karte sind alle bereits besuchten Bahnhöfe ersichtlich. Dabei ist beim anwählen des roten Kreises der Bahnhofsname ersichtlich.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/27_Karte.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="informationen"></a>
-## Informationen
-Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen des Spiels aufzufinden waren und das Impressum ersichtlich. 
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/Spielregeln.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
 
 [↑](#top)
 

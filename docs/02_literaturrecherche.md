@@ -55,15 +55,16 @@ Die Rasterisierung von Landbedeckungsdaten ist wichtig, wenn man Vektor mit Rast
   <img src="Bilder/image1.jpeg" alt="Startseite" style="width: 50%;">
 </p>
 
-Abbildung 2: Vergleich von Methoden zur Rasterisierung von Landbedeckungsdaten (vgl. Kubacka & Piniarski, 2024, Figure 2)
+**Abbildung 2**: Vergleich von Methoden zur Rasterisierung von Landbedeckungsdaten (vgl. Kubacka & Piniarski, 2024, Figure 2)
 
 Kubacka & Piniarski (2024, p. 6) beschreiben ebenfalls, dass zur besseren Erhaltung linearer Strukturen die «Custom-Priority» Methode entwickelt wurde, welche die nachfolgenden Landbedeckungsklassen in der nachfolgenden Reihenfolge priorisiert.
 
-1\. Verkehr 4. andere künstliche Flächen
-
-2\. Gewässer 5. Wald- und seminaturähnliche Flächen
-
-3\. Siedlung 6. Landwirtschaft.
+**1. Verkehr**
+**2. Gewässer**
+**3. Siedlung**
+**4. andere künstliche Flächen**
+**5. Wald- und seminaturähnliche Flächen**
+**6. Landwirtschaft**
 
 ---
 
@@ -153,7 +154,7 @@ oder unklare Definitionen und ist häufig das Ergebnis subjektiver Interpretatio
   <img src="Bilder/image2.png" alt="Startseite" style="width: 100%;">
 </p>
 
-Abbildung 3: Klassifikationsschema von Unsicherheiten auf Englisch (Klir & Wierman, 1999)
+**Abbildung 3**: Klassifikationsschema von Unsicherheiten auf Englisch (Klir & Wierman, 1999)
 
 Zusammenfassend lässt sich sagen, dass die drei Formen der Unsicherheit zwar miteinander in Beziehung stehen, aber unterschiedliche Ursachen haben. Fehler entstehen durch Messabweichungen, Unschärfe durch ungenaue Definitionen, und Mehrdeutigkeiten durch oder widersprüchliche Begriffe. In der Abbildung 3 ist die Unsicherheitsdefinition schematisch dargestellt.
 
@@ -163,24 +164,24 @@ Zusammenfassend lässt sich sagen, dass die drei Formen der Unsicherheit zwar mi
 
 Grenzen in der Natur sind meist nicht klar definiert. Ob ein Baum noch zum Wald gehört, wird mit einer harten Kante erfasst. Die Wahrnehmung der realen Welt unterscheidet sich von Person zu Person, was zu Diskrepanzen im Kartenwerk führen kann (Leyk et al., 2005). Unterschiede findet man hier in der Geometrie selbst, sowie in der Klassierung einer Fläche. Komplizierter wird es, wenn der Faktor Zeit miteinfliesst. Es ist nicht mehr klar eruier bar, ob eine Änderung nun von der unterschiedlichen Wahrnehmung der Realenwelt oder eine echte Veränderung als Ursache hat.
 
-Methoden
+**Methoden**
 
 Nach Leyk et al. (2005) kann die produktionsorientierte Unsicherheit mit diversen Methoden bestimmt werden. Je nach Methode können Fehler, Unschärfe und Mehrdeutigkeiten aufgedeckt werden. Der Mehrwert, zu wissen, um welche Fehlerart es sich handelt, hat einen Einfluss auf die Gesamtqualität. Dieses Wissen hilft bei der Herleitung, wie der Fehler entstanden ist und ob die Daten bereits bei der Erfassung von schlechter Qualität sind oder ob die Ursache in der Verarbeitung liegt. Dies könnte durch eine erneute Aufarbeitung der Originaldatei (Satellitenbilder) bereinigt werden.
 
-Vergleich mit Referenzdaten
+**Vergleich mit Referenzdaten**
 
 Der Vergleich von zwei unterschiedlichen Datensätzen, wo einer davon als Referenzdatensatz dient, kann mit einer Fehlermatrix statistisch bestimmt werden. Aus der Fehlermatrix kann Benutzergenauigkeit, prozentuale Genauigkeit oder der Kappa Koeffizient eruiert werden\
 (Leyk et al., 2005). Der Kappakoeffizient ist das Mass zur Übereinstimmung zweier Datensätze, welche voneinander abhängen aber durch unterschiedliche Methoden und Personen kategorisiert wurden (numiqo Team, 2025). Es wird ein Kappa Wert von über 0.6 wird als übereinstimmen betrachtet (0 = keine Übereinstimmung, 1 = gleicher Datensatz). Die Fehlermatrix wird auch häufig bei der Beurteilung von KI-Modellen eingesetzt (Karimi, 2021). Die Berechnung ist in GIS, FME oder R enthalten.
 
-Stratifizierte Genauigkeitsanalyse
+**Stratifizierte Genauigkeitsanalyse**
 
 Über einen ganzen Datensatz einen Qualitätswert zu definieren ist nicht realitätsgetreu. Wo das Interesse Grösser an Geodaten ist, wird auch qualitativ bessere Daten erhoben(Leyk et al., 2005). So sind Zonale Genauigkeit Auswertungen repräsentativer, jedoch benötigt es dazu Weitere Datensätze, welche als Parameter verwendet werden können. Solche Daten könnten Steigung, Bevölkerung, Messverfahren oder Zeit der Aufnahme sein.
 
-Diskrete Unsicherheitsmodellierung
+**Diskrete Unsicherheitsmodellierung**
 
 Nach Leyk et al. (2005) müssen unterschiedlichen Definitionen der Grenzen von natürlichen Phänomenen berücksichtigt werden. Dies kann durch die Verwendung eines Fehlerbands gewährleistet werden. Hier werden um die Linien Geometrien von beispielsweise einen Wald ein Puffer gerechnet. Die Kategorisierungen in diesem Puffer fliessen dann nicht oder nur abgeschwächt in die Fehlermatrix ein.
 
-Fuzzy Sets
+**Fuzzy Sets**
 
 Weiter führen Leyk et al. (2005) aus, dass eine weitere Möglichkeit zur besseren Anpassung der Fehlermatrix an die Realität in der Gewichtung von «Fuzzy Sets» besteht. Die Unsicherheit von Grenzen wird durch die Rasterisierung nur noch verstaut. Daher kann pro Zelle ein Prozentwert definiert werden. Es wird von beispielsweise der Kategorie Wald eine Minimalgeometrie und Maximalgeometrie definiert. Und je nach Position des Pixels in diesem Rahmen wird eine 1 für 100% Wald bis zu einer 0 für 0% Wald vergeben. Beim Vergleich mit den Referenzdaten können die Unsicherheiten als Fehler oder als Unsicherheit erkannt und somit in die Beurteilung der Qualität miteinbezogen werden.
 
@@ -190,15 +191,15 @@ Weiter führen Leyk et al. (2005) aus, dass eine weitere Möglichkeit zur besser
 
 Die Verwendeten Referenzdaten sind oft in Form von historischen Karten zu finden. Diese Karten müssen für den digitalen Gebrauch zuerst digitalisiert und transformiert werden. Beide Prozesse sind quellen für Fehler, genauer definiert Unsicherheiten.
 
-Methoden
+**Methoden**
 
 Anders wie bei der Produktionsorientierter Unsicherheit können diese Daten nicht an die Realwelt Parameter angepasst und dann doch verwendet werden. Es werden ausschliesslich Methoden in Betracht gezogen für die Beurteilung vom «Fit for Use» Entscheid.
 
-Root Mean Square Error
+**Root Mean Square Error**
 
 In Leyk et al. (2005, p. 303) wird beschreiben, dass die Genauigkeit historischen Karten mit dem Root Mean Square Error (RMSE) beurteilt werden. Dieser misst die Abweichung der Georeferenzierung anhand von Kontrollpunkten. Es ist eine Version der Standartabweichung und benötigt für die Berechnung soll und ist Koordinaten. Diese Methode gibt über die Globale Genauigkeit Auskunft.
 
-Fehlerbänder
+**Fehlerbänder**
 
 Für lokale Angaben können um Geometrien sogenannte Fehlerbänder (Leyk et al., 2005, p. 305) erfasst werden. Mithilfe des G-Model (Love et al., 2010, p. 10) können entlang einer Linie mehrere Fehlerellipsoide platziert werden. Diese verkörpern schlussendlich eine 2D- oder gar 3D-Eigenschaft, welches die Genauigkeit der Geometrie von der Ursprungslinie darstellt.
 
@@ -208,15 +209,15 @@ Für lokale Angaben können um Geometrien sogenannte Fehlerbänder (Leyk et al.,
 
 Bei der anwendungsorientierten Unsicherheit wird beurteilt, wie stark die Nutzung eins Datensatzes vom ursprünglichen Erfassungszweck abweicht. Bei der Erfassung wird vor allem Wert auf den primären Erfassungszweck gelegt. Auch wenn die Daten im gleichen Zug erhoben werden, wurde beispielsweise bei der Kategorisierung weniger auf die Datenqualität geprüft als bei der geometrischen Position. So ist in einem dicht besiedelten Gebiet das Interesse von räumlichen Daten anders als bei als Natur oder Kulturflächen. Dies zeigt der Verschnitt von Geodatenqualität und Populationszählungen (Leyk et al., 2019). Zudem können Semantische und Syntaktische Unterschiede auftreten, welche bereinigt werden müssen, bevor ein direkter Datenvergleich stattfinden kann.
 
-Semantischer Vergleich
+**Semantischer Vergleich**
 
 Für jede Kategorie muss recherchiert werden, ob deren Bedeutung den Original- und den Referenzdaten dieselbe ist (Leyk et al., 2005, p. 306). Hierfür müssen bei der Datenorganisation kontrolliert werden nach welchem Standard die Kategorien vergeben werden. Falls es zwischen den Datensätzen Unterschiede gibt, müssen diese normiert werden.
 
-Generalisierung
+**Generalisierung**
 
 Arbeitet man mit Topologiekarten, welche für ihren ursprünglichen Zweck generalisiert wurden, kann dies beim LULC-Vergleich ebenfalls Fehler verursachen. Je älter die Karte ist desto stärker wurde sie generalisiert (Leyk et al., 2005, p. 306). Dies fliesst mehr in die Erklärung von Unsicherheiten ein als in eine analytische Methode.
 
-Fitness-for-Use
+**Fitness-for-Use**
 
 «Fitness for Use» bezeichnet die Eignung eines räumlichen Datensatzes für einen spezifischen Anwendungszweck (Bruin et al., 2001, pp. 458--459). Die Beurteilung dieser Eignung basiert nicht nur auf formalen Genauigkeitsmassen, sondern auch auf der Übereinstimmung zwischen den Eigenschaften eines Datensatzes und den Anforderungen der beabsichtigten Nutzung. Dabei wird vorgeschlagen, den «Expected Value of Control» (EVC) als Mass für die «Fitness for Use» zu verwenden (Dan Costelloe et al., 2001, p. 546). Der EVC sagt aus, ob ein Datensatz trotz seiner Unsicherheit immer noch einen Mehrwert zu einer Aussage beisteuert. Die Beurteilung setzt voraus, dass die Unsicherheit probabilistisch quantifiziert werden kann (durch RMSE, Standardabweichung, Fehlerverteilungen) und eine Verlustfunktion definiert wird, die die Kosten falscher Entscheidungen in Bezug auf eine Zielgrösse ausdrückt. «Fitness for Use» bezieht sich nicht auf absolute Datenqualität, sondern auf deren praktischen Wert im Anwendungskontext.
 
@@ -258,7 +259,7 @@ Zur Sicherung der Qualität werden Hilfsdaten der Amtlichen Vermessung, des Geb�
   <img src="Bilder/image4.png" alt="Startseite" style="width: 100%;">
 </p>
 
-Abbildung 4: Standartnomenklatur NOAS04 welches die Klassifikationen der NOLU04 und NOLC04 umfasst (BFS, 2006)
+**Abbildung 4**: Standartnomenklatur NOAS04 welches die Klassifikationen der NOLU04 und NOLC04 umfasst (BFS, 2006)
 
 Die räumliche Genauigkeit der Arealstatistik ergibt sich aus dem 100m Stichprobenraster, wobei jeder Punkt eine Fläche von 1ha repräsentiert. Daraus ergibt sich ein geometrischer Unsicherheitsbereich von ± 50 m (BFS, 2024b). Aus den Einzelklassierungen der Stichprobenpunkte werden pro Gebietseinheit (Gemeinde, Kanton, Schweiz) Flächen- und Anteilswerte abgeleitet. Ferster & Assoulin (2019) beschreiben diese Aggregation der Punktwerte \($y_{t}(i,j)\) über definierte Räume d und weisen auf die zeitliche Streuung der Überflugsjahre hin, die bei der Interpretation berücksichtigt werden muss. (BFS, 2022).
 
@@ -369,7 +370,7 @@ In der Schweiz basiert die offizielle Umsetzung auf der Arealstatistik des Bunde
   <img src="Bilder/image5.png" alt="Startseite" style="width: 75%;">
 </p>
 
-Abbildung 5: Ableitung von 18 Kategorien (CC) aus den Arealstatistik NOLU04 und NOLC04 Kategorien gemäss (FOEN, 2022, Tables 6--6, p.352)
+**Abbildung 5**: Ableitung von 18 Kategorien (CC) aus den Arealstatistik NOLU04 und NOLC04 Kategorien gemäss (FOEN, 2022, Tables 6--6, p.352)
 
 ---
 
@@ -430,10 +431,9 @@ Für die quantitative Bewertung der Modelle verwenden Black et al. (Black et al.
 Zur Beurteilung der Konsistenz in Geoinformationen muss man sowohl räumliche als auch thematische Informationen berücksichtigen. Geografische Regionen bestehen nicht nur aus physischer Ausdehnung im Raum, sondern auch aus weiteren Informationen, wie etwa der Zugehörigkeit zu bestimmten Kategorien oder Themenbereichen (Duckham et al., 2006, p. 604).
 
 Ein zentrales Werkzeug zur Analyse solcher Zusammenhänge ist der Region Connection Calculus (RCC). RCC wurde später um räumliche und thematische Aspekte erweitert, indem dass Regionen als Objekte verstanden werden, zwischen denen eine Verbindungsrelation bestehen kann. Geografische Regionen werden dabei sowohl durch ihre räumliche Ausdehnung\
-(z. B. Fläche) als auch durch ihre thematische Bedeutung (z. B. Zugehörigkeit zu einer Kategorie) beschrieben. Für jeweils zwei Regionen lässt sich dann getrennt untersuchen, ob sie räumlich oder thematisch verbunden sind. Zur Notation wird Cs (x,y) als räumlich Verbunden und Ct (x,y) als thematisch verbunden eingesetzt. In **Fehler! Verweisquelle konnte nicht gefunden werden.** werden die Kombinationen der Verbindung zweier geografischer Regionen aufzeigt.
+(z. B. Fläche) als auch durch ihre thematische Bedeutung (z. B. Zugehörigkeit zu einer Kategorie) beschrieben. Für jeweils zwei Regionen lässt sich dann getrennt untersuchen, ob sie räumlich oder thematisch verbunden sind. Zur Notation wird Cs (x,y) als räumlich Verbunden und Ct (x,y) als thematisch verbunden eingesetzt. In Abbildung 6 werden die Kombinationen der Verbindung zweier geografischer Regionen aufzeigt.
 
-Duckham et al. (2006, p. 605) beschreibt, dass alle Regionen in der **Fehler! Verweisquelle konnte nicht gefunden werden.Fehler! Verweisquelle konnte nicht gefunden werden.**zweidimensional mit einer räumlichen Dimension (x-Achse) und einer thematischen Dimension (y-Achse) wie in\
-Abbildung 6 dargestellt sind, woraus sich die nachfolgenden Konstellationen ergeben:
+Duckham et al. (2006, p. 605) beschreibt, dass alle Regionen in der Abbildung 6 zweidimensional mit einer räumlichen Dimension (x-Achse) und einer thematischen Dimension (y-Achse) wie in Abbildung 6 dargestellt sind, woraus sich die nachfolgenden Konstellationen ergeben:
 
 -   Oben links: Regionen sind räumlich und thematisch verbunden
 
@@ -447,7 +447,7 @@ Abbildung 6 dargestellt sind, woraus sich die nachfolgenden Konstellationen erge
   <img src="Bilder/image6.png" alt="Startseite" style="width: 50%;">
 </p>
 
-Abbildung 6: Kombinationen der Verbindung zweier geografischer Regionen (Duckham et al., 2006, Figure 1)
+**Abbildung 6**: Kombinationen der Verbindung zweier geografischer Regionen (Duckham et al., 2006, Figure 1)
 
 ---
 
@@ -460,7 +460,7 @@ eingebettet sind.
   <img src="Bilder/image7.png" alt="Startseite" style="width: 50%;">
 </p>
 
-Abbildung 7: Karte mit Balkendiagramm als analytische Legende (Dykes et al., 2010, Figure 7)
+**Abbildung 7**: Karte mit Balkendiagramm als analytische Legende (Dykes et al., 2010, Figure 7)
 
 Die konzeptionellen Ansätze von Livers & Felder (2015) zur Darstellung von Bodenbedeckungsveränderungen können als Ansatz für die geplante Visualisierung in diesem Projekt verwendet werden und sind in Abbildung 8 einsehbar. Die Autorinnen illustrieren in ihrer Bachelorarbeit, wie Veränderungen über Zeiträume hinweg kartografisch verdichtet und regional differenziert dargestellt werden können.
 
@@ -468,7 +468,7 @@ Die konzeptionellen Ansätze von Livers & Felder (2015) zur Darstellung von Bode
   <img src="Bilder/image8.png" alt="Startseite" style="width: 50%;">
 </p>
 
-Abbildung 8: Beispiel für eine Bodenbedeckungsveränderungskarte für Neuseeland (Livers & Felder, 2015, Figure 8)
+**Abbildung 8**: Beispiel für eine Bodenbedeckungsveränderungskarte für Neuseeland (Livers & Felder, 2015, Figure 8)
 
 Für die Darstellung von Veränderungen über Zeit greifen Thomas & Giuliani (2023) auf Diagrammformen zurück, die sich besonders für kategorische Daten eignen. Ihr Ansatz in Abbildung 9 zeigt, wie lineare und proportionale Diagrammtypen zur Ergänzung kartografischer Darstellungen eingesetzt werden können.
 
@@ -476,7 +476,7 @@ Für die Darstellung von Veränderungen über Zeit greifen Thomas & Giuliani (20
   <img src="Bilder/image9.png" alt="Startseite" style="width: 50%;">
 </p>
 
-Abbildung 9: Bodenbedeckungsveränderung über die Zeit (Thomas & Giuliani, 2023, Figure 4)
+**Abbildung 9**: Bodenbedeckungsveränderung über die Zeit (Thomas & Giuliani, 2023, Figure 4)
 
 Darüber hinaus kann die Bodenbedeckungsveränderung über die Zeit mithilfe einer Veränderungsmatrix dargestellt werden. Livers und Felder (2015) zeigen in ihrer Arbeit, wie die Übergänge zwischen Bodenbedeckungsarten abgebildet werden können, wobei die Veränderungen von der linken zur oberen Kategorie in Flächeneinheiten angegeben sind\
 (siehe Tabelle 4). Dieser Ansatz lässt sich erweitern, indem die Veränderungen nicht absolut, sondern anteilsmässig beispielsweise in Prozent der Gesamtfläche dargestellt werden, um relative Unterschiede deutlicher sichtbar zu machen.
@@ -485,7 +485,7 @@ Darüber hinaus kann die Bodenbedeckungsveränderung über die Zeit mithilfe ein
   <img src="Bilder/image10.png" alt="Startseite" style="width: 50%;">
 </p>
 
-Tabelle 4: Veränderungsmatrix (Livers & Felder, 2015, Table 2)
+**Tabelle 4**: Veränderungsmatrix (Livers & Felder, 2015, Table 2)
 
 ---
 
@@ -503,7 +503,7 @@ Abbildung 10 zeigt diesen Mechanismus in kompakter Form, indem der Übergang von
   <img src="Bilder/image11.png" alt="Startseite" style="width: 75%;">
 </p>
 
-Abbildung 10 Konzeptionelle Darstellung eines Cellular-Automata-Prozesses zur räumlichen Allokation von LULC-Änderungen (Black, 2022, Folio 4)
+**Abbildung 10**: Konzeptionelle Darstellung eines Cellular-Automata-Prozesses zur räumlichen Allokation von LULC-Änderungen (Black, 2022, Folio 4)
 
 Liang et al. (2021, pp. 1--3) erweitern diesen Ansatz um Mixed-Cells, in denen mehrere Nutzungen gleichzeitig mit Anteilen vertreten sind, was graduelle Übergangsprozesse realistischer abbildet als reine diskrete Klassen. Sie zeigen, dass diese Modelle insbesondere für heterogene Landschaften wie urbane Übergangsräume oder Mosaiklandschaften relevant sind. Black et al. (2024, pp. 8--9) verdeutlichen zusätzlich, dass jene Regionen der Schweiz besonders sensitiv reagieren, deren Nutzungsmischung hoch ist wie Alpweiden- oder Kulturlandschaftsmosaike auftreten.
 
@@ -513,7 +513,7 @@ Liang et al. (2021, pp. 1--3) erweitern diesen Ansatz um Mixed-Cells, in denen m
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="index.html">← Kapitelübersicht</a>
+    <a href="01_aufbau.html">← Aufbau</a>
   </div>
   <div>
     <a href="03_datenaufarbeitung.html">Datenaufarbeitung →</a>

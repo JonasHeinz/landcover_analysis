@@ -1,97 +1,64 @@
-# Zeitliche Veränderung der LULC-Daten
+#	Zeitvergleich
+In diesem Kapitel werden anders als in den vorhergehenden drei Kapiteln nicht die Daten untereinander verglichen, sondern dieselben Daten unterschiedlicher Zeitstände. Es soll vereinfacht auch aufzeigen, wo Änderungen zwischen den Zeitständen vorkommen und in welchen Gebieten sich auch wenig verändert hat.
 
-Anbei werden die Funktionalitäten der einzelnen Komponenten der App erklärt. 
+---
 
-<a id="spielerstellen"></a>
-## Spiel erstellen
-Der erste Spieler erstellt mit dem Button ***Neues Spiel*** ein Spiel und definiert die *Maximale Spieldauer (Stunden)* und die *Anzahl Polizisten*. Die maximale Spieldauer wurde auf 10 Stunden begrenzt und mindestens eine Polizistengruppe muss dem Spiel beitreten. 
+##	Arealstatistik
+Bei der Arealstatistik sind vier Zeitstände vorhanden: 2018, 2009, 1997 und 1985. Bei einem Vergleich der Anzahl Zellen einer Kategorie pro Jahr, stellte sich heraus, dass die grösste absolute Zunahme in den folgenden Klassen vorkommt: Heimweiden, Holzschläge, Fels, Geröll/Sand, Aufgelöster Wald (auf unproduktiven Flächen), Waldschäden, Umschwung von Ein- und Zweifamilienhäusern und Umschwung von Mehrfamilienhäusern und Strassen/Wege. 
+Die grösste absolute Abnahme gab es bei den Klassen: Ackerland, Gletscher/Firn, Naturwiesen, Umschwung von Mehrfamilienhäusern, Öffentliche Gebäude, Günstige Alp- und Juraweiden, Gebüsch/Strauchvegetation, Schafalpen und Versteinte Alp- und Juraweiden.
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/01_Startseite.png" alt="Startseite" style="width: 32%;">
-  <img src="Bilder/02_Neues_Spiel.png" alt="Neues Spiel" style="width: 32%;">
+<p align="center">
+  <img src="Bilder/image32.png" alt="Startseite" style="width: 100%">
 </p>
 
-Anschliessend kann die eigene Rolle im Spiel gewählt werden und der Spielname angegeben. Im Warteraum erscheint die **Spiel-ID** welche den anderen Gruppen mitgeteilt werden muss. Sind alle Gruppen im Warteraum eingeloggt, kann das Spiel gestartet werden. 
+**Abbildung 26**: Relative Veränderung der einzelnen Klassen über die Jahre
 
+Bei Betrachtung von Abbildung 26 fallen zwei Klassen besonders ins Auge. Bei der Klasse Waldschäden gibt es erst eine Verdreifachung der Werte von 1985 im Jahr 1997 und dann eine Verneunfachung gegenüber 1985 im Jahr 2009, bevor sie 2018 wieder auf das Niveau von 1997 fällt. Diese Waldschäden entstanden vermutlich durch Krankheiten und Stürme. Der Höhepunkt von 2009 ist vermutlich auch durch das Orkantief Lothar von Dezember 1999 zu Begründen. Bei der prozentual meist angestiegen Klasse seit 1985 handelt es sich um Golfplätze.
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/03_Rolle_Auswahl.png" alt="Rolle auswählen" style="width: 30%;">
-  <img src="Bilder/04_Gruppen_Name.png" alt="Gruppenname" style="width: 30%;">
-    <img src="Bilder/05_Warteliste.png" alt="Warteraum" style="width: 30%;">
+---
+
+##	CORINE Land Cover
+Da sich auch die Polygone des CORINE Land Cover Vektordatensatzes über die Jahre verändern können, wurde der Vergleich zwischen den vorliegenden Datenständen von 2012 und 2018 auf die Kantone aggregiert. Diese Aggregation fand ebenfalls mit der bereits definierten Methode Max Area statt. Dabei fiel auf, dass die einzige Änderung in den Vektordaten im Kanton Uri stattfand. Bei einer detaillierteren Analyse des Kantons, ist in Abbildung 27 ersichtlich, dass lediglich kleinste Bereiche eine Änderung in der CORINE Land Cover Kategorie erfuhren. In den dunkelroten Bereichen traf keine Übereinstimmung ein und der Datenpunkt wurde entsprechend gefärbt.  
+
+<p align="center">
+  <img src="Bilder/image33.png" alt="Startseite" style="width: 100%">
 </p>
 
-<a id="spielbeitreten"></a>
-## Spiel beitreten
-Wurde das Spiel bereits erstellt, kann man mit der
-**Spiel-ID** einem Spiel beitreten, die eigene Rolle und den Name angeben. Anschliessend tritt man zum Warteraum hinzu und kann das Spiel starten sobald die Räuber und eine Polizistengruppe bereit ist.
+**Abbildung 27**: LULC-Veränderung zwischen den CORINE Land Cover Vektordatensätzen von 2012 und 2018
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/21_Speil_beitreten.png" alt="Speil beitreten" style="width: 30%;">
-  <img src="Bilder/22_Auswahl_Bahnhof.png" alt="Auswahl_Gruppe" style="width: 30%;">
-    <img src="Bilder/23_Warteliste.png" alt="Warteraum" style="width: 30%;">
+In einem Grossteil der Fälle lagen die Datenpunkte im Jahr 2012 in der Kategorie «Glaciers and perpetual snow» vor und änderten bis 2018 zu «Bare rocks». Diese Veränderung sind auf Grund der klimatischen Veränderung und höheren Temperaturen in der Innerschweiz gut begründbar. 
+
+---
+
+##	ESA WorldCover
+Für die Analyse der zeitlichen Veränderungen der Landbedeckung wurde ein direkter Vergleich der ESA WorldCover Datensätze für die Jahre 2020 und 2021 durchgeführt. Beide Raster besitzen die gleiche Ausdehnung und Auflösung. Jeder Pixel enthält einen Identifikator entsprechend der ESA WorldCover Legende. Für die Analyse werden ausschliesslich die Kategorien berücksichtigt, welche im Datensatz tatsächlich vorkommen. 
+Für den Zeitvergleich war es zunächst angedacht wie bei den früheren Analysen ein künstliches 10m Gitter zu erzeugen. Dadurch würde es möglich, mehrere Attribute zu speichern, was den Vergleich sehr einfach gemacht hätte. Dieses Vorgehen hätte jedoch für den grossflächigen Datensatz über die ganze Schweiz zu einer sehr hohen Anzahl an Polygonen geführt und damit zu beträchtlichem Speicher- und Rechenaufwand. Da das Gitter exakt der Rasterauflösung entspricht, entsteht zudem keinerlei zusätzlicher Informationsgewinn. Die Pixelwerte würden lediglich als Polygone dupliziert werden, ohne inhaltlichen Mehrwert. Gleichzeitig erhöht eine solche Vektorisierung die Fehleranfälligkeit. Aus diesen Gründen wurde der gitterbasierte Ansatz verworfen und stattdessen ein, pixelgenauer Raster zu Raster Vergleich umgesetzt, der sowohl effizienter als auch methodisch präziser ist.
+Dafür wurde zunächst ein neues Raster erstellt, das sowohl unveränderte als auch veränderte Pixel kodiert. Um den Speicherbedarf zu schonen und den RAM nicht zum Überlaufen zu bringen wurde ein Einkanalraster mit dem Datentyp «uint8» erzeugt. Dieser Datentyp ist ausreichend, weil alle möglichen Werte kleiner als 255 sind.
+ 
+Die Codierung des Rasters wurde nachfolgend festgelegt:
+•	Unveränderte Pixel (gleiche Kategorie 2020 und 2021) 
+new = cat / 10 - Jede Kategorie wird zu einer kleineren Zahl, z. B. Wald = 10 wird zu Wald = 1
+•	Veränderte Pixel (unterschiedliche Kategorie 2020 und 2021)
+new = cat - Die vollen Klassencodes markieren Pixel als geändert, z.B. Wald = 10.
+Für jede vorkommende Landbedeckungskategorie wurde ermittelt, wie viele Pixel von 2020 im Jahr 2021 derselben Klasse zugeordnet blieben. Mithilfe der vorbereiteten Daten konnten nun Visualisierungen erstellt werden. Da die Funktionen der Visualisierungen für den Vergleich zwischen einzelnen Datensätzen auf Vektorgittern beruhen konnten diese nicht verwendet werden. Stattdessen wurde eine leicht angepasste Version verwendet, um eine Übersichtskarte mit Balkendiagramm zu erstellen. Bei einem Vergleich von Landnutzung und Landbedeckungsdatensätzen mit einem zeitlichen Unterschied von einem Jahr werden eigentlich keine grossen Änderungen erwartet. Bei der Analyse der erstellten Visualisierung in Abbildung 28 fällt aber sofort auf, dass sehr grosse Änderungen stattgefunden haben.
+
+<p align="center">
+  <img src="Bilder/image34.png" alt="Startseite" style="width: 100%">
 </p>
 
-<a id="bahnhofverbindungen"></a>
-## Bahnhof und Verbindungen suchen
-Von einem Bahnhof aus lassen sich die nächsten Verbindungen samt Abfahrtszeit, Linie, Richtung und Gleis anzeigen. mittels  dem Button ***Nächste Verbindung*** werden spätere Verbindungen geladen. Wählt man eine dieser Verbindungen aus, erscheinen die Haltestellen der Verbindung. 
+**Abbildung 28**: LULC-Veränderung zwischen den ESA WorldCover Datensätzen von 2020 und 2021
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/11_Startbahnhof.png" alt="Bahnhof wählen" style="width: 32%;">
-  <img src="Bilder/12_Verbindungen.png" alt="Verbindungen" style="width: 32%;">
-    <img src="Bilder/13_Detail_Verbindung.png" alt="Warteraum" style="width: 32%;">
+Besonders herausstechend ist das Buschland, welches 2021 eine nullprozentige Übereinstimmung mit 2020 aufweist. Zunächst wurde ein Fehler im Programmcode vermutet. Eine genauere Untersuchung (siehe Abbildung 29) zeigte jedoch, dass 2020 nur 787 Pixel als Buschland klassifiziert wurden, während 2021 über 250’000 Pixel als Buschland detektiert wurden. Nach weiterer Recherche stellte sich heraus, dass die ESA WorldCover Karten 
+für 2020 und 2021 mit unterschiedlichen Versionen des Algorithmus erstellt wurden 
+(Zanaga et al., 2021, p. 10). Somit spiegeln die Unterschiede zwischen den Karten sowohl reale Veränderungen der Landbedeckung als auch Änderungen, die durch die unterschiedlichen Versionen des Algorithmus bedingt sind. Da nur wenige Veränderungen zu erwarten waren, lässt sich ein Grossteil der beobachteten Differenzen auf die unterschiedlichen Algorithmus Versionen zurückführen. In folgenden Kapiteln werden klare Genauigkeitsunterschiede zwischen den Versionen ersichtlich.
+ 
+<p align="center">
+  <img src="Bilder/image35.png" alt="Startseite" style="width: 100%">
 </p>
 
-<a id="informationenpolizisten"></a>
-## Informationen teilen Polizisten
-Die Polizisten können grösstenteils entscheiden wie viele Informationen sie mit dem anderen Gruppen teilen. Dabei kann entscheiden werden ob sie den Bahnhof mit den anderen Gruppen teilen. Beim Auswählen des Bahnhof erscheint ein Pop-up mit der Meldung ***Bahnhof im Chat speichern?***
+**Abbildung 29**: Visualisierung der Zellenanzahl pro Klasse in ESA WorldCover 2020 und 2021
+ 
 
-<p style="display: flex; flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/25_Bahnhof_im_Chat_Senden.png" alt="Bahnhof im Chat senden" style="width: 32%;">
-</p>
-
-Jede zweite Route muss den anderen Gruppen gemeldet werden. Somit kann im Pop-up ***Trip im Chat speichern?*** ausgewählt werden ob die Verbindung im [Chat](##Chat) gesendet werden soll.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/26_Trip_Speichern.png" alt="Trip speichern" style="width: 32%;">
-</p>
-
-<a id="informationenraeuber"></a>
-## Informationen teilen Räuber
-Die Räuber müssen sich immer melden, wenn sie einen Bahnhof verlassen. Dabei wird jeweils wenn man eine Verbindung ausgewählt hat mit dem Button ***Route Speichern*** die Route erfasst. Aus taktischen Gründen können sie sich dafür entscheiden länger angemeldet zu bleiben. Ist dies der Fall, meldsen sie die Route und spätestens nach 15 Minuten können sie mit dem Button ***von Bahnhof abmelden*** den Räubern eine Nachricht im [Chat](##Chat) schicken. 
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/14_Von_Bahnhof_abmelden.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-Nachdem die Verbindung erfasst wurde und die Räubergruppe sich am Bahnhof abgemeldet hat, erhält man ein Überblick der ausgewählten Strecke. Während der Fahrt können neue Verbindungen gesucht werden. Bestätigt man die neue Route erhalten die Polizisten automatisch eine Nachricht, dass die Räuber am Bahnhof aussteigen. Die Ausstiegszeit wird aus dem Fahrplannetz abgegriffen und Verspätungen werden dabei nicht abgefangen
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/15_Nächste_Verbindung.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="chat"></a>
-## Chat
-Im Chat erscheinen alle geteilten Informationen der anderen Gruppen chronologisch. Zudem sind die Informationen der Gruppen farblich unterteilt.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/24_Chat.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="karte"></a>
-## Karte
-Auf der Karte sind alle bereits besuchten Bahnhöfe ersichtlich. Dabei ist beim anwählen des roten Kreises der Bahnhofsname ersichtlich.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/27_Karte.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="informationen"></a>
-## Informationen
-Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen des Spiels aufzufinden waren und das Impressum ersichtlich. 
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/Spielregeln.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
 
 [↑](#top)
 

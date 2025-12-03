@@ -1,97 +1,42 @@
-# Vergleich aller Analysen
+#	Vergleich Arealstatistik - ESA WorldCover
+In diesem Kapitel liegt der Fokus auf dem ESA WorldCover Datensatz, wie dieser der Arealstatistik ähnelt und wo er sich unterscheidet. Besonders hervorgehoben wird das Vorgehen und die Methodik, die Ergebnisse durch Visualisierungen und eine Diskussion der Erkenntnisse.
 
-Anbei werden die Funktionalitäten der einzelnen Komponenten der App erklärt. 
+---
 
-<a id="spielerstellen"></a>
-## Spiel erstellen
-Der erste Spieler erstellt mit dem Button ***Neues Spiel*** ein Spiel und definiert die *Maximale Spieldauer (Stunden)* und die *Anzahl Polizisten*. Die maximale Spieldauer wurde auf 10 Stunden begrenzt und mindestens eine Polizistengruppe muss dem Spiel beitreten. 
+##	Vorgehen und Methodik
+Da es sich bei den ESA WorldCover Daten um schweizweite 10m Rasterdaten handelt und bei der Arealstatistik um 100m Punktdaten mussten die Datensätze zunächst harmonisiert werden, um eine Vergleichbarkeit zu gewährleisten. Dafür wurde zunächst die offizielle Schweizer Landesgrenze aus den swissBOUNDARIES3D Daten eingelesen und um 1km nach aussen gepuffert. In einem nächsten Schritt wurden die ESA WorldCover Kacheln zusammengefügt und in das Schweizer Koordinatensystem LV95 transformiert. Abschliessend wird das umprojizierte Mosaik mit der gepufferten Grenze maskiert. Das Ergebnis ist ein homogenes, umprojiziertes und zugeschnittenes ESA WorldCover Raster, das für die weiteren Analysen genutzt werden kann. 
+Für die Überführung der Vektordaten, in ein einheitliches 100m Raster, wurde die Methode der maximalen Flächenanteilszuweisung bzw. Max Area verwendet. Diese Methode ist in diesem Fall besonders sinnvoll, weil die hochauflösenden ESA WorldCover Daten auf ein gröberes 
+100m Raster übertragen werden. Durch die Max Area Methode wird der Klasse mit dem grössten Flächenanteil in der Zelle der Vorrang gegeben. So bleibt die dominante Landbedeckung erhalten, während kleinere, zufällige Pixelabweichungen geglättet werden. Das Problem bei der Methode ist, dass für die Arealstatistik als Punktdaten und nicht als Raster vorliegt. Also musste die Arealstatistik zunächst in eine flächenhafte Form überführt werden, um sie mit den 
+ESA WorldCover Daten räumlich verknüpfen und klassifizieren zu können. Dazu wurde um jeden Punkt ein 100m2 grosses Quadrat erzeugt, das die jeweilige Bezugsfläche des Punktes der Arealstatistik repräsentiert. Auf diese Weise entstand ein flächendeckendes 100m Gitter, das als gemeinsame räumliche Grundlage für die spätere Zuordnung und den Vergleich der Klassen diente.
+Nun war es möglich mit der Python-Bibliothek «rasterstats» die Anteile der verschiedenen ESA WorldCover Klassen in jeder Arealstatistikzelle zu berechnen und die drei flächenmässig grössten Anteile zu speichern. Diese konnten anschliessend der Arealstatistikzelle als Attribut hinzugefügt werden. Anschliessend gab es eine erste Zuteilung der 72 Arealstatistikklassen zu den elf ESA WorldCover Klassen, wobei die Klasse Mangroven für die Schweiz irrelevant ist, da es keine Mangroven gibt und auch keine von der ESA detektiert wurden. Nach einem ersten Durchlauf mit der Zuteilung gab es eine Kontrolle, ob es Arealstatistikklassen gibt, die besser mit einer anderen ESA WorldCover Kategoire übereinstimmen. Danach wurde dasselbe mit der zweiten Zuteilung durchgeführt, um zu prüfen, ob eine möglichst optimale Zuteilung erreicht ist. Da in den beiden anderen Datensätzen eine Zuteilung auf die sechs IPCC-Klassen gemacht wurde, wurden die zehn ESA WorldCover Klassen ebenfalls auf diese zugeteilt, um diese später besser miteinander vergleichen zu können. Die Klassenzuteilung ist in Abbildung 11 ersichtlich.
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/01_Startseite.png" alt="Startseite" style="width: 32%;">
-  <img src="Bilder/02_Neues_Spiel.png" alt="Neues Spiel" style="width: 32%;">
+---
+ 
+##	Ergebnisse der Analyse
+Als Ergebnis werden diverse Visualisierungen erstellt. Nachführend ein kleiner Auszug mit zwei Fehlermatrizen (Abbildung 23 und Abbildung 24) zur Beurteilung der Klassen und einer Karte zur Verteilung der einzelnen IPCC-Klassen (Abbildung 25).
+
+<p align="center">
+  <img src="Bilder/image29.png" alt="Startseite" style="width: 100%">
 </p>
 
-Anschliessend kann die eigene Rolle im Spiel gewählt werden und der Spielname angegeben. Im Warteraum erscheint die **Spiel-ID** welche den anderen Gruppen mitgeteilt werden muss. Sind alle Gruppen im Warteraum eingeloggt, kann das Spiel gestartet werden. 
+**Abbildung 23**: Übergangsmatrix Arealstatistik / ESA WorldCover 2020
 
-
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/03_Rolle_Auswahl.png" alt="Rolle auswählen" style="width: 30%;">
-  <img src="Bilder/04_Gruppen_Name.png" alt="Gruppenname" style="width: 30%;">
-    <img src="Bilder/05_Warteliste.png" alt="Warteraum" style="width: 30%;">
+<p align="center">
+  <img src="Bilder/image30.png" alt="Startseite" style="width: 100%">
 </p>
 
-<a id="spielbeitreten"></a>
-## Spiel beitreten
-Wurde das Spiel bereits erstellt, kann man mit der
-**Spiel-ID** einem Spiel beitreten, die eigene Rolle und den Name angeben. Anschliessend tritt man zum Warteraum hinzu und kann das Spiel starten sobald die Räuber und eine Polizistengruppe bereit ist.
-
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/21_Speil_beitreten.png" alt="Speil beitreten" style="width: 30%;">
-  <img src="Bilder/22_Auswahl_Bahnhof.png" alt="Auswahl_Gruppe" style="width: 30%;">
-    <img src="Bilder/23_Warteliste.png" alt="Warteraum" style="width: 30%;">
+**Abbildung 24**: Übergangsmatrix Arealstatistik / ESA WorldCover 2021
+ 
+<p align="center">
+  <img src="Bilder/image31.png" alt="Startseite" style="width: 100%">
 </p>
 
-<a id="bahnhofverbindungen"></a>
-## Bahnhof und Verbindungen suchen
-Von einem Bahnhof aus lassen sich die nächsten Verbindungen samt Abfahrtszeit, Linie, Richtung und Gleis anzeigen. mittels  dem Button ***Nächste Verbindung*** werden spätere Verbindungen geladen. Wählt man eine dieser Verbindungen aus, erscheinen die Haltestellen der Verbindung. 
+**Abbildung 25**: Vergleich Arealstatistik / ESA WorldCover
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/11_Startbahnhof.png" alt="Bahnhof wählen" style="width: 32%;">
-  <img src="Bilder/12_Verbindungen.png" alt="Verbindungen" style="width: 32%;">
-    <img src="Bilder/13_Detail_Verbindung.png" alt="Warteraum" style="width: 32%;">
-</p>
 
-<a id="informationenpolizisten"></a>
-## Informationen teilen Polizisten
-Die Polizisten können grösstenteils entscheiden wie viele Informationen sie mit dem anderen Gruppen teilen. Dabei kann entscheiden werden ob sie den Bahnhof mit den anderen Gruppen teilen. Beim Auswählen des Bahnhof erscheint ein Pop-up mit der Meldung ***Bahnhof im Chat speichern?***
-
-<p style="display: flex; flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/25_Bahnhof_im_Chat_Senden.png" alt="Bahnhof im Chat senden" style="width: 32%;">
-</p>
-
-Jede zweite Route muss den anderen Gruppen gemeldet werden. Somit kann im Pop-up ***Trip im Chat speichern?*** ausgewählt werden ob die Verbindung im [Chat](##Chat) gesendet werden soll.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/26_Trip_Speichern.png" alt="Trip speichern" style="width: 32%;">
-</p>
-
-<a id="informationenraeuber"></a>
-## Informationen teilen Räuber
-Die Räuber müssen sich immer melden, wenn sie einen Bahnhof verlassen. Dabei wird jeweils wenn man eine Verbindung ausgewählt hat mit dem Button ***Route Speichern*** die Route erfasst. Aus taktischen Gründen können sie sich dafür entscheiden länger angemeldet zu bleiben. Ist dies der Fall, meldsen sie die Route und spätestens nach 15 Minuten können sie mit dem Button ***von Bahnhof abmelden*** den Räubern eine Nachricht im [Chat](##Chat) schicken. 
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/14_Von_Bahnhof_abmelden.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-Nachdem die Verbindung erfasst wurde und die Räubergruppe sich am Bahnhof abgemeldet hat, erhält man ein Überblick der ausgewählten Strecke. Während der Fahrt können neue Verbindungen gesucht werden. Bestätigt man die neue Route erhalten die Polizisten automatisch eine Nachricht, dass die Räuber am Bahnhof aussteigen. Die Ausstiegszeit wird aus dem Fahrplannetz abgegriffen und Verspätungen werden dabei nicht abgefangen
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/15_Nächste_Verbindung.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="chat"></a>
-## Chat
-Im Chat erscheinen alle geteilten Informationen der anderen Gruppen chronologisch. Zudem sind die Informationen der Gruppen farblich unterteilt.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/24_Chat.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="karte"></a>
-## Karte
-Auf der Karte sind alle bereits besuchten Bahnhöfe ersichtlich. Dabei ist beim anwählen des roten Kreises der Bahnhofsname ersichtlich.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/27_Karte.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="informationen"></a>
-## Informationen
-Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen des Spiels aufzufinden waren und das Impressum ersichtlich. 
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/Spielregeln.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
+##	Diskussion der Vergleichsanalyse AS und WC
+Aus den Abbildung 23 und Abbildung 24 geht hervor, dass Forestland eine Übereinstimmung von über 93% über beide Zeitstände erreichte. Ebenfalls eine gute Übereinstimmung haben Grasland, Wetlands und Other Land mit gut 80% Übereinstimmung. Cropland und Settlements haben eine überraschend hohe Differenz zwischen den beiden Datensätzen. Settlements wurden oft als Grassland und Forestland klassiert. Cropland wird zu fast einem Drittel als Grasland erkannt. Welche sowohl durch den zeitlichen Unterschied sowie auch durch die unterschiedlichen Erfassungsmethoden entstanden sein könnten. In Abbildung 25 ist ersichtlich wo welche 
+IPCC-Kategorien am häufigsten zu finden sind.
 
 [↑](#top)
 

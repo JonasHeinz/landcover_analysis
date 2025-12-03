@@ -1,97 +1,46 @@
-# Vergleich Arealstatistik vs Corine LandCover
+# Vergleich Arealstatistik - Amtliche Vermessung
 
-Anbei werden die Funktionalitäten der einzelnen Komponenten der App erklärt. 
+In diesem Kapitel wird die Unterschiedlichkeit der Landnutzungs- und Landbedeckungsdaten der Amtlichen Vermessung zur Arealstatistik untersucht. Verglichen werden die Datensätze hinsichtlich Klassifikationen, Genauigkeiten und Unsicherheiten. Die Analyse von Unsicherheiten und Veränderungen durch den Referenzrahmenwechsel von LV95 auf LV03 entfiel, da in der Amtlichen Vermessung nur ein aktueller Zeitstand von Oktober 2025 vorlag, mit welchem die Analyse durchgeführt wurde.
 
-<a id="spielerstellen"></a>
-## Spiel erstellen
-Der erste Spieler erstellt mit dem Button ***Neues Spiel*** ein Spiel und definiert die *Maximale Spieldauer (Stunden)* und die *Anzahl Polizisten*. Die maximale Spieldauer wurde auf 10 Stunden begrenzt und mindestens eine Polizistengruppe muss dem Spiel beitreten. 
+---
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/01_Startseite.png" alt="Startseite" style="width: 32%;">
-  <img src="Bilder/02_Neues_Spiel.png" alt="Neues Spiel" style="width: 32%;">
+## Vorgehen und Methodik
+Die Bodenbedeckung der Amtlichen Vermessung und die Arealstatistik wurden mithilfe der Methoden Cell Center und Max Area miteinander verglichen. Bei beiden Methoden wurde zuerst um das Zentrum der Punkte der Arealstatistik ein 100m Gitter erstellt.
+Bei der Methode Cell Center wurde dann eine räumliche Verbindung zwischen dem Mittelpunkt der Boxen und den Polygonen der Bodenbedeckung der Amtlichen Vermessung durchführt. Dadurch wurde den Daten der Arealstatistik die Bodenbedeckungsart der Amtlichen Vermessung im Zentrum jeder Box hinzugefügt. Bei Mehrfachzuweisungen wurde jeweils nur die erste Zuweisung weiterverwendet. Anders ist es bei der Methode Max Area. Hier wurden die Polygone der Bodenbedeckung mit den zuvor erstellten Boxen verschnitten. Anschliessend wurde der Flächenanteil jeder Bodenbedeckungsart pro Box berechnet. Die Bodenbedeckungsart, welche in der Box prozentual am meisten vorkommt, wurde für die weiteren Schritte übernommen. Bevor die Klassen der Arealstatistik und der Amtlichen Vermessung pro Zelle auf Übereinstimmung geprüft werden konnten, wurden die Klassen der beiden Datensätze die sechs IPCC-Klassen zugewiesen. In einem letzten Schritt wurden die zuvor erstellten Attribute «AV_IPCC» und «AS_IPCC» miteinander verglichen.
+
+---
+
+##	Ergebnisse der Analyse
+Nachfolgend ist eines der Ergebnisse des Vergleichs ersichtlich. Bei Abbildung 18 handelt es sich um das Resultat der Methode Cell Center, da mit dieser Methode eine bessere Übereinstimmung über alle Kategorien erreicht wurde. Auffallend ist, dass sowohl in der Kartendarstellung als auch in der Übergangsmatrix in Abbildung 19 die Kategorie «Grassland» eine sehr schlechte Übereinstimmung aufweist. 
+
+<p align="center">
+  <img src="Bilder/image24.png" alt="Startseite" style="width: 100%">
 </p>
 
-Anschliessend kann die eigene Rolle im Spiel gewählt werden und der Spielname angegeben. Im Warteraum erscheint die **Spiel-ID** welche den anderen Gruppen mitgeteilt werden muss. Sind alle Gruppen im Warteraum eingeloggt, kann das Spiel gestartet werden. 
+**Abbildung 18**: Vergleich Arealstatistik / Amtliche Vermessung (Cell Center) 
 
-
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/03_Rolle_Auswahl.png" alt="Rolle auswählen" style="width: 30%;">
-  <img src="Bilder/04_Gruppen_Name.png" alt="Gruppenname" style="width: 30%;">
-    <img src="Bilder/05_Warteliste.png" alt="Warteraum" style="width: 30%;">
+<p align="center">
+  <img src="Bilder/image25.png" alt="Startseite" style="width: 100%">
 </p>
 
-<a id="spielbeitreten"></a>
-## Spiel beitreten
-Wurde das Spiel bereits erstellt, kann man mit der
-**Spiel-ID** einem Spiel beitreten, die eigene Rolle und den Name angeben. Anschliessend tritt man zum Warteraum hinzu und kann das Spiel starten sobald die Räuber und eine Polizistengruppe bereit ist.
+**Abbildung 19**: Übergangsmatrix Arealstatistik / Amtliche Vermessung (Cell Center)
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/21_Speil_beitreten.png" alt="Speil beitreten" style="width: 30%;">
-  <img src="Bilder/22_Auswahl_Bahnhof.png" alt="Auswahl_Gruppe" style="width: 30%;">
-    <img src="Bilder/23_Warteliste.png" alt="Warteraum" style="width: 30%;">
+---
+
+##	Diskussion der Vergleichsanalyse AS und AV
+Die schlechte Übereinstimmung der Kategorie «Grassland» lässt sich mit den unterschiedlichen Landbedeckungskategorien der einzelnen Datensätze erklären. Bei der Arealstatistik werden die Bodenbedeckungen Ackerland, Weide und Wiese einzeln erfasst. Im Vergleich dazu werden diese drei Bodenbedeckungsarten in der Amtlichen Vermessung in einer einzigen Kategorie «Acker_Wiese_Weide» zusammengefasst. Die IPCC-Kategorien unterscheiden zwischen Ackerland und Wiese/Weide. Beim Abbilden der Kategorien der Amtlichen Vermessung konnte die Kategorie «Acker_Wiese_Weide» nicht aufgeteilt werden und wurde der IPCC-Kategorie «Cropland» zugewiesen. Dies führte zu schlechten Ergebnissen bei der Analyse.
+Ein weiterer Grund für die schlechte Übereinstimmung ist, dass die Arealstatistik ihre Daten aus Luftbildern bezieht. Viele der landwirtschaftlichen Flächen waren zu diesem Zeitpunkt grün und wurden daher als Wiese anstatt als Ackerland klassiert. Ein Beispiel dazu zeugt Abbildung 20. 
+
+<p align="center">
+  <img src="Bilder/image26.png" alt="Startseite" style="width: 100%">
 </p>
 
-<a id="bahnhofverbindungen"></a>
-## Bahnhof und Verbindungen suchen
-Von einem Bahnhof aus lassen sich die nächsten Verbindungen samt Abfahrtszeit, Linie, Richtung und Gleis anzeigen. mittels  dem Button ***Nächste Verbindung*** werden spätere Verbindungen geladen. Wählt man eine dieser Verbindungen aus, erscheinen die Haltestellen der Verbindung. 
+**Abbildung 20**: Unterägeri mit Umland und Ägerisee 
 
-<p style="display: flex; justify-content:center; gap: 10px;">
-  <img src="Bilder/11_Startbahnhof.png" alt="Bahnhof wählen" style="width: 32%;">
-  <img src="Bilder/12_Verbindungen.png" alt="Verbindungen" style="width: 32%;">
-    <img src="Bilder/13_Detail_Verbindung.png" alt="Warteraum" style="width: 32%;">
-</p>
+Die restlichen Kategorien wurden gut erkannt und die einzelnen Unterschiede können auf den Zeitunterschied der beiden Datensätze zurückgeführt werden. Grenzen von Klassen, welche schummrig sind wie z. B. Waldrand wurden ebenfalls gut erkannt, anders als in der 
+Konzeptphase angenommen. 
 
-<a id="informationenpolizisten"></a>
-## Informationen teilen Polizisten
-Die Polizisten können grösstenteils entscheiden wie viele Informationen sie mit dem anderen Gruppen teilen. Dabei kann entscheiden werden ob sie den Bahnhof mit den anderen Gruppen teilen. Beim Auswählen des Bahnhof erscheint ein Pop-up mit der Meldung ***Bahnhof im Chat speichern?***
 
-<p style="display: flex; flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/25_Bahnhof_im_Chat_Senden.png" alt="Bahnhof im Chat senden" style="width: 32%;">
-</p>
-
-Jede zweite Route muss den anderen Gruppen gemeldet werden. Somit kann im Pop-up ***Trip im Chat speichern?*** ausgewählt werden ob die Verbindung im [Chat](##Chat) gesendet werden soll.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/26_Trip_Speichern.png" alt="Trip speichern" style="width: 32%;">
-</p>
-
-<a id="informationenraeuber"></a>
-## Informationen teilen Räuber
-Die Räuber müssen sich immer melden, wenn sie einen Bahnhof verlassen. Dabei wird jeweils wenn man eine Verbindung ausgewählt hat mit dem Button ***Route Speichern*** die Route erfasst. Aus taktischen Gründen können sie sich dafür entscheiden länger angemeldet zu bleiben. Ist dies der Fall, meldsen sie die Route und spätestens nach 15 Minuten können sie mit dem Button ***von Bahnhof abmelden*** den Räubern eine Nachricht im [Chat](##Chat) schicken. 
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/14_Von_Bahnhof_abmelden.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-Nachdem die Verbindung erfasst wurde und die Räubergruppe sich am Bahnhof abgemeldet hat, erhält man ein Überblick der ausgewählten Strecke. Während der Fahrt können neue Verbindungen gesucht werden. Bestätigt man die neue Route erhalten die Polizisten automatisch eine Nachricht, dass die Räuber am Bahnhof aussteigen. Die Ausstiegszeit wird aus dem Fahrplannetz abgegriffen und Verspätungen werden dabei nicht abgefangen
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/15_Nächste_Verbindung.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="chat"></a>
-## Chat
-Im Chat erscheinen alle geteilten Informationen der anderen Gruppen chronologisch. Zudem sind die Informationen der Gruppen farblich unterteilt.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/24_Chat.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="karte"></a>
-## Karte
-Auf der Karte sind alle bereits besuchten Bahnhöfe ersichtlich. Dabei ist beim anwählen des roten Kreises der Bahnhofsname ersichtlich.
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/27_Karte.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
-
-<a id="informationen"></a>
-## Informationen
-Unter dem Informationsbutton sind die Spielregeln, welche bereits beim erstellen des Spiels aufzufinden waren und das Impressum ersichtlich. 
-
-<p style="display: flex; justify-content:center;gap: 10px;">
-  <img src="Bilder/Spielregeln.png" alt="Bahnhof wählen" style="width: 32%;">
-</p>
 
 [↑](#top)
 

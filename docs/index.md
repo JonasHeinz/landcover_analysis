@@ -44,6 +44,6 @@ Interaktive Visualisierungen zur Unterstützung der Analyse stehen in [Interakti
 
 <div style="display: flex; justify-content: space-between;">
   <div>
-    <a href="02_literaturrecherche.md">Literaturrecherche →</a>
+    <a href="01_aufbau.md">Aufbau →</a>
   </div>
 </div>
