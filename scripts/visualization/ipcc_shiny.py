@@ -14,7 +14,6 @@ from scripts import DATA_DIR
 from shiny import App, ui, reactive
 from shinywidgets import output_widget, render_plotly, render_widget
 import os
-os.environ['PROJ_LIB'] = r"C:\Users\LeonardoS\miniconda3\envs\corine\Library\share\proj"
 
 
 # -----------------------------

@@ -1,0 +1,12 @@
+{
+    "https://api.shinyapps.io": {
+        "server_url": "https://api.shinyapps.io",
+        "filename": "C:\\Users\\patri\\Documents\\landcover_analysis",
+        "app_url": "https://wp-fhnw.shinyapps.io/ipcc-shiny1/",
+        "app_id": "16224970",
+        "app_guid": null,
+        "title": "ipcc-shiny",
+        "app_mode": "python-shiny",
+        "app_store_version": 1
+    }
+}
