@@ -13,9 +13,7 @@ Die Arealstatistik dient als Referenz für den Qualitätsvergleich der LULC-Date
 3. CORINE 2012 / 2018
 4. Amtliche Vermessung
 
----
-
-### Tabelle 6: Übersichtstabelle der Klassifikationsmetriken, Ergebnisse der besseren Methode
+## <br>
 
 | Datensatz                              | Accuracy | Precision | Recall | F1-Score | Kappa  |
 | -------------------------------------- | -------- | --------- | ------ | -------- | ------ |
@@ -25,14 +23,14 @@ Die Arealstatistik dient als Referenz für den Qualitätsvergleich der LULC-Date
 | ESA WorldCover 2020                    | 0.7854   | 0.8039    | 0.7854 | 0.7752   | 0.7089 |
 | ESA WorldCover 2021                    | 0.8085   | 0.8218    | 0.8085 | 0.8016   | 0.7414 |
 
----
+#### Tabelle 6: Übersichtstabelle der Klassifikationsmetriken, Ergebnisse der besseren Methode
+
+## <br>
 
 # Zentrale Ergebnisse der Vergleichsanalysen
 
 CORINE 2018 und beide ESA-WorldCover-Datensätze zeigen eine gute Übereinstimmung mit der Arealstatistik.  
 Über alle Datensätze hinweg stimmen besonders **Forestland** und **Settlements** am besten mit den IPCC-Kategorien überein.
-
-### Tabelle 7: Übereinstimmung der IPCC-Kategorien in Prozent
 
 | Datensatz                              | Forestland | Grassland | Cropland | Settlements | Wetlands | Other Land |
 | -------------------------------------- | ---------- | --------- | -------- | ----------- | -------- | ---------- |
@@ -43,14 +41,14 @@ CORINE 2018 und beide ESA-WorldCover-Datensätze zeigen eine gute Übereinstimmu
 | ESA WorldCover 2021                    | 95%        | 83%       | 59%      | 44%         | 78%      | 83%        |
 | Standardabweichung                     | 5.4%       | 29.2%     | 16.7%    | 9.2%        | 10.6%    | 9.8%       |
 
----
+#### Tabelle 7: Übereinstimmung der IPCC-Kategorien in Prozent
+
+## <br>
 
 # Methodenvergleich
 
 Die Methode **Cell Center** erzielt durchgehend die besseren Ergebnisse.  
 Besonders bei der Amtlichen Vermessung ist der Vorteil gegenüber der **Max-Area-Methode** deutlich sichtbar.
-
-### Tabelle 8: Cohen’s Kappa nach Datensatz und Methoden
 
 | Datensatz                              | Methode     | Kappa  |
 | -------------------------------------- | ----------- | ------ |
@@ -65,7 +63,9 @@ Besonders bei der Amtlichen Vermessung ist der Vorteil gegenüber der **Max-Area
 | ESA WorldCover 2021                    | Cell Center | 0.7414 |
 |                                        | Max Area    | 0.7208 |
 
----
+#### Tabelle 8: Cohen’s Kappa nach Datensatz und Methoden
+
+## <br>
 
 # Diskussion
 
