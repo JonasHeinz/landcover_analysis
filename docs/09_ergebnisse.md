@@ -1,4 +1,4 @@
-# Erkenntnisse der Vergleichsanalysen (Kurzfassung)
+# Erkenntnisse der Vergleichsanalysen
 
 Die Arealstatistik dient als Referenz für den Qualitätsvergleich der LULC-Datensätze. Die Klassifikationsmetriken zeigen deutliche Leistungsunterschiede:
 
@@ -27,7 +27,7 @@ Die Arealstatistik dient als Referenz für den Qualitätsvergleich der LULC-Date
 
 ---
 
-# Zentrale Ergebnisse der Vergleichsanalysen (Kurzfassung)
+# Zentrale Ergebnisse der Vergleichsanalysen
 
 CORINE 2018 und beide ESA-WorldCover-Datensätze zeigen eine gute Übereinstimmung mit der Arealstatistik.  
 Über alle Datensätze hinweg stimmen besonders **Forestland** und **Settlements** am besten mit den IPCC-Kategorien überein.
@@ -45,7 +45,7 @@ CORINE 2018 und beide ESA-WorldCover-Datensätze zeigen eine gute Übereinstimmu
 
 ---
 
-# Methodenvergleich (Kurzfassung)
+# Methodenvergleich
 
 Die Methode **Cell Center** erzielt durchgehend die besseren Ergebnisse.  
 Besonders bei der Amtlichen Vermessung ist der Vorteil gegenüber der **Max-Area-Methode** deutlich sichtbar.
@@ -67,7 +67,7 @@ Besonders bei der Amtlichen Vermessung ist der Vorteil gegenüber der **Max-Area
 
 ---
 
-# Diskussion (Kurzfassung)
+# Diskussion
 
 Die Unterschiede zwischen den Datensätzen hängen stark von ihrer Erfassungsmethode ab:
 
