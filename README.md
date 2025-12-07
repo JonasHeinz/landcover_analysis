@@ -8,8 +8,12 @@ Die Resultate zeigen deutliche Qualitätsunterschiede zwischen den Datensätzen.
 
 Alle Datensätze müssen in den Ordner Data/ Preprocessing und anschliessendn in den ensprechenden Ordner abgelegt werden. der Ganze Ablauf wird Datengetrennt gehlaten. Der ganze Prozess muss pro Datenwuelle einzeln durchgeführt werden.
 
-| Datensatz           | Skritps                                               |
+|     Datensatz       |                       Skritps                         |
 |---------------------|-------------------------------------------------------|
-| Corine              | *pp_corine_raster.ipynb* oder *pp_corine_vector.ipynb*|
-| Amtliche Vermessung | *Vollstaendigkeit*                                    |
-| ESA WordCover       | *preprocessing.py*                                    |
+|       Corine        | *pp_corine_raster.ipynb* oder *pp_corine_vector.ipynb*|
+| Amtliche Vermessung |                  *Vollstaendigkeit*                   |
+|    ESA WordCover    |                  *preprocessing.py*                   |
+
+
+## Analyse
+Die Daten se müssen in den Ordner Data/ Preprocessing
