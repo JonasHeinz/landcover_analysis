@@ -4,6 +4,15 @@ Landnutzungs- und Landbedeckungsdaten (LULC) spielen eine zentrale Rolle in Umwe
 Die Arbeit beinhaltet eine umfassende Literaturrecherche zu Harmonisierungsmethoden, Unsicherheitsquellen und Klassifikationslogiken, gefolgt von einer methodischen Aufarbeitung aller Datensätze und deren Überführung in das Intergovernmental Panel on Climate Change (IPCC)-Kompatible Kategorienmodell. Mittels Raster- und Vektoranalysen, punktbasierter Validierung und statistischen Genauigkeitsmetriken wie «accuracy», «F1-Score» und «Cohen’s Kappa» wird die Übereinstimmung der Datensätze mit der Arealstatistik als Referenz bewertet. Ergänzend werden zeitliche Veränderungen analysiert sowie erste Szenario basierte Interpolations- und Modellierungsansätze mittels Cellular Automata und Markov-basierten Methoden angeschaut. Interaktive Visualisierungen unterstützen die räumliche Interpretation der Ergebnisse.
 Die Resultate zeigen deutliche Qualitätsunterschiede zwischen den Datensätzen. Während die Bodenbedeckung der Amtlichen Vermessung thematisch und geometrisch detailliert ist, weist sie im Abgleich mit der Arealstatistik die geringste Übereinstimmung auf. CORINE 2018 liefert konsistentere Resultate als CORINE 2012, bleibt jedoch klar hinter den ESA WorldCover-Produkten zurück. WorldCover 2020 und insbesondere WorldCover 2021 erreichen die höchsten Genauigkeitswerte und stellen damit die zuverlässigste Grundlage für nationale LULC-Vergleiche im Kontext des IPCC dar. Die Analyse verdeutlicht zudem, dass methodische Harmonisierung, transparente Unsicherheitsbewertung und geeignete Transformationen zentrale Voraussetzungen für eine robuste Nutzung heterogener LULC-Daten sind.
 
+---
+
+Genauere Informationen bezüglich Literatur und Vorgehen kann unter https://jonasheinz.github.io/landcover_analysis/ gefunfen werden.
+
+## Voreinstellungen
+
+Das Git-Repo auf lokalen PC klonen. Ordnerstrucktur nicht anpassen! <br>
+Die für die verschiednen Skripts benötigten Lybaries sind alle im _Requirements.txt_ zu finden.
+
 ## Preprocessing
 
 Alle Datensätze müssen in den Ordner Data/ Preprocessing und anschliessendn in den ensprechenden Ordner abgelegt werden. der Ganze Ablauf wird Datengetrennt gehlaten. Der ganze Prozess muss pro Datenwuelle einzeln durchgeführt werden.
