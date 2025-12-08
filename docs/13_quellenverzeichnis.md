@@ -2,15 +2,14 @@
 
 # Quellenverzeichnis
 
-<div id="quellenverzeichnis"></div>
 
 Folgend sind in alle Quellen für diese Arbeit in mehrere Kategorien unterteilt und aufgelistet.
 
 In dieser Arbeit wurde künstliche Intelligenz (KI), namentlich ChatGPT, zur Generierung einzelner Programmier-Codes sowie zur Überarbeitung von einzelnen Textabschnitten verwendet. Keine Sätze oder Abschnitte in der GitHub-Page wurden jedoch eins zu eins von der KI geschrieben und kopiert.
 
-### Internetquellen und Literatur
+---
 
-<div id="literatur"></div>
+### Internetquellen und Literatur
 
 Quellen Zitiert nach APA 7 Style:
 
@@ -138,9 +137,9 @@ Verordnung über die amtliche Vermessung (VAV), 211.432.2 SR. (1992). https://ww
 
 Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann, C., Quast, R., Wevers, J., Grosu, A., Paccini, A., Vergnaud, S., Cartus, O., Santoro, M., Fritz, S., Georgieva, I., Lesiv, M., Carter, S., Herold, M., Li, L., Tsendbazar, N.-E., … Arino, O. (2021). ESA WorldCover 10 m 2020 v100 (Version v100) [Dataset]. Zenodo. https://doi.org/10.5281/ZENODO.5571936
 
-### Datenquellen
+---
 
-<div id="datenquellen"></div>
+### Datenquellen
 
 | Name der Datenquelle     | Link                                                                                                 |
 | ------------------------ | ---------------------------------------------------------------------------------------------------- |
@@ -150,22 +149,121 @@ Zanaga, D., Van De Kerchove, R., De Keersmaecker, W., Souverijns, N., Brockmann,
 | ESA WorldCover | [https://esa-worldcover.org/en/data-access](https://esa-worldcover.org/en/data-access) |
 |                          |
 
+---
+
 ### Libraries
 
-<div id="libraries"></div>
-
-#### Python
-
-| Name der Bibiliothek / Library | Link zur Dokumentation                                                                     |
-| ------------------------------ | ------------------------------------------------------------------------------------------ |
-| Requests                       | [https://pypi.org/project/requests/](https://pypi.org/project/requests/)                   |
-| JSON                           | [https://docs.python.org/3/library/json.html](https://docs.python.org/3/library/json.html) |
-| CSV                            | [https://docs.python.org/3/library/csv.html](https://docs.python.org/3/library/csv.html)   |
-| SQLalchemy                     | [https://docs.sqlalchemy.org/en/20/](https://docs.sqlalchemy.org/en/20/)                   |
-| Numpy                          | [https://numpy.org/doc/2.2/](https://numpy.org/doc/2.2/)                                   |
-| Geopandas                      | [https://geopandas.org/en/stable/](https://geopandas.org/en/stable/)                       |
-| Fastapi                        | [https://fastapi.tiangolo.com/](https://fastapi.tiangolo.com/)                             |
-| uvicorn                        | [https://www.uvicorn.org/](https://www.uvicorn.org/)                                       |
+| Library | Dokumentation | Version |
+|---------|---------------|---------|
+| affine | https://pypi.org/project/affine/ | 2.4.0 |
+| anyio | https://anyio.readthedocs.io/en/stable/ | 4.12.0 |
+| appdirs | https://pypi.org/project/appdirs/ | 1.4.4 |
+| asgiref | https://asgiref.readthedocs.io/en/latest/ | 3.11.0 |
+| asttokens | https://pypi.org/project/asttokens/ | 3.0.0 |
+| attrs | https://www.attrs.org/en/stable/ | 25.4.0 |
+| branca | https://python-visualization.github.io/branca/ | 0.8.2 |
+| cffi | https://cffi.readthedocs.io/en/latest/ | 2.0.0 |
+| charset-normalizer | https://charset-normalizer.readthedocs.io/en/latest/ | 3.4.4 |
+| click | https://click.palletsprojects.com/ | 8.3.1 |
+| click-plugins | https://pypi.org/project/click-plugins/ | 1.1.1.2 |
+| cligj | https://pypi.org/project/cligj/ | 0.7.2 |
+| colorama | https://pypi.org/project/colorama/ | 0.4.6 |
+| comm | https://pypi.org/project/comm/ | 0.2.3 |
+| contourpy | https://contourpy.readthedocs.io/en/stable/ | 1.3.2 |
+| cycler | https://matplotlib.org/cycler/ | 0.12.1 |
+| debugpy | https://github.com/microsoft/debugpy | 1.8.17 |
+| decorator | https://decorator.readthedocs.io/en/stable/ | 5.2.1 |
+| et-xmlfile | https://et-xmlfile.readthedocs.io/en/latest/ | 2.0.0 |
+| exceptiongroup | https://pypi.org/project/exceptiongroup/ | 1.3.0 |
+| executing | https://pypi.org/project/executing/ | 2.2.1 |
+| fiona | https://fiona.readthedocs.io/en/stable/ | 1.10.1 |
+| folium | https://python-visualization.github.io/folium/ | 0.20.0 |
+| fonttools | https://fonttools.readthedocs.io/en/latest/ | 4.60.1 |
+| freexl | https://www.gaia-gis.it/freexl/ | 2.0.0 |
+| geopandas | https://geopandas.org/en/stable/ | 1.1.1 |
+| geotiff | https://gdal.org/ | 1.7.4 |
+| h11 | https://python-hyper.org/projects/h11/en/stable/ | 0.16.0 |
+| h2 | https://python-hyper.org/projects/h2/en/stable/ | 4.3.0 |
+| hpack | https://python-hyper.org/projects/hpack/en/stable/ | 4.1.0 |
+| htmltools | https://rstudio.github.io/htmltools/ | 0.6.0 |
+| hyperframe | https://python-hyper.org/projects/hyperframe/en/stable/ | 6.1.0 |
+| idna | https://pypi.org/project/idna/ | 3.11 |
+| importlib-metadata | https://importlib-metadata.readthedocs.io/en/latest/ | 8.7.0 |
+| ipykernel | https://ipykernel.readthedocs.io/en/latest/ | 7.1.0 |
+| ipyleaflet | https://ipyleaflet.readthedocs.io/en/stable/ | 0.20.0 |
+| ipython | https://ipython.readthedocs.io/en/stable/ | 8.37.0 |
+| ipywidgets | https://ipywidgets.readthedocs.io/en/stable/ | 8.1.8 |
+| jedi | https://jedi.readthedocs.io/en/stable/ | 0.19.2 |
+| jinja2 | https://jinja.palletsprojects.com/ | 3.1.6 |
+| joblib | https://joblib.readthedocs.io/en/stable/ | 1.5.2 |
+| jupyter-client | https://jupyter-client.readthedocs.io/en/stable/ | 8.6.3 |
+| jupyter-core | https://jupyter-core.readthedocs.io/en/stable/ | 5.9.1 |
+| jupyter-leaflet | https://ipyleaflet.readthedocs.io/en/stable/ | 0.20.0 |
+| jupyterlab-widgets | https://ipywidgets.readthedocs.io/en/stable/ | 3.0.16 |
+| kiwisolver | https://pypi.org/project/kiwisolver/ | 1.4.9 |
+| mapclassify | https://pysal.org/mapclassify/ | 2.8.1 |
+| markdown-it-py | https://markdown-it-py.readthedocs.io/en/latest/ | 4.0.0 |
+| markupsafe | https://markupsafe.palletsprojects.com/ | 3.0.3 |
+| matplotlib-base | https://matplotlib.org/ | 3.10.7 |
+| matplotlib-inline | https://pypi.org/project/matplotlib-inline/ | 0.2.1 |
+| mdit-py-plugins | https://mdit-py-plugins.readthedocs.io/en/latest/ | 0.5.0 |
+| mdurl | https://github.com/executablebooks/mdurl | 0.1.2 |
+| munkres | https://pypi.org/project/munkres/ | 1.1.4 |
+| narwhals | https://pypi.org/project/narwhals/ | 2.11.0 |
+| nest-asyncio | https://github.com/erdewit/nest_asyncio | 1.6.0 |
+| networkx | https://networkx.org/documentation/stable/ | 3.4.2 |
+| numpy | https://numpy.org/doc/ | 2.2.6 |
+| openpyxl | https://openpyxl.readthedocs.io/en/stable/ | 3.1.5 |
+| orjson | https://github.com/ijl/orjson | 3.11.4 |
+| packaging | https://packaging.pypa.io/en/latest/ | 25.0 |
+| pandas | https://pandas.pydata.org/docs/ | 2.3.3 |
+| parso | https://parso.readthedocs.io/en/latest/ | 0.8.5 |
+| patsy | https://patsy.readthedocs.io/en/stable/ | 1.0.2 |
+| pillow | https://pillow.readthedocs.io/en/stable/ | 11.3.0 |
+| plotly | https://plotly.com/python/ | 6.4.0 |
+| proj | https://proj.org/ | 9.6.2 |
+| prompt-toolkit | https://python-prompt-toolkit.readthedocs.io/en/stable/ | 3.0.52 |
+| psutil | https://psutil.readthedocs.io/en/stable/ | 7.1.2 |
+| pure-eval | https://pypi.org/project/pure-eval/ | 0.2.3 |
+| pycparser | https://pypi.org/project/pycparser/ | 2.22 |
+| pygments | https://pygments.org/ | 2.19.2 |
+| pyogrio | https://pyogrio.readthedocs.io/en/stable/ | 0.11.0 |
+| pyparsing | https://pyparsing-docs.readthedocs.io/en/latest/ | 3.2.5 |
+| pyproj | https://pyproj4.github.io/pyproj/stable/ | 3.7.1 |
+| pysocks | https://pypi.org/project/PySocks/ | 1.7.1 |
+| python-dateutil | https://dateutil.readthedocs.io/en/stable/ | 2.9.0 |
+| python-multipart | https://pypi.org/project/python-multipart/ | 0.0.20 |
+| pytz | https://pythonhosted.org/pytz/ | 2025.2 |
+| pyzmq | https://pyzmq.readthedocs.io/ | 27.1.0 |
+| questionary | https://github.com/tmbo/questionary | 2.1.1 |
+| rasterio | https://rasterio.readthedocs.io/en/stable/ | 1.4.3 |
+| requests | https://requests.readthedocs.io/ | 2.32.5 |
+| scikit-learn | https://scikit-learn.org/stable/ | 1.7.2 |
+| scipy | https://scipy.org/ | 1.15.2 |
+| seaborn | https://seaborn.pydata.org/ | 0.13.2 |
+| shapely | https://shapely.readthedocs.io/en/stable/ | 2.1.2 |
+| shiny | https://shiny.posit.co/py/ | 1.4.0 |
+| shinywidgets | https://shiny.posit.co/py/api/shinywidgets/ | 0.7.0 |
+| six | https://six.readthedocs.io/ | 1.17.0 |
+| snuggs | https://pypi.org/project/snuggs/ | 1.4.7 |
+| sqlite | https://www.sqlite.org/docs.html | 3.50.4 |
+| stack-data | https://pypi.org/project/stack-data/ | 0.6.3 |
+| starlette | https://www.starlette.io/ | 0.50.0 |
+| statsmodels | https://www.statsmodels.org/stable/ | 0.14.5 |
+| threadpoolctl | https://threadpoolctl.readthedocs.io/en/latest/ | 3.6.0 |
+| tornado | https://www.tornadoweb.org/ | 6.5.2 |
+| traitlets | https://traitlets.readthedocs.io/en/stable/ | 5.14.3 |
+| traittypes | https://github.com/jupyter-widgets/traittypes | 0.2.3 |
+| typing-extensions | https://typing-extensions.readthedocs.io/ | 4.15.0 |
+| uc-micro-py | https://github.com/executablebooks/uc-micro-py | 1.0.3 |
+| urllib3 | https://urllib3.readthedocs.io/ | 2.5.0 |
+| uvicorn | https://www.uvicorn.org/ | 0.38.0 |
+| watchfiles | https://watchfiles.helpmanual.io/ | 1.1.1 |
+| wcwidth | https://pypi.org/project/wcwidth/ | 0.2.14 |
+| websockets | https://websockets.readthedocs.io/en/stable/ | 15.0.1 |
+| widgetsnbextension | https://ipywidgets.readthedocs.io/en/stable/ | 4.0.15 |
+| xyzservices | https://xyzservices.readthedocs.io/en/stable/ | 2025.4.0 |
+| zipp | https://zipp.readthedocs.io/en/stable/ | 3.23.0 |
 
 
 [↑](#top)
