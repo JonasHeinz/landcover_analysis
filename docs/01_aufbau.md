@@ -13,16 +13,7 @@ Papers, Konzepte und Protokolle werden über Zotero und Microsoft Teams organisi
 
 **Abbildung 1**: Architekturdiagramm für das gesamte Projekt
 
-[↑](#top)
-
-<div style="display: flex; justify-content: space-between;">
-  <div>
-    <a href="index.html">← Aufbau</a>
-  </div>
-  <div>
-    <a href="02_literaturrecherche.html">Literaturrecherche →</a>
-  </div>
-</div>
+---
 
 ## Ordnerstruktur GitHub
 
@@ -61,3 +52,15 @@ scripts/
 │ └─ worldcover/
 └─ visualization/
 ```
+---
+
+[↑](#top)
+
+<div style="display: flex; justify-content: space-between;">
+  <div>
+    <a href="index.html">← Aufbau</a>
+  </div>
+  <div>
+    <a href="02_literaturrecherche.html">Literaturrecherche →</a>
+  </div>
+</div>
