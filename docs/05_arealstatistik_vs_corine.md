@@ -6,7 +6,7 @@ In diesem Kapitel wird die Unterschiedlichkeit der Landnutzungs- und Landbedecku
 
 ## Vorgehen und Methodik
 Die Bodenbedeckung der Amtlichen Vermessung und die Arealstatistik wurden mithilfe der Methoden Cell Center und Max Area miteinander verglichen. Bei beiden Methoden wurde zuerst um das Zentrum der Punkte der Arealstatistik ein 100m Gitter erstellt.
-Bei der Methode Cell Center wurde dann eine räumliche Verbindung zwischen dem Mittelpunkt der Boxen und den Polygonen der Bodenbedeckung der Amtlichen Vermessung durchführt. Dadurch wurde den Daten der Arealstatistik die Bodenbedeckungsart der Amtlichen Vermessung im Zentrum jeder Box hinzugefügt. Bei Mehrfachzuweisungen wurde jeweils nur die erste Zuweisung weiterverwendet. Anders ist es bei der Methode Max Area. Hier wurden die Polygone der Bodenbedeckung mit den zuvor erstellten Boxen verschnitten. Anschliessend wurde der Flächenanteil jeder Bodenbedeckungsart pro Box berechnet. Die Bodenbedeckungsart, welche in der Box prozentual am meisten vorkommt, wurde für die weiteren Schritte übernommen. Bevor die Klassen der Arealstatistik und der Amtlichen Vermessung pro Zelle auf Übereinstimmung geprüft werden konnten, wurden die Klassen der beiden Datensätze die sechs IPCC-Klassen zugewiesen. In einem letzten Schritt wurden die zuvor erstellten Attribute «AV_IPCC» und «AS_IPCC» miteinander verglichen.
+Bei der Methode Cell Center wurde dann eine räumliche Verbindung zwischen dem Mittelpunkt der Gitterzellen und den Polygonen der Bodenbedeckung der Amtlichen Vermessung durchführt. Dadurch wurde den Daten der Arealstatistik die Bodenbedeckungsart der Amtlichen Vermessung im Zentrum jeder Gitterzelle hinzugefügt. Bei Mehrfachzuweisungen wurde jeweils nur die erste Zuweisung weiterverwendet. Anders ist es bei der Methode Max Area. Hier wurden die Polygone der Bodenbedeckung mit den zuvor erstellten Gitterzellen verschnitten. Anschliessend wurde der Flächenanteil jeder Bodenbedeckungsart pro Gitterzelle berechnet. Die Bodenbedeckungsart, welche in der Gitterzelle prozentual am meisten vorkommt, wurde für die weiteren Schritte übernommen. Bevor die Klassen der Arealstatistik und der Amtlichen Vermessung pro Zelle auf Übereinstimmung geprüft werden konnten, wurden die Klassen der beiden Datensätze die sechs IPCC-Klassen zugewiesen. In einem letzten Schritt wurden die zuvor erstellten Attribute «AV_IPCC» und «AS_IPCC» miteinander verglichen.
 
 ---
 
@@ -17,13 +17,13 @@ Nachfolgend ist eines der Ergebnisse des Vergleichs ersichtlich. Bei Abbildung 1
   <img src="Bilder/image24.png" alt="Startseite" style="width: 100%">
 </p>
 
-**Abbildung 18**: Vergleich Arealstatistik / Amtliche Vermessung (Cell Center) 
+**Abbildung 18**: Vergleich Arealstatistik / Amtliche Vermessung (Cell Center): Übersichtskarte mit Balkendiagramm, welches die Übereinstimmung der Datensätze pro Kategorie darstellt. Die Kategorie «Grassland» weisst eine sehr schlechte Übereinstimmung auf. 
 
 <p align="center">
   <img src="Bilder/image25.png" alt="Startseite" style="width: 100%">
 </p>
 
-**Abbildung 19**: Übergangsmatrix Arealstatistik / Amtliche Vermessung (Cell Center)
+**Abbildung 19**: Übergangsmatrix Arealstatistik / Amtliche Vermessung (Cell Center). Auffallend ist, dass die Zelle Grassland-Grassland einen Wert unter 2% aufweist.
 
 ---
 
@@ -37,8 +37,7 @@ Ein weiterer Grund für die schlechte Übereinstimmung ist, dass die Arealstatis
 
 **Abbildung 20**: Unterägeri mit Umland und Ägerisee 
 
-Die restlichen Kategorien wurden gut erkannt und die einzelnen Unterschiede können auf den Zeitunterschied der beiden Datensätze zurückgeführt werden. Grenzen von Klassen, welche schummrig sind wie z. B. Waldrand wurden ebenfalls gut erkannt, anders als in der 
-Konzeptphase angenommen. 
+Die restlichen Kategorien wurden gut erkannt und die einzelnen Unterschiede können auf den Zeitunterschied der beiden Datensätze zurückgeführt werden. Obwohl im Konzept generell von Klassifikations- und Semantikunsicherheiten ausgegangen wurde, zeigte sich, dass auch unscharfe Klassengrenzen wie Waldränder gut erkannt wurden.
 
 
 
